@@ -1,0 +1,220 @@
+{
+    "width": 300,
+    "height": 1300,
+    "x":200,
+
+    
+    "data": [
+        {
+            "name": "data",
+            "url": "[fileUrl]",
+            "transform": [
+                {"type": "addIndex","as": "id"}
+            ]
+        }
+    ],
+
+    "networks": [
+        {
+            "name": "network",
+            "parts": [
+                {"data": "data",
+                    "yieldsLinks": [
+                        {"source_id": {"field": "From Node (Short Name)"},
+                         "source_node_type": "node",
+                         "source_id_field": "id",
+                         "target_id": {"field": "To Node Name"},
+                         "target_node_type": "node",
+                         "target_id_field": "id",
+                         "data": [ "*"]
+                        }
+                    ],
+                    "yieldsNodes": [
+                        {"id_field": "From Node (Short Name)",
+                        "type": "node",
+                        "data": [{"field": "From Node Type","as": "node_type"},
+                                {"field": "From Node Type", "as": "node_type_color"},
+                                {"field": "From Node (Short Name)","as": "name"},
+                                {"field": "PP","as": "Peace"},
+                                {"field": "date", "as": "node_time"}]},
+                                
+                        {"id_field": "To Node Name",
+                        "type": "node",
+                        "data": [{"field": "To Node Type","as": "node_type"},
+                                {"field": "To Node Sub-Type", "as": "node_type_color"},
+                                {"field": "To Node Name","as": "name"}
+                                ]}
+                    ]
+                }
+            ],
+            "transform": [
+                {"type": "filterEdges", "expression": "datum.data.PP == [peaceProcess]"},
+                {"type": "removeIsolated"}
+            ]
+        }
+    ],
+
+    "orderings": [
+        {
+            "name": "entity_groups",
+            "orderBy": {
+                "field": "data.node_type_color",
+                "direction": "descending"
+            },
+            "data": "network.nodes"
+        },
+        {
+            "name": "agreement_time",
+            "orderBy": {
+                "field": "data.node_time"
+            },
+            "data": "network.nodes"
+        }
+    ],
+
+    "layouts": [
+        {
+            "name": "syrian-layout",
+            "network": "network",
+            "type": "d3-force"
+        },
+        {
+            "name": "syrian-jigsaw",
+            "pattern": "cartesian",
+            "x": [
+                {
+                    "scale": "axis",
+                    "field": "data.node_type"
+                }
+            ],
+            "y": [
+                {
+                    "order": "entity_groups",
+                    "order": "agreement_time"
+                }
+            ],
+            "data": "network.nodes",
+            "width":0.1,
+            "positioning": "distribute"
+        }
+    ],
+
+    "scales": [
+        {
+            "name": "axis",
+            "type": "ordinal",
+            "domain": [
+                "Peace Agreement",
+                "Entity"
+            ],
+            "range": [
+                0,
+                1
+            ]
+        },
+        {
+            "name": "nodeColor",
+            "type": "ordinal",
+            "range": [
+                "#D97144",
+                "#568AA4",
+                "#60A18B",
+                "#335B60",
+                "#EAC05B",
+                "#CDD2CC",
+                "#F3F2D7",
+                "#B16748",
+                "#7FAADC",
+                "#9EB449",
+                "#714FBA",
+                "#E8A5D5"
+            ],
+            "domain": [
+                "Peace Process",
+                "Armed Group",
+                "Peace Agreement",
+                "IGO",
+                "Country/State",
+                "State Coalition",
+                "Region",
+                "Other",
+                "Political Party",
+                "Political Party/Armed Group",
+                "UN Mission",
+                "Entity"
+            ]
+        },
+        {
+            "name": "edgeColor",
+            "type": "ordinal",
+            "range": ["#C1C1C1","lightgrey"],
+            "domain": ["party","third party"]
+        },
+        {
+            "name": "edgeWidth",
+            "type": "ordinal",
+            "range": [2,0.8],
+            "domain": ["party","third party"]
+        },
+        {
+            "name": "shape",
+            "type": "ordinal",
+            "domain": [
+                "Peace Agreement",
+                "Entity",
+                "Peace Process"
+            ],
+            "range": [
+                "square",
+                "circle",
+                "triangle"
+            ]
+        }
+    ],
+
+    "vis": [
+        {
+            "entries": "network.links",
+            "layout": "syrian-jigsaw",
+            "mark": {
+                "type": "linkpath",
+                "start": "source",
+                "end": "target",
+                "strokeWidth": {"field":"data.Edge", "scale":"edgeWidth"},
+                "stroke": {"field":"data.Edge", "scale":"edgeColor"}
+            }
+        },
+        {
+            "entries": "network.nodes",
+            "layout": "syrian-jigsaw",
+            "mark": {
+                "type": "symbol",
+                "shape": {"field": "data.node_type", "scale": "shape"},
+                "area": { "expression": "datum.data.node_type == 'Peace Agreement' ? 400 : 250"},
+                "fill": {
+                    "field": "data.node_type_color",
+                    "scale": "nodeColor"
+                },
+                "tooltip": {
+                    "expression": "{Name: datum.data.name, Type: datum.data.node_type_color}"
+                }
+            }
+        },
+        {
+            "entries": "network.nodes",
+            "layout": "syrian-jigsaw",
+            "mark": {
+                "type": "text",
+                "text": {"field": "data.name"},
+                "fill": "black",
+                "fontSize":14,
+                "lineBreak": ",",
+                "limit": 170,
+                "align": {"expression": "datum.data.node_type_color == 'Peace Agreement' ? 'right' : 'left'"},
+                "dx": {"expression": "datum.data.node_type_color == 'Peace Agreement' ? -15 : 10"},
+                "dy": 2
+            }
+        }
+    ]
+
+}

@@ -1,0 +1,146 @@
+{
+  "width": 1000,
+  "height": 300,
+  
+  "data": [
+    {
+      "name": "data",
+      "url": "[fileUrl]",
+        "transform": [
+            {"type": "addIndex","as": "id"}
+        ]
+    }
+],
+
+  "networks": [
+      {
+          "name": "network",
+          "parts": [
+              {"data": "data",
+                  "yieldsLinks": [
+                      {"source_id": {"field": "From Node (Short Name)"},
+                       "source_node_type": "node",
+                       "source_id_field": "id",
+                       "target_id": {"field": "To Node Name"},
+                       "target_node_type": "node",
+                       "target_id_field": "id",
+                       "data": [ "*"]
+                      }
+                  ],
+                  "yieldsNodes": [
+                      {"id_field": "From Node (Short Name)",
+                      "type": "node",
+                      "data": [{"field": "From Node Type","as": "node_type"},
+                              {"field": "From Node Type", "as": "node_type_color"},
+                              {"field": "From Node (Short Name)","as": "name"},
+                              {"field": "PP","as": "Peace"},
+                              {"field": "date", "as": "node_time"}]},
+                              
+                      {"id_field": "To Node Name",
+                      "type": "node",
+                      "data": [{"field": "To Node Type","as": "node_type"},
+                              {"field": "To Node Sub-Type", "as": "node_type_color"},
+                              {"field": "To Node Name","as": "name"}
+                              ]}
+                  ]
+              }
+          ],
+          "transform": [
+              {"type": "filterNodes", "expression": "datum.data.node_type == 'Peace Agreement'"},
+              {
+                  "type": "calculate", 
+                  "for": "nodes", 
+                  "as": "date", 
+                  "calculate": "utcParse(datum.data.node_time, '%Y/%m/%d')" 
+                  },
+              {
+                  "type":"calculate", 
+                  "calculate": "year(datum.data.node_time)", 
+                  "as": "year"}
+          ]}],
+  
+  "scales": [
+      {
+          "name": "time",
+          "type": "time",
+          "range": [0, 1500],
+          "domain": [653097600000, 1637884800000]
+      },
+      {
+          "name": "year",
+          "type": "linear",
+          "range": [0, 1500],
+          "domain": [1990, 2021]
+      }
+      
+  ],
+
+  "groupings": [
+      {
+          "name": "years",
+          "common": ["year"],
+          "data": "network.nodes"
+      }
+  ],
+
+  "layouts": [
+      {
+          "name": "layout",
+          "data": "years",
+          "pattern": "cartesian",
+          "x": [
+              {"scale": "year", "field": "data[0].year"}
+          ]
+      },
+      {
+          "name": "l",
+          "network": "network",
+          "pattern": "cartesian",
+          "x": [{"field": "date", "scale": "time"}],
+          "y": [{"value": 0}],
+          "transform": [
+              {"type": "set", "field": "width", "value": 20},
+              {"type": "set", "field": "height", "value": 20},
+              {"type": "beeswarm", "gravityY": 0} 
+          ]
+      }
+  ],
+
+  "vis": [
+      {
+          "entries": "years",
+          "layout": "layout",
+          
+          "mark": {
+              "type": "rect",
+              "fill": { "expression": "datum.data[0].year % 2 == 0 ? 'black' : 'white'"},
+              "opacity": 0.02,
+              "width": 43,
+              "height": 230
+              }
+      },
+      {
+           "entries": "years",
+          "layout": "layout",
+          
+          "mark": {
+              "type": "text",
+              "fill": "gray",
+              "text": {"expression": "datum.data[0].year % 2 == 0 ? datum.data[0].year : ''"},
+              "fontSize": 13,
+              "dx": 5,
+              "dy": 225
+           }
+      },
+      {
+          "entries": "network.nodes",
+          "layout": "l",
+          "mark": {
+              "type": "square",
+              "area": 150,
+              "fill": { "expression": "datum.data.Peace == [peaceProcess] ? '#60A18B' : '#D9D9D9'"},
+              "tooltip": {"expression": "{ Name: datum.data.name, Time: datum.data.node_time}"  }
+           }
+      }
+  ]
+}
