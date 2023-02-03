@@ -1,15 +1,14 @@
 
 <template>
-
     <div class='selector-wrapper'>
-        <p class="selector-title">Choose a peace process to start:</p>
+        <p class="selector-title">To begin, select a Peace Process to show relevant agreements in which Russia has been involved:</p>
         <div class="selection">
             <el-select 
                 id="select1" 
                 v-model="selectedProcess" 
                 placeholder="Select" 
                 size="large"
-                @change="render(); getMetrics()">
+                @change=" getMetrics(); render();">
                 <el-option
                 v-for="name in selectList"
                 :value="name"
@@ -23,8 +22,12 @@
 <script>
     import russia from "@/data/russia.json"
 
+    let view1, view2, view3, view4
+
     export default {
         emits:["sendData"],
+
+        props:["ppArr"],
         
         data() {
             return {
@@ -34,6 +37,7 @@
                 //for display titles
                 agreementNum: 0,
                 actorNum: 0,
+                maxNum: 0,
                 time: "",
                 selectedProcess: this.ppArr[0],
 
@@ -46,16 +50,21 @@
                 listH: 0,
                 timelineW: 0,
                 timelineH: 0,
-                barWidth: 0
+                barWidth: 0,
+                listDefaultHeight: 0,
+                networkDefaultHeight: 0
             }
         },
 
         methods: {
-            renderUpdateNew() {
-                return new Promise( resolve => {
-                    setTimeout(() => {
-                        var select = this.selectedProcess
+            async render(){
+                await this.getChartSize();
+                await this.renderUpdateNew();
+                await this.queryElement();
+            },
 
+            async renderUpdateNew() {
+                        var select = this.selectedProcess
                         //AUTO SIZING
                         var jigsawWidth = this.jigsawW
                         var jigsawHeight = this.jigsawH
@@ -67,119 +76,91 @@
                         var timelineHeight = this.timelineH
                         var timelinebar = this.barWidth
 
-                        NetPanoramaTemplateViewer.render(`..${__webpack_public_path__}templates/network.json`, {
+                        view1 = await NetPanoramaTemplateViewer.render(`..${__webpack_public_path__}templates/network.json`, {
                             fileUrl: `"..${__webpack_public_path__}data/russia.json"`,
                             peaceProcess: `'${select}'`,
                             autoWidth: `${networkWidth}`,
                             autoHeight: `${networkHeight}`
-                            }, "network");
+                            }, "network",
+                            {paramCallbacks: {selected_node: this.linkNodes}});
 
-                        NetPanoramaTemplateViewer.render(`..${__webpack_public_path__}templates/jigsaw.json`, {
+                        view2 = await NetPanoramaTemplateViewer.render(`..${__webpack_public_path__}templates/jigsaw.json`, {
                             fileUrl: `"..${__webpack_public_path__}data/russia.json"`,
                             peaceProcess: `'${select}'`,
                             autoWidth: `${jigsawWidth}`,
                             autoHeight: `${jigsawHeight}`
-                            }, "jigsaw");
+                            }, "jigsaw",
+                            {paramCallbacks: {selected_node: this.linkNodes}});
 
-                        NetPanoramaTemplateViewer.render(`..${__webpack_public_path__}templates/list.json`, {
+                        view3 = await NetPanoramaTemplateViewer.render(`..${__webpack_public_path__}templates/list.json`, {
                             fileUrl: `"..${__webpack_public_path__}data/russia.json"`,
                             peaceProcess: `'${select}'`,
                             autoWidth: `${listWidth}`,
                             autoHeight: `${listHeight}`
                             }, "list");
 
-                        NetPanoramaTemplateViewer.render(`..${__webpack_public_path__}templates/timeline.json`, {
+                        view4 = await NetPanoramaTemplateViewer.render(`..${__webpack_public_path__}templates/timeline.json`, {
                             fileUrl: `"..${__webpack_public_path__}data/russia.json"`,
                             peaceProcess: `'${select}'`,
                             autoWidth: `${timelineWidth}`,
                             autoHeight: `${timelineHeight}`,
                             barWidth: `${timelinebar}`,
-                            }, "timeline");
+                            }, "timeline",
+                            {paramCallbacks: {selected_node: this.linkNodes}});
 
                         console.log("RENDERED")
-                    }, 50)
-                resolve('done')
-                })
-                
-            },
+                },
 
             queryElement(){
                 return new Promise (resolve => {
                     setTimeout(() => {
+                        //remove blank mapDivs
                         let mapElement = document.querySelectorAll("#mapDiv")
                         for (let element of mapElement) {
                             element.remove()
+                            element.style.width = "20px"
+                            element.style.height = "20px"
                         }
-
+                        //disable text selection on tooltip divs to improve hovering experience
                         let tooltipElement = document.querySelectorAll('div[style*="z-index: 3;"]')
                         for (let tooltip of tooltipElement){
                             tooltip.className="tooltip-disable"
                         }
-                    }, 100)
+                    }, 200)
                     resolve('done')
                 })
             },
 
-            async render(){
-                await this.getChartSize();
-                await this.renderUpdateNew();
-                await this.queryElement();
-            },
-
-            getMetrics() {
-                var select = this.selectedProcess
-                var agtArr = [];
-                var agtYearArr = [];
-        
-                for (let i=0; i<russia.length; i++) {
-                    if (russia[i].PP == select) {
-                        var agtName = russia[i]["From Node (Short Name)"];
-                        if (agtArr.includes(agtName) == false) {
-                            agtArr.push(agtName);
-                            agtYearArr.push(new Date(russia[i].date));
-                        }
-                    }
-                }
-
-                var actArr = [];
-
-                for (let i=0; i<russia.length; i++) {
-                    if (russia[i].PP == select) {
-                        var actorName = russia[i]["To Node Name"];
-                        if (actArr.includes(actorName) == false) {
-                            actArr.push(actorName);
-                        }
-                    }
-                }
-
-                this.agreementNum = agtArr.length;
-                this.actorNum = actArr.length;
-
-                var maxDate = new Date(Math.max.apply(null, agtYearArr));
-                var maxYear = maxDate.getFullYear();
-                var minDate = new Date(Math.min.apply(null, agtYearArr));
-                var minYear = minDate.getFullYear();
-
-                this.time = `${minYear} - ${maxYear}`;
-
-                //emit to parent
-                let emitArr = {"pp": this.selectedProcess, "agtNum": agtArr.length, "actorNum": actArr.length, "time": `${minYear} - ${maxYear}` }
-                console.log("11111111111",emitArr)
-                this.$emit("sendData", emitArr)
-            },
-
             getChartSize() {
-                return new Promise (resolve => {
-                    setTimeout(() => {
                     //get gird size
+                    let parent = document.querySelector('.parent')
                     let grid3 = document.querySelector('.div3')
                     let grid4 = document.querySelector('.div4')
                     let grid5 = document.querySelector('.div5')
                     let timeline = document.querySelector('.timeline')
-                    
+
                     let titleNetwork = document.querySelector('.div3 .title')
                     let titleList = document.querySelector('.div4 .title')
                     let titleJigsaw = document.querySelector('.div5 .title')
+
+                    //calculate List Size
+                    const unitHeight = 16
+                    var row = Math.ceil(this.maxNum / 16)
+                    var listNewHeight = unitHeight * ( this.agreementNum * row)
+                    this.listH = listNewHeight + 50
+
+                    // assign streched grid size if list too long
+                    let listDivHeight = titleList.offsetHeight + listNewHeight + 50
+                    if ( listDivHeight > this.listDefaultHeight) {
+                        parent.style.height = `${listDivHeight*2}px`
+                        console.log(parent, parent.style.height)
+                    }
+                    else {
+                        parent.style.height = "auto"
+                        grid4.style.height = "auto"
+                        grid3.style.height = "auto"
+                        grid5.style.height = "auto"
+                    }
 
                     //get container size
                     let jigsawContainerWidth = grid5.offsetWidth
@@ -187,19 +168,15 @@
                     let networkContainerWidth = grid3.offsetWidth
                     let networkContainerHeight = grid3.offsetHeight - titleNetwork.offsetHeight
                     let listContainerWidth = grid4.offsetWidth
-                    let listContainerHeight = grid4.offsetHeight - titleList.offsetHeight
 
                     //define chart size
                     this.networkW = networkContainerWidth - 40
-                    this.networkH = networkContainerHeight - 30
-                    this.jigsawW = jigsawContainerWidth - 330
-                    this.jigsawH = jigsawContainerHeight - 30
-                    this.listW = listContainerWidth - 170
-                    this.listH = listContainerHeight - 30
-                    
-                    this.timelineW = timeline.offsetWidth
-                    this.timelineH = timeline.offsetHeight
-                    console.log(this.timelineW, this.timelineH)
+                    this.networkH = networkContainerHeight - 90
+                    this.jigsawW = jigsawContainerWidth - 340
+                    this.jigsawH = jigsawContainerHeight - 50
+                    this.listW = listContainerWidth - 300
+                    this.timelineW = timeline.offsetWidth - 50
+                    this.timelineH = timeline.offsetHeight - 50
 
                     //get timeline bar width and scale domain
                     var timeText = document.getElementById('timespan').innerHTML
@@ -213,15 +190,92 @@
                     }
                     let yearNum = yearArr.length
                     this.barWidth = this.timelineW / yearNum
+                }, 
 
-                    //template for all charts
-                    // chart = document.querySelector('.chart')
-                    // chartContainerWidth = chart.offsetWidth
-                    // chartContainerHeight = chart.offsetHeight
 
-                }, 10)
-                    resolve('done')
-                })
+            getMetrics() {
+                var select = this.selectedProcess
+                var agtArr = []
+                var agtYearArr = []
+                var actArr = []
+                var actorsInAgt = []
+                var actorSignedAgreements = []
+        
+                for (let i=0; i<russia.length; i++) {
+                    if (russia[i].PP == select) {
+                        var agtName = russia[i]["From Node (Short Name)"]
+                        var fullName = russia[i]["From Node (Full Name)"]
+                        var actorName = russia[i]["To Node Name"]
+
+                        if (agtArr.includes(fullName) == false) {
+                            agtArr.push(fullName)
+                            agtYearArr.push(new Date(russia[i].date))
+                            
+                            //for network full view, get agt: {attributes}
+                            actorsInAgt.push({
+                                agt: agtName, 
+                                name: fullName,  
+                                date:russia[i].date,
+                                link: russia[i].PAX_Hyperlink, 
+                                stage: russia[i]["From Node Sub-Type"], 
+                                description: russia[i].agt_description, 
+                                actorList: [actorName],
+                                actortypeList: [{actor: actorName, edge: russia[i].Edge,type: russia[i]["To Node Sub-Type"]}]})
+                        }
+                        else {
+                            for (let item of actorsInAgt) {
+                                if (item.agt == agtName) {
+                                    if (item.actorList.includes(actorName) == false) {
+                                        item.actorList.push(actorName)
+                                        item.actortypeList.push({actor: russia[i]["To Node Name"], edge:russia[i].Edge, type: russia[i]["To Node Sub-Type"]})
+                                    }
+                                }
+                            }
+                        }
+                        
+                        if (actArr.includes(actorName) == false) {
+                            actArr.push(actorName);
+                            //for network full view, get actor: {signed agreements}
+                            actorSignedAgreements.push({ 
+                                name: actorName,
+                                agtList: [{ name: fullName, edge: russia[i].Edge, date: russia[i].date}]  
+                                })
+                        }
+                        else {
+                            for (let item of actorSignedAgreements) {
+                                if ( item.name == actorName) {
+                                    item.agtList.push({ name: fullName, edge: russia[i].Edge, date: russia[i].date})
+                                }
+                            }
+                        }
+                    }
+                }
+
+                this.maxNum = 0
+                var actorMax = 0
+                for (let agt of actorsInAgt) {
+                    let actNum = agt.actorList.length
+                    // console.log("ACTORS", {agt: agt, actors: actorsInAgt})
+                    if ( actNum >= actorMax) {
+                        actorMax = actNum
+                    }
+                }
+
+                this.maxNum = actorMax
+                this.agreementNum = agtArr.length
+                this.actorNum = actArr.length
+
+                var maxDate = new Date(Math.max.apply(null, agtYearArr));
+                var maxYear = maxDate.getFullYear();
+                var minDate = new Date(Math.min.apply(null, agtYearArr));
+                var minYear = minDate.getFullYear();
+
+                this.time = `${minYear} - ${maxYear}`;
+
+                //emit to parent
+                let emitArr = {"pp": this.selectedProcess, "agtNum": agtArr.length, "actorNum": actArr.length, "time": `${minYear} - ${maxYear}`, "actorList": actorsInAgt, "actors": actorSignedAgreements, "maxNum": actorMax }
+                this.$emit("sendData", emitArr)
+
             },
 
             debounce(operate, delay) {
@@ -245,36 +299,46 @@
                         timer = setTimeout(task, delay)
                     }
                 }
-            }
+            },
+
+            linkNodes(newVal) {
+                this.propogateSelection(view1, "selected_node", newVal)
+                this.propogateSelection(view2, "selected_node", newVal)
+                this.propogateSelection(view4, "selected_node", newVal)
+            },
+
+            propogateSelection(viewer, selectionName, newVal) {
+                const nodeIds = newVal.nodes.map(n => n.id)
+                const linkIds = newVal.links.map(l => l.id)
+                console.log({nodeIds: nodeIds, linkIds: linkIds})
+                // the name of the network in which the selection is made - set in specification       
+                const networkName = "network"
+                const nodes = viewer.state[networkName].nodes.filter(n => nodeIds.includes(n.id))
+                const links = viewer.state[networkName].links.filter(l => linkIds.includes(l.id))
+                viewer.setParam(selectionName, {nodes, links})
+            },
+
+
         },
 
         mounted() {
+            //get default height
+            let listGrid = document.querySelector('.div4')
+            let networkGrid = document.querySelector('.div3')
+            let networkGridHeight = networkGrid.offsetHeight
+            let listGridHeight = listGrid.offsetHeight
+            this.networkDefaultHeight = networkGridHeight
+            this.listDefaultHeight = listGridHeight
+
             this.getMetrics()
-            this.render()
+            // this.render()
 
-            //original resize methods
-            // window.addEventListener('resize', this.debounce(this.getChartSize, 150), false)
-            // window.addEventListener('resize', this.debounce(this.renderUpdateNew, 150), false)
-
+            setTimeout(() => {
+                this.render()
+            }, 200);
+            
             //in async await
-            window.addEventListener('resize', this.debounce(this.render, 150), false)
-        },
-
-        setup() {
-            var ppArr = [];
-            for (let i=0; i<russia.length; i++) {
-                var peaceProcess = russia[i].PP;
-                if (ppArr.includes(peaceProcess) == false) {
-                    ppArr.push(peaceProcess);
-                    i++
-                } else {
-                    i++
-                }
-            }
-
-            return {
-                ppArr
-            }
+            window.addEventListener('resize', this.debounce(this.render, 150))
         }
     }
 

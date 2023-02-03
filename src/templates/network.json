@@ -45,7 +45,7 @@
             "parts": [
                 {"data": "data",
                     "yieldsLinks": [
-                        {"source_id": {"field": "From Node (Short Name)"},
+                        {"source_id": {"field": "From Node (Full Name)"},
                          "source_node_type": "node",
                          "source_id_field": "id",
                          "target_id": {"field": "To Node Name"},
@@ -55,11 +55,12 @@
                         }
                     ],
                     "yieldsNodes": [
-                        {"id_field": "From Node (Short Name)",
+                        {"id_field": "From Node (Full Name)",
                         "type": "node",
                         "data": [{"field": "From Node Type","as": "node_type"},
                                 {"field": "From Node Type", "as": "node_type_color"},
                                 {"field": "From Node (Short Name)","as": "name"},
+                                {"field": "From Node (Full Name)","as": "fullName"},
                                 {"field": "PP","as": "Peace"},
                                 {"field": "date", "as": "node_time"}]},
                                 
@@ -91,32 +92,30 @@
             "name": "nodeColor",
             "type": "ordinal",
             "range": [
-                "#D97144",
-                "#568AA4",
                 "#60A18B",
-                "#335B60",
                 "#EAC05B",
-                "#CDD2CC",
-                "#F3F2D7",
-                "#B16748",
+                "#D97144",
+                "#E8A5D5",
                 "#7FAADC",
-                "#9EB449",
                 "#714FBA",
-                "#E8A5D5"
+                "#9EB449",
+                "#CEAC9D",
+                "#F6F5BF",
+                "#568AA4",
+                "#CDD2CC"
             ],
             "domain": [
-                "Peace Process",
-                "Armed Group",
                 "Peace Agreement",
-                "IGO",
                 "Country/State",
-                "State Coalition",
-                "Region",
-                "Other",
+                "Entity",
+                "IGO",
+                "NGO",
                 "Political Party",
-                "Political Party/Armed Group",
-                "UN Mission",
-                "Entity"
+                "Armed Organization",
+                "Military",
+                "State Coalition",
+                "Umbrella",
+                "Other"
             ]
         },
         {
@@ -139,7 +138,6 @@
         }
     ],
     "vis": [
-         
         {
             "entries": "network.links",
             "layout": "layout",
@@ -191,7 +189,7 @@
                     "scale": "nodeColor"
                 },
                 "tooltip": {
-                    "field": "data.name"
+                    "expression": "datum.data.node_type == 'Peace Agreement' ? {Name: datum.data.fullName, Date: datum.data.node_time} : {Name: datum.id}"
                 },
                 "opacity": {
                     "conditions": [
@@ -212,6 +210,7 @@
                 "text": {"field": "id"},
                 "fontSize": 14,
                 "fontWeight": 600,
+                "limit": 300,
                 "align": "left",
                 "fill": "black",
                 "dx": 10,
@@ -227,6 +226,7 @@
                 "text": {"field": "id"},
                 "fontSize": 14,
                 "fontWeight": 500,
+                "limit": 300,
                 "align": "left",
                 "fill": "black",
                 "dx": 15,

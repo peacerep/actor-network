@@ -1,182 +1,337 @@
 <template>
-    <div style="margin: 30px 0px;">
+    <div class="legend-container">
         <div>
             <p class="network-legends">Agreement</p>
             <svg id="agt_legend"></svg>
         </div>
         
         <div>
-            <p class="network-legends">Signatory types</p>
+            <p class="network-legends">Signatory Types</p>
             <svg id="edge_legend"></svg>
         </div>
 
-        <div>
-            <p class="network-legends">Actor groups</p>
-            <svg id="entity_legend"></svg>
+        <div id="legend">
+            <div class="legend-info">
+                <p class="network-legends">Actor Groups</p>
+
+                <el-popover placement="right" :width="650" trigger="hover">
+                    <template #reference>
+                        <el-icon style="margin: 0px 5px;"><CirclePlus /></el-icon>
+                    </template>
+                    <el-table :data="this.actors" height="500">
+                        <el-table-column width="120" property="Actor Type Label" label="Actor" />
+                        <el-table-column property="Definition" label="Description" />
+                    </el-table>
+                </el-popover>
+
+            </div>
+            <svg v-if="this.width >= 1200" id="entity_legend"></svg>
+            <svg v-else-if="this.width < 1200 && this.width >= 300" id="test_legend"></svg>
         </div>
   </div>
 </template>
 
 <script>
     import * as d3 from "d3";
+    import actors from "@/data/actor_definitions.json"
+
     export default {
     data() {
         return {
-            timelienLegends:["other agreements"]
+            actors: [],
+            timelienLegends:["other agreements"],
+            width: 0
         };
     },
     
     mounted() {
-        const width = 280;
+        this.actors = actors
+        // this.getWiddow()
+        // this.renderLegend()
+        // this.render()
+        //get window
+        this.load()
+        window.addEventListener('resize', this.debounce(this.render, 100))
+    },
 
-        const entities = [
-            "Armed Group", 
-            "IGO", 
-            "Country/State", 
-            "State Coalition", 
-            "Region", 
-            "Other",
-            "Political Party",
-            "Political Party/Armed Group",
-            "UN Mission",
-            "Entity"
-        ];
-
-        let timelineList = ["Agreements in selected process", "All other agreemenets"];
-        let timelineColors = ["#60A18B", "#D9D9D9"];
-        var timelineColorScale = d3.scaleOrdinal()
-                                    .domain(timelineList)
-                                    .range(timelineColors);
-        var timelineSvg = d3.select("#timeline_legend")
-                            .attr("width", 800)
-                            .attr("height", 50)
-
-        timelineSvg.selectAll("rect")
-                    .data(timelineList)
-                    .enter()
-                    .append('rect')
-                        .attr("x", 20)
-                        .attr("y", (d,i) => (i*25))
-                        .attr("width", 18)
-                        .attr("height", 18)
-                        .style("fill", d => timelineColorScale(d));
-
-        timelineSvg.selectAll("labels")
-                    .data(timelineList)
-                    .enter()
-                    .append('text')
-                        .attr("x", 50)
-                        .attr("y", (d,i) => (i*25 + 15))
-                        .style("fill", "black")
-                        .text(d => d);
-
-        const agt = ["Peace Agreement"];
-
-        const signatory = ["Party", "Third Party"];
-        const sigColor = ["#C1C1C1","#D3D3D3"];
-
-        var sigColorScale = d3.scaleOrdinal()
-                            .domain(signatory)
-                            .range(sigColor);
-
-        var svg = d3.select("#entity_legend")
-                    .attr('width', width)
-                    .attr('height', 250);
-
-        var colorRange = [
-                "#568AA4",
-                "#335B60",
-                "#EAC05B",
-                "#CDD2CC",
-                "#F3F2D7",
-                "#B16748",
-                "#7FAADC",
-                "#9EB449",
-                "#714FBA",
-                "#E8A5D5"
-        ];
-
-        var color = d3.scaleOrdinal()
-                    .domain(entities)
-                    .range(colorRange);
+    methods: {
+        debounce(operate, delay) {
+            let time = null
+            let timer = null
+            let newTime = null
+            function task() {
+                newTime = +new Date()
+                if( newTime - time < delay ){
+                    timer = setTimeout(task, delay)
+                }
+                else {
+                    operate()
+                    timer = null
+                }
+                time = newTime
+            }
+            return function () {
+                time = +new Date()
+                if(!timer){
+                    timer = setTimeout(task, delay)
+                }
+            }
+        },
         
-        svg.selectAll("dots")
-            .data(entities)
-            .enter()
-            .append("circle")
-                .attr("cx", 30)
-                .attr("cy", function(d,i){ return 10 + i*25})
-                .attr("r", 10)
+        getWiddow() {
+            var w = window.outerWidth;
+            this.width = w
+            return w
+        },
+
+        async render() {
+            await this.clearSvg()
+            await this.getWiddow()
+            setTimeout(this.renderLegend(), 50)
+            // await this.renderLegend()
+        },
+
+        async load() {
+            await this.getWiddow()
+            setTimeout(this.renderLegend(), 50)
+        },
+
+        clearSvg() {
+            // const agtSvg = document.querySelectorAll('#agt_legend')
+            // const agtSvgChild = []
+            // agtSvg.forEach( agtSvg => {
+            //     const children = agtSvg.querySelectorAll('*')
+            //     agtSvgChild.push(children)
+            // })
+
+            // const edgeSvg = document.querySelectorAll('#edge_legend')
+            // const edgeSvgChild = []
+            // edgeSvg.forEach( edgeSvg => {
+            //     const children = edgeSvg.querySelectorAll('*')
+            //     edgeSvgChild.push(children)
+            // })
+            const agtSvg = document.getElementById('agt_legend')
+            const edgeSvg = document.getElementById('edge_legend')
+            
+            if ( this.width >= 1200 ){
+                const entitySvg = document.getElementById('entity_legend')
+                while (entitySvg.childNodes.length > 0) {
+                    entitySvg.removeChild(entitySvg.childNodes[0])
+                }
+            }
+            else {
+                const testSvg = document.getElementById('test_legend')
+                while (testSvg.childNodes.length > 0) {
+                    testSvg.removeChild(testSvg.childNodes[0])
+                }
+            }
+        
+            while (agtSvg.childNodes.length > 0) {
+                agtSvg.removeChild(agtSvg.childNodes[0])
+            }
+            while (edgeSvg.childNodes.length > 0) {
+                edgeSvg.removeChild(edgeSvg.childNodes[0])
+            }
+
+            console.log("Legend cleared")
+        },
+
+        renderLegend() {
+            // this.getWiddow()
+            const width = 220
+            const rectWidth = 16
+            const dotRadius = 8
+
+            const entities = [
+                "Country/State",
+                "Entity",
+                "IGO",
+                "NGO",
+                "Political Party",
+                "Armed Organization",
+                "Military",
+                "State Coalition",
+                "Umbrella",
+                "Other"
+            ];
+
+            const agt = ["Peace Agreement"]
+
+            const signatory = ["Party", "Third Party"]
+            const sigColor = ["#C1C1C1","#D3D3D3"]
+
+            var sigColorScale = d3.scaleOrdinal()
+                                .domain(signatory)
+                                .range(sigColor)
+
+            var svg = d3.selectAll("#entity_legend")
+                        .attr('width', width)
+                        .attr('height', 250)
+
+            var colorRange = [
+                    "#EAC05B",
+                    "#D97144",
+                    "#E8A5D5",
+                    "#7FAADC",
+                    "#714FBA",
+                    "#9EB449",
+                    "#CEAC9D",
+                    "#F6F5BF",
+                    "#568AA4",
+                    "#CDD2CC"
+            ]
+
+            var color = d3.scaleOrdinal()
+                        .domain(entities)
+                        .range(colorRange);
+            
+            //entities in media query
+            svg.selectAll("dots")
+                .data(entities)
+                .enter()
+                .append("circle")
+                    .attr("cx", 30)
+                    .attr("cy", function(d,i){ return 10 + i*24})
+                    .attr("r", dotRadius)
+                    .style("fill", d => color(d));
+    
+            svg.selectAll("labels")
+                .data(entities)
+                .enter()
+                .append("text")
+                .attr("x", 50)
+                .attr("y", function(d,i){ return 10 + i*24})
+                .style("fill", "black")
+                .text(d => d)
+                .attr("text-anchor", "left")
+                .attr("class", "legend-labels")
+                .style("alignment-baseline", "middle");
+
+            //the second legend
+            var svgH = d3.selectAll("#test_legend")
+                        .attr('height', 120)
+                        .attr('width', 350)
+                        
+            var g = svgH.append('g')
+                        .attr('class', 'legend-groups')
+                        .attr("transform", function(d, i) {
+                            return "translate(0,0)";
+                        })
+
+            g.selectAll('g')
+                .data(entities)
+                .enter()
+                .append('circle')
+                .attr("cx", function(d, i){
+                    if (i <= 4 ) { return 30 }
+                    else { return 200 }
+                })
+                .attr("cy", function(d,i){ 
+                    if (i <= 4) { return 10 + i*24}
+                    else { return i*25 - 115}
+
+                })
+                .attr("r", dotRadius)
                 .style("fill", d => color(d));
-   
-        svg.selectAll("labels")
-            .data(entities)
-            .enter()
-            .append("text")
-            .attr("x", 50)
-            .attr("y", function(d,i){ return 10 + i*25})
-            .style("fill", "black")
-            .text(d => d)
-            .attr("text-anchor", "left")
-            .attr("class", "legend-labels")
-            .style("alignment-baseline", "middle");
+            
+            g.selectAll('g')
+                .data(entities)
+                .enter()
+                .append("text")
+                .attr("x", function(d, i){
+                    if (i <= 4 ) { return 50 }
+                    else { return 220 }
+                })
+                .attr("y", function(d,i){ 
+                    if (i <= 4) { return 10 + i*24}
+                    else { return i*25 - 115}
+                })
+                .style("fill", "black")
+                .text(d => d)
+                .attr("text-anchor", "left")
+                .attr("class", "legend-labels")
+                .style("alignment-baseline", "middle")
+            
+                        
+            //agt_legend
+            var svgAgt = d3.selectAll("#agt_legend")
+                        .attr('width', width)
+                        .attr('height', 50);
 
-        var svgAgt = d3.select("#agt_legend")
-                    .attr('width', width)
-                    .attr('height', 50);
+            svgAgt.selectAll("rect")
+                    .data(agt)
+                    .enter()
+                    .append("rect")
+                        .attr("x", 22)
+                        .attr("y", function(d,i){ return 0 + i*25})
+                        .attr("width", rectWidth)
+                        .attr("height", rectWidth)
+                        .style("fill", "#60A18B")
 
-        svgAgt.selectAll("rect")
+            svgAgt.selectAll("labels")
                 .data(agt)
                 .enter()
-                .append("rect")
-                    .attr("x", 22)
-                    .attr("y", function(d,i){ return 0 + i*25})
-                    .attr("width", 18)
-                    .attr("height", 18)
-                    .style("fill", "#335B60")
+                .append("text")
+                .attr("x", 50)
+                .attr("y", function(d,i){ return 10 + i*25})
+                .style("fill", "black")
+                .text(d => d)
+                .attr("text-anchor", "left")
+                .attr("class", "legend-labels")
+                .style("alignment-baseline", "middle")
 
-        svgAgt.selectAll("labels")
-            .data(agt)
-            .enter()
-            .append("text")
-            .attr("x", 50)
-            .attr("y", function(d,i){ return 10 + i*25})
-            .style("fill", "black")
-            .text(d => d)
-            .attr("text-anchor", "left")
-            .attr("class", "legend-labels")
-            .style("alignment-baseline", "middle")
+            var svgSig = d3.selectAll("#edge_legend")
+                        .attr('width', width)
+                        .attr('height', 60);
 
-        var svgSig = d3.select("#edge_legend")
-                    .attr('width', width)
-                    .attr('height', 80);
+            svgSig.selectAll("rect")
+                    .data(signatory)
+                    .enter()
+                    .append("rect")
+                        .attr("x", 22)
+                        .attr("y", function(d,i){ return 6 + i*25})
+                        .attr("width", 30)
+                        .attr("height", function(d,i){ return 8 / (i+1) })
+                        .style("fill", d => sigColorScale(d))
 
-        svgSig.selectAll("rect")
+            svgSig.selectAll("labels")
                 .data(signatory)
                 .enter()
-                .append("rect")
-                    .attr("x", 22)
-                    .attr("y", function(d,i){ return 6 + i*25})
-                    .attr("width", 30)
-                    .attr("height", function(d,i){ return 8 / (i+1) })
-                    .style("fill", d => sigColorScale(d))
+                .append("text")
+                .attr("x", 60)
+                .attr("y", function(d,i){ return 10 + i*25})
+                .style("fill", "black")
+                .text(d => d)
+                .attr("text-anchor", "left")
+                .attr("class", "legend-labels")
+                .style("alignment-baseline", "middle")
 
-        svgSig.selectAll("labels")
-            .data(signatory)
-            .enter()
-            .append("text")
-            .attr("x", 60)
-            .attr("y", function(d,i){ return 10 + i*25})
-            .style("fill", "black")
-            .text(d => d)
-            .attr("text-anchor", "left")
-            .attr("class", "legend-labels")
-            .style("alignment-baseline", "middle")
+            // console.log("legends added")
+            }
+        }
     }
-    };
 </script>
 
 
 <style scoped>
+.legend-info {
+    display: flex;
+    flex-direction: row;
+}
+
+.tooltip-actor {
+    background: rgba(69,77,93,.9);
+    border-radius: .1rem;
+    color: #fff;
+    display: block;
+    font-size: 14px;
+    max-width: 320px;
+    padding: .2rem .4rem;
+    position: absolute;
+    text-overflow: ellipsis;
+    white-space: pre;
+    z-index: 999;
+}
+
 
 </style>

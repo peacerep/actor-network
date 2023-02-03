@@ -1,14 +1,14 @@
 <template>
     <div class="title-wrapper">
-      <h1>{{ countryTitle }}</h1>
-      <h1 class="sub-heading">Peace Agreements Actor Mapping</h1>
+      <h1>{{ countryTitle }} as a Global Peace Actor</h1>
+      <h1 class="sub-heading">Actor Networks of Russia's involvement in Peace and Transition Processes</h1>
     </div>
 
     <div class="top-description-wrapper">
         <p class="top-description">
-            Explore actor networks showing who signed peace agreements by country and peace process, and type of actor. 
+            Explore actor networks representing past peace and transition agreements where Russia has been involved globally, since 1990. All networks illustrate any agreement where Russia has been a party or third party signatory, and all other signatories of that agreement. 
             <br />
-            Source: <el-link class="source-link" href="https://www.peaceagreements.org/search">https://www.peaceagreements.org/search</el-link>
+            Source: <el-link class="source-link" href="https://www.peaceagreements.org/search">Peace Agreement Database</el-link>
         </p>
     </div>
 

@@ -1,7 +1,8 @@
 {
     "width": "[autoWidth]",
     "height": "[autoHeight]",
-    "x": 165,
+    "x": 150,
+    "y": -10,
 
     "data": [
         {
@@ -91,32 +92,30 @@
             "name": "nodeColor",
             "type": "ordinal",
             "range": [
-                "#D97144",
-                "#568AA4",
                 "#60A18B",
-                "#335B60",
                 "#EAC05B",
-                "#CDD2CC",
-                "#F3F2D7",
-                "#B16748",
+                "#D97144",
+                "#E8A5D5",
                 "#7FAADC",
-                "#9EB449",
                 "#714FBA",
-                "#E8A5D5"
+                "#9EB449",
+                "#CEAC9D",
+                "#F6F5BF",
+                "#568AA4",
+                "#CDD2CC"
             ],
             "domain": [
-                "Peace Process",
-                "Armed Group",
                 "Peace Agreement",
-                "IGO",
                 "Country/State",
-                "State Coalition",
-                "Region",
-                "Other",
+                "Entity",
+                "IGO",
+                "NGO",
                 "Political Party",
-                "Political Party/Armed Group",
-                "UN Mission",
-                "Entity"
+                "Armed Organization",
+                "Military",
+                "State Coalition",
+                "Umbrella",
+                "Other"
             ]
         },
         {
@@ -137,12 +136,11 @@
                 "x": -10,
                 "dy": 3,
                 "fontSize":12,
-
                 "limit": 140,
                 "lineHeight": 10,
                 "fill": "black",
                 "align": "right",
-                "tooltip": {"expression": "{ agreement: datum.data[0].source.data.fullName }"}
+                "tooltip": {"expression": "datum.data[0].source.data.fullName"}
             }
         },
         {
@@ -162,7 +160,7 @@
                 "name": "list2",
                 "data": "entry.data",
                 "pattern": "row-by-row",
-                "numCols": 20,
+                "numCols": 16,
                 "order": { "order": "order_by_id"  }
                 }
             ],
@@ -177,8 +175,10 @@
                             "field": "target.data.node_type_color",
                             "scale": "nodeColor"
                         },
-                        "area": 200,
-                        "tooltip": {"expression": "{ Name: datum.target.data.name }"} 
+                        "stroke": "white",
+                        "strokeWidth": 3,
+                        "area": 350,
+                        "tooltip": {"expression": "datum.target.data.name"} 
                     }
                 }
             ]
