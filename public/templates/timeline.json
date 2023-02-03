@@ -1,6 +1,6 @@
 {
-  "width": 1000,
-  "height": 300,
+    "width": "[autoWidth]",
+    "height": "[autoHeight]",
   
   "data": [
     {
@@ -115,7 +115,7 @@
               "type": "rect",
               "fill": { "expression": "datum.data[0].year % 2 == 0 ? 'black' : 'white'"},
               "opacity": 0.02,
-              "width": 43,
+              "width": "[barWidth]",
               "height": 230
               }
       },
@@ -128,7 +128,7 @@
               "fill": "gray",
               "text": {"expression": "datum.data[0].year % 2 == 0 ? datum.data[0].year : ''"},
               "fontSize": 13,
-              "dx": 5,
+              "dx": 2,
               "dy": 225
            }
       },

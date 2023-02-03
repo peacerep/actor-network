@@ -1,8 +1,8 @@
 {
-    "width": 600,
-    "height": 600,
-    "x": 50,
-    "y": 10,
+    "width": "[autoWidth]",
+    "height": "[autoHeight]",
+    "x": 20,
+    "y": 20,
     
     "data": [
         {
@@ -19,7 +19,8 @@
             "name": "selected_node",
             "action": "replace",
             "network": "network",
-            "type": "selection"
+            "type": "selection",
+            "clearOnBackgroundClick": true
         },
         {
             "name": "outlinks",

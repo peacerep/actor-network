@@ -10,14 +10,14 @@
   /* ----TEXTS---- */
   h1 {
     text-align: left;
-    font-size: 64px;
+    font-size: 60px;
     margin: 0px;
     padding: 50px 0px 0px 0px;
   }
 
   h1.sub-heading {
       text-align: left;
-      font-size: 24px;
+      font-size: 20px;
       margin: 0px;
     padding: 10px 0px 0px 0px;
   }
@@ -31,14 +31,14 @@
   
   h3 {
     text-align: left;
-    font-size: 30px;
+    font-size: 26px;
     margin: 0px 0px 10px 20px;
     padding: 0px;
   }
 
   .top-sub {
     text-align: left;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 300;
     margin: 20px 0px 0px 20px;
     padding: 0px;
@@ -56,7 +56,7 @@
 
   p.top-description {
     padding: 0px 0px 10px 10px;
-    font-size: 20px;
+    font-size: 16px;
     width: 100%;
     border-left: solid 2px black;
   }
@@ -72,21 +72,35 @@
     margin: 0px 0px 10px 20px;
   }
 
+  .legend-labels {
+    font-size: 14px;
+  }
+
   p.chart-description {
     margin: 0px 20px;
     padding: 0px;
   }
 
+  p.selector-title {
+    padding: 0px;
+    margin: 0px 0px 10px 20px;
+  }
+
+  .source-link {
+    font-size: 16px;
+  }
+
+
   /* -----METRICS---- */
   .metrics-num {
-    font-size: 40px;
+    font-size: 30px;
     font-weight: 300;
     padding: 0px;
     margin: 0px 00px;
   }
 
   .metrics-title {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 300;
     padding: 0px;
     margin: 0px 2px;
@@ -109,7 +123,7 @@
   }
 
   .top-description-wrapper {
-    margin: 100px 0px 20px 40px;
+    margin: 40px 0px 20px 40px;
     padding-right: 60px;
   }
   
@@ -154,12 +168,18 @@
   /* ----PEACE PROCESS---- */
   .process-wrapper {
     padding: 0px 30px;
-    margin: 0px 0px;
+    margin: 40px 0px 40px 0px;
+    background-color: #F4F4F4;
+  }
+
+  .selector-wrapper {
+    padding: 0px 30px;
+    margin: 40px 0px 0px 0px;
     background-color: #F4F4F4;
   }
   
   .selection {
-    margin: 10px 0px 40px 20px;
+    margin: 0px 0px 40px 20px;
     display: flex;
     justify-content: left;
     align-items: left;
@@ -173,35 +193,53 @@
 
   .parent {
     display: grid;
-    grid-template-columns: 0.25fr repeat(2, 1fr);
-    grid-template-rows: repeat(5, 1fr);
+    height: 160vh;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(12, 1fr);
     grid-column-gap: 30px;
     grid-row-gap: 30px;
     padding: 0px 20px;
     background-color: #F4F4F4;
     }
     
-  .div1 { 
-      grid-area: 1 / 1 / 3 / 2;
+  .div1 {
+      grid-area: 1 / 1 / 5 / 2;
       background-color: white;
   }
   .div2 { 
-      grid-area: 3 / 1 / 6 / 2; 
+      grid-area: 5 / 1 / 13 / 2; 
       background-color: white;
   }
   .div3 { 
-      grid-area: 1 / 2 / 4 / 3; 
+      grid-area: 1 / 2 / 7 / 4; 
       background-color: white;
       align-self: stretch;
   }
   .div4 { 
-      grid-area: 4 / 2 / 6 / 3; 
+      grid-area: 7 / 2 / 13 / 4; 
       background-color: white;
   }
   .div5 { 
-      grid-area: 1 / 3 / 6 / 4; 
+      grid-area: 1 / 4 / 13 / 6; 
       background-color: white;
       }
+
+
+/* attribute selector */
+
+ div[style*="z-index: 3;"] {
+  color: palevioletred;
+ }
+
+ .tooltip-disable {
+  color: palevioletred;
+
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+ }
 
 
 

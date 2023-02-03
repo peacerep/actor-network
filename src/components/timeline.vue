@@ -6,7 +6,7 @@
         <svg id="timeline_legend"></svg>
         
         <div class="timeline">
-            <div id="timeline" style="width: 100%; height:300px; position: relative; z-index:0;" ></div>
+            <div id="timeline" style="width: 100%; position: abosolute;" ></div>
         </div>
     </div>
 

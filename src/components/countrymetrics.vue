@@ -22,7 +22,7 @@
             <p class="metrics-title">Actors</p>
         </div></el-col>
         <el-col :span="7"><div class="grid-content">
-            <p class="metrics-num">{{ timespan }}</p>
+            <p class="metrics-num" id="timespan">{{ timespan }}</p>
             <p class="metrics-title">timespan</p>
         </div></el-col>
     </el-row>

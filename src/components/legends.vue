@@ -11,7 +11,7 @@
         </div>
 
         <div>
-            <p class="network-legends">Entity groups</p>
+            <p class="network-legends">Actor groups</p>
             <svg id="entity_legend"></svg>
         </div>
   </div>
@@ -42,8 +42,8 @@
             "Entity"
         ];
 
-        let timelineList = ["other agreemenets", "agreements signed in selected process"];
-        let timelineColors = ["#D9D9D9", "#60A18B"];
+        let timelineList = ["Agreements in selected process", "All other agreemenets"];
+        let timelineColors = ["#60A18B", "#D9D9D9"];
         var timelineColorScale = d3.scaleOrdinal()
                                     .domain(timelineList)
                                     .range(timelineColors);
@@ -118,6 +118,7 @@
             .style("fill", "black")
             .text(d => d)
             .attr("text-anchor", "left")
+            .attr("class", "legend-labels")
             .style("alignment-baseline", "middle");
 
         var svgAgt = d3.select("#agt_legend")
@@ -143,6 +144,7 @@
             .style("fill", "black")
             .text(d => d)
             .attr("text-anchor", "left")
+            .attr("class", "legend-labels")
             .style("alignment-baseline", "middle")
 
         var svgSig = d3.select("#edge_legend")
@@ -168,6 +170,7 @@
             .style("fill", "black")
             .text(d => d)
             .attr("text-anchor", "left")
+            .attr("class", "legend-labels")
             .style("alignment-baseline", "middle")
     }
     };
