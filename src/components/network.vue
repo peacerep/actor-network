@@ -110,7 +110,7 @@ export default {
 
             var view1 = NetPanoramaTemplateViewer.render(`..${__webpack_public_path__}templates/network.json`, 
                     {
-                        fileUrl: `"..${__webpack_public_path__}data/russia.json"`,
+                        fileUrl: `"..${__webpack_public_path__}data/uk.json"`,
                         peaceProcess: `'${select}'`,
                         autoWidth: `${networkWidth}`,
                         autoHeight: `${networkHeight}`

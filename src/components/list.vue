@@ -68,7 +68,7 @@ export default {
 
             var view1 = await NetPanoramaTemplateViewer.render(`..${__webpack_public_path__}templates/list.json`, 
                     {
-                        fileUrl: `"..${__webpack_public_path__}data/russia.json"`,
+                        fileUrl: `"..${__webpack_public_path__}data/uk.json"`,
                         peaceProcess: `'${select}'`,
                         autoWidth: `${listWidth}`,
                         autoHeight: `${listHeight}`

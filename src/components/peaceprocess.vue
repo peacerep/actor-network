@@ -1,7 +1,7 @@
 
 <template>
     <div class='selector-wrapper'>
-        <p class="selector-title">To begin, select a Peace Process to show relevant agreements in which Russia has been involved:</p>
+        <p class="selector-title">To begin, select a Peace Process to show relevant agreements in which UK has been involved:</p>
         <div class="selection">
             <el-select 
                 id="select1" 
@@ -20,7 +20,7 @@
 
 
 <script>
-    import russia from "@/data/russia.json"
+    import countryData from "@/data/uk.json"
 
     let view1, view2, view3, view4
 
@@ -77,7 +77,7 @@
                         var timelinebar = this.barWidth
 
                         view1 = await NetPanoramaTemplateViewer.render(`..${__webpack_public_path__}templates/network.json`, {
-                            fileUrl: `"..${__webpack_public_path__}data/russia.json"`,
+                            fileUrl: `"..${__webpack_public_path__}data/uk.json"`,
                             peaceProcess: `'${select}'`,
                             autoWidth: `${networkWidth}`,
                             autoHeight: `${networkHeight}`
@@ -85,7 +85,7 @@
                             {paramCallbacks: {selected_node: this.linkNodes}});
 
                         view2 = await NetPanoramaTemplateViewer.render(`..${__webpack_public_path__}templates/jigsaw.json`, {
-                            fileUrl: `"..${__webpack_public_path__}data/russia.json"`,
+                            fileUrl: `"..${__webpack_public_path__}data/uk.json"`,
                             peaceProcess: `'${select}'`,
                             autoWidth: `${jigsawWidth}`,
                             autoHeight: `${jigsawHeight}`
@@ -93,14 +93,14 @@
                             {paramCallbacks: {selected_node: this.linkNodes}});
 
                         view3 = await NetPanoramaTemplateViewer.render(`..${__webpack_public_path__}templates/list.json`, {
-                            fileUrl: `"..${__webpack_public_path__}data/russia.json"`,
+                            fileUrl: `"..${__webpack_public_path__}data/uk.json"`,
                             peaceProcess: `'${select}'`,
                             autoWidth: `${listWidth}`,
                             autoHeight: `${listHeight}`
                             }, "list");
 
                         view4 = await NetPanoramaTemplateViewer.render(`..${__webpack_public_path__}templates/timeline.json`, {
-                            fileUrl: `"..${__webpack_public_path__}data/russia.json"`,
+                            fileUrl: `"..${__webpack_public_path__}data/uk.json"`,
                             peaceProcess: `'${select}'`,
                             autoWidth: `${timelineWidth}`,
                             autoHeight: `${timelineHeight}`,
@@ -201,33 +201,41 @@
                 var actorsInAgt = []
                 var actorSignedAgreements = []
         
-                for (let i=0; i<russia.length; i++) {
-                    if (russia[i].PP == select) {
-                        var agtName = russia[i]["From Node (Short Name)"]
-                        var fullName = russia[i]["From Node (Full Name)"]
-                        var actorName = russia[i]["To Node Name"]
+                for (let i=0; i<countryData.length; i++) {
+                    if (countryData[i].PP == select) {
+                        var agtName = countryData[i]["From Node (Short Name)"]
+                        var fullName = countryData[i]["From Node (Full Name)"]
+                        var actorName = countryData[i]["To Node Name"]
+                        var agtID = countryData[i]["AgtID"]
 
-                        if (agtArr.includes(fullName) == false) {
+                        if (agtArr.includes(agtID) == false) {
                             agtArr.push(fullName)
-                            agtYearArr.push(new Date(russia[i].date))
-                            
+
+                            // new Date() parse string in "2000-01-01"
+                            // agtYearArr.push(new Date(countryData[i].date))
+
+                            // uk agt date in "dd/mm/yyyy" format
+                            const parts = countryData[i].date.split('/');
+                            let dateObj = new Date(parts[2], parts[1] - 1, parts[0]);
+                            agtYearArr.push(dateObj)
+
                             //for network full view, get agt: {attributes}
                             actorsInAgt.push({
                                 agt: agtName, 
                                 name: fullName,  
-                                date:russia[i].date,
-                                link: russia[i].PAX_Hyperlink, 
-                                stage: russia[i]["From Node Sub-Type"], 
-                                description: russia[i].agt_description, 
+                                date:countryData[i].date,
+                                link: countryData[i].PAX_Hyperlink, 
+                                stage: countryData[i]["From Node Sub-Type"], 
+                                description: countryData[i].agt_description, 
                                 actorList: [actorName],
-                                actortypeList: [{actor: actorName, edge: russia[i].Edge,type: russia[i]["To Node Sub-Type"]}]})
+                                actortypeList: [{actor: actorName, edge: countryData[i].Edge,type: countryData[i]["To Node Sub-Type"]}]})
                         }
                         else {
                             for (let item of actorsInAgt) {
                                 if (item.agt == agtName) {
                                     if (item.actorList.includes(actorName) == false) {
                                         item.actorList.push(actorName)
-                                        item.actortypeList.push({actor: russia[i]["To Node Name"], edge:russia[i].Edge, type: russia[i]["To Node Sub-Type"]})
+                                        item.actortypeList.push({actor: countryData[i]["To Node Name"], edge:countryData[i].Edge, type: countryData[i]["To Node Sub-Type"]})
                                     }
                                 }
                             }
@@ -238,13 +246,13 @@
                             //for network full view, get actor: {signed agreements}
                             actorSignedAgreements.push({ 
                                 name: actorName,
-                                agtList: [{ name: fullName, edge: russia[i].Edge, date: russia[i].date}]  
+                                agtList: [{ name: fullName, edge: countryData[i].Edge, date: countryData[i].date}]  
                                 })
                         }
                         else {
                             for (let item of actorSignedAgreements) {
                                 if ( item.name == actorName) {
-                                    item.agtList.push({ name: fullName, edge: russia[i].Edge, date: russia[i].date})
+                                    item.agtList.push({ name: fullName, edge: countryData[i].Edge, date: countryData[i].date})
                                 }
                             }
                         }
@@ -271,6 +279,7 @@
                 var minYear = minDate.getFullYear();
 
                 this.time = `${minYear} - ${maxYear}`;
+                console.log('time', agtYearArr)
 
                 //emit to parent
                 let emitArr = {"pp": this.selectedProcess, "agtNum": agtArr.length, "actorNum": actArr.length, "time": `${minYear} - ${maxYear}`, "actorList": actorsInAgt, "actors": actorSignedAgreements, "maxNum": actorMax }

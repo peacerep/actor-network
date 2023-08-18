@@ -74,7 +74,7 @@ export default ({
 
             view1 = await NetPanoramaTemplateViewer.render(`..${__webpack_public_path__}templates/matrix.json`, 
                     {
-                        fileUrl: `"..${__webpack_public_path__}data/russia.json"`,
+                        fileUrl: `"..${__webpack_public_path__}data/uk.json"`,
                         peaceProcess: `'${select}'`,
                         autoWidth: `${marticskWidth}`,
                         autoHeight: `${marticsHeight}`

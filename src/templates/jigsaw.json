@@ -247,6 +247,8 @@
                     "field": "data.node_type_color",
                     "scale": "nodeColor"
                 },
+                "stroke": "black",
+                "strokeWidth": {"expression": "datum.data.name == 'United Kingdom' ? 2 : 0"},
                 "tooltip": {
                     "expression": "datum.data.node_type == 'Peace Agreement' ? {Name: datum.data.fullName, Date: datum.data.node_time} : {Name: datum.id}"
                 },
@@ -267,7 +269,7 @@
                 "type": "text",
                 "text": {"field": "id"},
                 "fill": "black",
-                "fontSize":12,
+                "fontSize":14,
                 "limit": 150,
                 "align": {"expression": "datum.data.node_type_color == 'Peace Agreement' ? 'right' : 'left'"},
                 "dx": {"expression": "datum.data.node_type_color == 'Peace Agreement' ? -15 : 10"},

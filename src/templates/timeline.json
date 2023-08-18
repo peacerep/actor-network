@@ -9,8 +9,58 @@
         "transform": [
             {"type": "addIndex","as": "id"}
         ]
+    },
+    {
+        "name": "yearArr",
+        "values": [
+            {"year": 1990},
+            {"year": 1991},
+            {"year": 1992},
+            {"year": 1993},
+            {"year": 1994},
+            {"year": 1995},
+            {"year": 1996},
+            {"year": 1997},
+            {"year": 1998},
+            {"year": 1999},
+            {"year": 2000},
+            {"year": 2001},
+            {"year": 2002},
+            {"year": 2003},
+            {"year": 2004},
+            {"year": 2005},
+            {"year": 2006},
+            {"year": 2007},
+            {"year": 2008},
+            {"year": 2009},
+            {"year": 2010},
+            {"year": 2011},
+            {"year": 2012},
+            {"year": 2013},
+            {"year": 2014},
+            {"year": 2015},
+            {"year": 2016},
+            {"year": 2017},
+            {"year": 2018},
+            {"year": 2019},
+            {"year": 2020},
+            {"year": 2021}
+        ],
+        "transform": [
+                {"type": "addIndex","as": "id"}
+            ]
     }
-],
+    ],
+
+    "parameters": [
+        {
+            "name": "selected_node",
+            "action": "replace",
+            "network": "network",
+            "type": "selection",
+            "clearOnBackgroundClick": true
+        }
+    ],
 
   "networks": [
       {
@@ -18,7 +68,7 @@
           "parts": [
               {"data": "data",
                   "yieldsLinks": [
-                      {"source_id": {"field": "From Node (Short Name)"},
+                      {"source_id": {"field": "From Node (Full Name)"},
                        "source_node_type": "node",
                        "source_id_field": "id",
                        "target_id": {"field": "To Node Name"},
@@ -28,13 +78,15 @@
                       }
                   ],
                   "yieldsNodes": [
-                      {"id_field": "From Node (Short Name)",
+                      {"id_field": "From Node (Full Name)",
                       "type": "node",
                       "data": [{"field": "From Node Type","as": "node_type"},
                               {"field": "From Node Type", "as": "node_type_color"},
                               {"field": "From Node (Short Name)","as": "name"},
+                              {"field": "From Node (Full Name)","as": "fullName"},
                               {"field": "PP","as": "Peace"},
-                              {"field": "date", "as": "node_time"}]},
+                              {"field": "date", "as": "node_time"},
+                              {"field": "year", "as": "year"}]},
                               
                       {"id_field": "To Node Name",
                       "type": "node",
@@ -51,12 +103,12 @@
                   "type": "calculate", 
                   "for": "nodes", 
                   "as": "date", 
-                  "calculate": "utcParse(datum.data.node_time, '%Y/%m/%d')" 
+                  "calculate": "utcParse(datum.data.node_time, '%d/%m/%Y')" 
                   },
-              {
-                  "type":"calculate", 
-                  "calculate": "year(datum.data.node_time)", 
-                  "as": "year"}
+                  {
+                    "type":"calculate", 
+                    "calculate": "datum.data.year", 
+                    "as": "year"}
           ]}],
   
   "scales": [
@@ -84,14 +136,14 @@
   ],
 
   "layouts": [
-      {
-          "name": "layout",
-          "data": "years",
-          "pattern": "cartesian",
-          "x": [
-              {"scale": "year", "field": "data[0].year"}
-          ]
-      },
+    {
+        "name": "layout-yearArr",
+        "data": "yearArr",
+        "pattern": "cartesian",
+        "x": [
+            {"scale": "year", "field": "year"}
+        ]
+    },
       {
           "name": "l",
           "network": "network",
@@ -99,47 +151,97 @@
           "x": [{"field": "date", "scale": "time"}],
           "y": [{"value": 0}],
           "transform": [
-              {"type": "set", "field": "width", "value": 20},
-              {"type": "set", "field": "height", "value": 20},
+              {"type": "set", "field": "width", "value": 10},
+              {"type": "set", "field": "height", "value": 25},
               {"type": "beeswarm", "gravityY": 0} 
           ]
       }
   ],
 
   "vis": [
-      {
-          "entries": "years",
-          "layout": "layout",
-          "mark": {
-              "type": "rect",
-              "fill": { "expression": "datum.data[0].year % 2 == 0 ? 'black' : 'white'"},
-              "opacity": 0.02,
-              "width": "[barWidth]",
-              "height": "[autoHeight]"
-              }
-      },
-      {
-           "entries": "years",
-          "layout": "layout",
-          
-          "mark": {
-              "type": "text",
-              "fill": "gray",
-              "text": {"expression": "datum.data[0].year % 2 == 0 ? datum.data[0].year : ''"},
-              "fontSize": 13,
-              "dx": 2,
-              "dy": 225
-           }
-      },
-      {
-          "entries": "network.nodes",
-          "layout": "l",
-          "mark": {
-              "type": "square",
-              "area": 150,
-              "fill": { "expression": "datum.data.Peace == [peaceProcess] ? '#60A18B' : '#D9D9D9'"},
-              "tooltip": {"expression": "{ Name: datum.data.name, Date: datum.data.node_time}"  }
-           }
-      }
+    {
+        "entries": "yearArr",
+        "layout": "layout-yearArr",
+        "mark": {
+            "type": "rect",
+            "fill": { "expression": "datum.year % 2 == 0 ? 'black' : 'white'"},
+            "opacity": 0.02,
+            "width": "[barWidth]",
+            "height": "[autoHeight]"
+        }
+    },
+    {
+        "entries": "yearArr",
+        "layout": "layout-yearArr",
+        "mark": {
+            "type": "text",
+            "fill": "gray",
+            "text": {"expression": "datum.year % 2 == 0 ? datum.year : ''"},
+            "fontSize": 13,
+            "dx": 0,
+            "dy": 225
+        }
+    },
+    {
+        "entries": "network.nodes",
+        "layout": "l",
+        "actions": [
+            {
+            "interaction": "select",
+            "using": "cursor",
+            "event": "mouseover",
+            "action": "replace",
+            "selection": "selected_node"
+            }
+        ],
+        "mark": {
+            "type": "square",
+            "area": 150,
+            "fill": { "expression": "datum.data.Peace == [peaceProcess] ? '#60A18B' : '#D9D9D9'"},
+            "tooltip": {"expression": "{ Name: datum.data.fullName, Date: datum.data.node_time}"  }
+        }
+    },
+    {
+        "entries": "network.nodes",
+        "layout": "l",
+        "ifInSelection": "selected_node.nodes",
+        "mark": {
+            "type": "square",
+            "area": 220,
+            "fill": "orange"
+        }
+    },
+    {
+        "entries": "network.nodes",
+        "layout": "l",
+        "ifInSelection": "selected_node.nodes",
+        "mark": {
+            "type": "text",
+            "text": {"field": "id"},
+            "fontSize": 14,
+            "fontWeight": 800,
+            "limit": 300,
+            "align": "left",
+            "fill": "white",
+            "dx": 10,
+            "dy":3
+            }
+    },
+    {
+        "entries": "network.nodes",
+        "layout": "l",
+        "ifInSelection": "selected_node.nodes",
+        "mark": {
+            "type": "text",
+            "text": {"field": "id"},
+            "fontSize": 14,
+            "fontWeight": 500,
+            "limit": 300,
+            "align": "left",
+            "fill": "black",
+            "dx": 10,
+            "dy":3
+            }
+    }
   ]
 }

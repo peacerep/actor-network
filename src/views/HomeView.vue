@@ -26,7 +26,7 @@
   import countrymetrics from '../components/countrymetrics.vue'
 
   import ppdashbord from '../components/ppdashboard.vue'
-  import russia from '../data/russia.json'
+  import countryData from '../data/uk.json'
 
   export default {
     components: {peaceprocess, countrytitle, timeline, countrymetrics, ppdashbord},
@@ -52,10 +52,9 @@
       let x, y, a, b, c, d;
       console.log('\\n')
 
-
       var ppArr = [];
-      for (let i=0; i<russia.length; i++) {
-          var peaceProcess = russia[i].PP;
+      for (let i=0; i<countryData.length; i++) {
+          var peaceProcess = countryData[i].PP;
           if (ppArr.includes(peaceProcess) == false) {
               ppArr.push(peaceProcess);
               i++
@@ -70,10 +69,19 @@
       var agtNum = 0
       var actorArr = []
 
-      for (let i=0; i<russia.length; i++) {
-      var agt = russia[i]["From Node (Short Name)"]
-      var agtYear = russia[i].date
-      var actorName = russia[i]["To Node Name"]
+      for (let i=0; i<countryData.length; i++) {
+
+      // var agt = countryData[i]["From Node (Short Name)"]
+      var agt = countryData[i]["AgtId"]
+
+
+      // The Russia agt date format is 1999/06/10, while the UK agt date is 10/06/1996
+      // var agtYear = countryData[i].date
+      var date = countryData[i].date;
+      var dateParts = date.split("/");
+      var agtYear = dateParts[2];
+
+      var actorName = countryData[i]["To Node Name"]
 
       if (actorArr.includes(actorName) == false) {
         actorArr.push(actorName);
@@ -85,6 +93,8 @@
           agtNum++;
       }
       }
+
+      console.log("agtArr", agtArr)
 
       var maxDate = new Date(Math.max.apply(null, agtTimeArr))
       var maxYear = maxDate.getFullYear()

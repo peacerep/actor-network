@@ -2,7 +2,7 @@
     <div class="component-container">
         <div class="title">
             <h3 class="top-sub">Overview</h3>
-            <h3>Russia's Involvement</h3>
+            <h3>Country Involvement</h3>
         </div>
 
     <!-- ELEMENT ROW -->

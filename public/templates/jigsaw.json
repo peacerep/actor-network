@@ -121,7 +121,7 @@
             ],
             "data": "network.nodes",
             "width":0.1,
-            "positioning": "start"
+            "positioning": "distribute"
         }
     ],
 
@@ -248,7 +248,7 @@
                     "scale": "nodeColor"
                 },
                 "stroke": "black",
-                "strokeWidth": {"expression": "datum.data.name == 'Russia' ? 2 : 0"},
+                "strokeWidth": {"expression": "datum.data.name == 'United Kingdom' ? 2 : 0"},
                 "tooltip": {
                     "expression": "datum.data.node_type == 'Peace Agreement' ? {Name: datum.data.fullName, Date: datum.data.node_time} : {Name: datum.id}"
                 },

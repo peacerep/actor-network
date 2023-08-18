@@ -82,6 +82,30 @@
 
     "layouts": [
         {
+            "name": "layout-discarded",
+            "network": "network",
+            "type": "d3-force",
+            "normalizeX": [
+                0,
+                500
+            ],
+            "normalizeY": [
+                0,
+                500
+            ],
+            "forces": [
+               {
+                "force": "link"
+               },
+                {
+                    "force": "nbody",
+                    "strength": -15,
+                    "theta": 1.2,
+                    "distanceMin": 1
+                }
+            ]
+        },
+        {
             "name": "layout",
             "network": "network",
             "type": "d3-force"
@@ -127,7 +151,7 @@
         {
             "name": "edgeWidth",
             "type": "ordinal",
-            "range": [2.5,0.8],
+            "range": [1.8, 0.8],
             "domain": ["party","third party"]
         },
         {
@@ -183,11 +207,13 @@
             "mark": {
                 "type": "symbol",
                 "shape": {"field": "data.node_type", "scale": "shape"},
-                "area": { "expression": "datum.data.node_type == 'Peace Agreement' ? 400 : 250"},
+                "area": { "expression": "datum.data.node_type == 'Peace Agreement' ? 350 : 250"},
                 "fill": {
                     "field": "data.node_type_color",
                     "scale": "nodeColor"
                 },
+                "stroke": "black",
+                "strokeWidth": {"expression": "datum.data.name == 'United Kingdom' ? 2 : 0"},
                 "tooltip": {
                     "expression": "datum.data.node_type == 'Peace Agreement' ? {Name: datum.data.fullName, Date: datum.data.node_time} : {Name: datum.id}"
                 },
@@ -204,12 +230,27 @@
         {
             "entries": "network.nodes",
             "layout": "layout",
+            "mark": {
+                "type": "text",
+                "text": {"expression": "datum.data.name == 'United Kingdom' ? 'United Kingdom' : ' '"},
+                "fontSize": 14,
+                "fontWeight": 500,
+                "limit": 300,
+                "align": "left",
+                "fill": "black",
+                "dx": 10,
+                "dy":3
+                }
+        },
+        {
+            "entries": "network.nodes",
+            "layout": "layout",
             "ifInSelection": "selected_node.nodes",
             "mark": {
                 "type": "text",
                 "text": {"field": "id"},
                 "fontSize": 14,
-                "fontWeight": 600,
+                "fontWeight": 500,
                 "limit": 300,
                 "align": "left",
                 "fill": "black",
@@ -229,9 +270,9 @@
                 "limit": 300,
                 "align": "left",
                 "fill": "black",
-                "dx": 15,
+                "dx": 10,
                 "dy":3
-                }
+            }
         }
     ]
 }
