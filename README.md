@@ -31,3 +31,8 @@ Files in need of care:
 
 ### Replace country name text
 We need to update all text containing country name, `countrytitle.vue` and `peaceprocess.vue` This is silly right now.
+
+## Pending Fixes
+- Automate country names and paths
+- Timeline beeswarm graph lacks full responsiveness
+- ...
