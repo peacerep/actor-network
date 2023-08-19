@@ -20,14 +20,12 @@
 
 
 <script>
-    import countryData from "@/data/uk.json"
-
     let view1, view2, view3, view4
 
     export default {
         emits:["sendData"],
 
-        props:["ppArr", "actorTypeLegendList","actorTypeLegendListNetwork", "colorRange", "colorRangeNetwork"],
+        props:["countryData", "ppArr", "actorTypeLegendList","actorTypeLegendListNetwork", "colorRange", "colorRangeNetwork"],
         
         data() {
             return {
@@ -215,12 +213,12 @@
                 var actorSignedAgreements = []
 
                 // loop over each row in entire data
-                for (let i=0; i<countryData.length; i++) {
+                for (let i=0; i<this.countryData.length; i++) {
                     // get only data from selected peace process
-                    if (countryData[i]["PPName"] == select) {
-                        var agtID = countryData[i]["AgtId"]
-                        var fullName = countryData[i]["Agt"]
-                        var actorName = countryData[i]["actor"]
+                    if (this.countryData[i]["PPName"] == select) {
+                        var agtID = this.countryData[i]["AgtId"]
+                        var fullName = this.countryData[i]["Agt"]
+                        var actorName = this.countryData[i]["actor"]
 
                         if (agtArr.includes(agtID) == false) {
                             agtArr.push(agtID)
@@ -229,7 +227,7 @@
                             // agtYearArr.push(new Date(countryData[i].date))
 
                             // uk agt date in "dd/mm/yyyy" format
-                            const parts = countryData[i].date.split('/');
+                            const parts = this.countryData[i].date.split('/');
                             let dateObj = new Date(parts[2], parts[1] - 1, parts[0]);
                             agtYearArr.push(dateObj)
 
@@ -237,13 +235,13 @@
                             actorsInAgt.push({
                                 id: agtID,
                                 name: fullName,  
-                                date:countryData[i].date,
-                                link: countryData[i].PAX_Hyperlink, 
-                                stage: countryData[i]["stage_label"], 
-                                description: countryData[i].description, 
+                                date:this.countryData[i].date,
+                                link: this.countryData[i].PAX_Hyperlink, 
+                                stage: this.countryData[i]["stage_label"], 
+                                description: this.countryData[i].description, 
                                 actorList: [actorName],
-                                actortypeList: [{actor: actorName, edge: countryData[i]["signatory_type"],
-                                type: countryData[i]["old_actor_type"]}]})
+                                actortypeList: [{actor: actorName, edge: this.countryData[i]["signatory_type"],
+                                type: this.countryData[i]["old_actor_type"]}]})
                         }
                         else {
                             for (let item of actorsInAgt) {
@@ -251,9 +249,9 @@
                                     if (item.actorList.includes(actorName) == false) {
                                         item.actorList.push(actorName)
                                         item.actortypeList.push({
-                                            actor: countryData[i]["actor"], 
-                                            edge: countryData[i]["signatory_type"], 
-                                            type: countryData[i]["old_actor_type"]})
+                                            actor: this.countryData[i]["actor"], 
+                                            edge: this.countryData[i]["signatory_type"], 
+                                            type: this.countryData[i]["old_actor_type"]})
                                     }
                                 }
                             }
@@ -264,13 +262,13 @@
                             //actorSignedAgreements: for network full view, get actor: {signed agreements}
                             actorSignedAgreements.push({ 
                                 name: actorName,
-                                agtList: [{ name: fullName, edge: countryData[i]["signatory_type"], date: countryData[i].date}]  
+                                agtList: [{ name: fullName, edge: this.countryData[i]["signatory_type"], date: this.countryData[i].date}]  
                                 })
                         }
                         else {
                             for (let item of actorSignedAgreements) {
                                 if ( item.name == actorName) {
-                                    item.agtList.push({ name: fullName, edge: countryData[i]["signatory_type"], date: countryData[i].date})
+                                    item.agtList.push({ name: fullName, edge: this.countryData[i]["signatory_type"], date: this.countryData[i].date})
                                 }
                             }
                         }

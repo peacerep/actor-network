@@ -3,7 +3,9 @@
     <el-container>
       <el-aside class="top-side">
         <countrytitle />
-        <peaceprocess v-on:sendData="getData" 
+        <peaceprocess
+          :countryData="countryData" 
+          v-on:sendData="getData" 
           :ppArr="ppArr" 
           :actorTypeLegendList="actorTypeLegendList" 
           :colorRange="colorRange"
@@ -49,7 +51,8 @@
         agtNum: 0,
         agtActorNum:0,
         agtTime: '',
-        data: {}
+        data: {},
+        countryData
       }
     },
 
