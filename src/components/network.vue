@@ -9,7 +9,7 @@
     <div class="dialogue-container" id="network-dialog-container">
         <div class="dialogue-legends">
             <h3 class="dialogue-heading">Legend</h3>
-            <legends />
+            <legends :actorTypeLegendList="actorTypeLegendList" :colorRange="colorRange"/>
         </div>
         <el-divider v-if="this.w >= 1200" direction="vertical" content-position="center" />
         <el-divider v-else-if="this.w < 1200 && this.w >= 300" content-position="center" />
@@ -62,7 +62,7 @@ import actorInfo from '../data/actors_all.json'
 
 export default {
     components: { legends },
-    props: ["title", "actorList", "agreementList"],
+    props: ["title", "actorList", "agreementList", "actorTypeLegendListNetwork", "colorRangeNetwork", "actorTypeLegendList", "colorRange" ],
 
     data() {
         return {
@@ -108,12 +108,18 @@ export default {
             var networkWidth = this.width
             var networkHeight = this.height
 
+            // legends for network
+            var actorTypeLegendListNetwork = JSON.stringify(this.actorTypeLegendListNetwork)
+            var colorRangeNetwork = JSON.stringify(this.colorRangeNetwork)
+
             var view1 = NetPanoramaTemplateViewer.render(`..${__webpack_public_path__}templates/network.json`, 
                     {
                         fileUrl: `"..${__webpack_public_path__}data/uk.json"`,
                         peaceProcess: `'${select}'`,
                         autoWidth: `${networkWidth}`,
-                        autoHeight: `${networkHeight}`
+                        autoHeight: `${networkHeight}`,
+                        actorTypeLegendList: `${actorTypeLegendListNetwork}`,
+                        colorRange: `${colorRangeNetwork}`
                     }, 
                     "networkFull",
                     {paramCallbacks: {selected_node: this.onChange}}
@@ -150,7 +156,7 @@ export default {
                 //different layout for entity nodes and agreement nodes
                 const nodeType = node.data.node_type
                 
-                if ( nodeType == "Entity") {
+                if ( nodeType == "signatory") {
                     //if selected node is an actor
                     this.actorVisible = true
                     document.getElementById('entityName').innerText = node.id
@@ -161,7 +167,7 @@ export default {
                             document.getElementById('actor-info').innerText = actor.additional_info
                         }
                     }
-                    //loop agreementList for all signed agreements
+                    //loop agreementList for all signed agreements, trace to HomeView to peaceprocess.vue
                     for ( let actor of this.agreementList) {
                         if ( actor.name == node.id ) {
                             this.agtTable = actor.agtList
@@ -173,10 +179,12 @@ export default {
                     //if selected node is an agreement
                     this.agtVisible = true
                     document.getElementById('agtName').innerText = node.id
-                    //loop actorList for agreement info
+                    
+                    //loop actorList for agreement info, trace to HomeView to peaceprocess.vue
                     for (let agt of this.actorList) {
                         if ( agt.name == node.id ) {
                             this.actorTable = agt.actortypeList
+                            console.log("agt actor table", agt.actortypeList)
                             document.getElementById('date').innerText = agt.date
                             document.getElementById('link').href = agt.link
                             document.getElementById('stage').innerText = `Stage: ${agt.stage}`

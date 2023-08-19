@@ -36,6 +36,8 @@
     import actors from "@/data/actor_definitions.json"
 
     export default {
+    props: ["actorTypeLegendList", "colorRange"],
+
     data() {
         return {
             actors: [],
@@ -46,10 +48,6 @@
     
     mounted() {
         this.actors = actors
-        // this.getWiddow()
-        // this.renderLegend()
-        // this.render()
-        //get window
         this.load()
         window.addEventListener('resize', this.debounce(this.render, 100))
     },
@@ -97,19 +95,6 @@
         },
 
         clearSvg() {
-            // const agtSvg = document.querySelectorAll('#agt_legend')
-            // const agtSvgChild = []
-            // agtSvg.forEach( agtSvg => {
-            //     const children = agtSvg.querySelectorAll('*')
-            //     agtSvgChild.push(children)
-            // })
-
-            // const edgeSvg = document.querySelectorAll('#edge_legend')
-            // const edgeSvgChild = []
-            // edgeSvg.forEach( edgeSvg => {
-            //     const children = edgeSvg.querySelectorAll('*')
-            //     edgeSvgChild.push(children)
-            // })
             const agtSvg = document.getElementById('agt_legend')
             const edgeSvg = document.getElementById('edge_legend')
             
@@ -137,26 +122,19 @@
         },
 
         renderLegend() {
-            // this.getWiddow()
-            const width = 220
             const rectWidth = 16
             const dotRadius = 8
+            const legendGap = 6
 
-            const entities = [
-                "Country/State",
-                "Entity",
-                "IGO",
-                "NGO",
-                "Political Party",
-                "Armed Organization",
-                "Military",
-                "State Coalition",
-                "Umbrella",
-                "Other"
-            ];
+            // legends and colors from data
+            const entities = this.actorTypeLegendList
+            const colorRange = this.colorRange
+            const entityNum = this.actorTypeLegendList.length
+
+            const width = 220
+            const height = entityNum * (2 * dotRadius + legendGap)
 
             const agt = ["Peace Agreement"]
-
             const signatory = ["Party", "Third Party"]
             const sigColor = ["#C1C1C1","#D3D3D3"]
 
@@ -166,20 +144,7 @@
 
             var svg = d3.selectAll("#entity_legend")
                         .attr('width', width)
-                        .attr('height', 250)
-
-            var colorRange = [
-                    "#EAC05B",
-                    "#D97144",
-                    "#E8A5D5",
-                    "#7FAADC",
-                    "#714FBA",
-                    "#9EB449",
-                    "#CEAC9D",
-                    "#F6F5BF",
-                    "#568AA4",
-                    "#CDD2CC"
-            ]
+                        .attr('height', height)
 
             var color = d3.scaleOrdinal()
                         .domain(entities)
@@ -191,7 +156,7 @@
                 .enter()
                 .append("circle")
                     .attr("cx", 30)
-                    .attr("cy", function(d,i){ return 10 + i*24})
+                    .attr("cy", function(d,i){ return 10 + i* (dotRadius*2 + legendGap)})
                     .attr("r", dotRadius)
                     .style("fill", d => color(d));
     
@@ -200,7 +165,7 @@
                 .enter()
                 .append("text")
                 .attr("x", 50)
-                .attr("y", function(d,i){ return 10 + i*24})
+                .attr("y", function(d,i){ return 12 + i* (dotRadius*2 + legendGap)})
                 .style("fill", "black")
                 .text(d => d)
                 .attr("text-anchor", "left")
@@ -229,7 +194,6 @@
                 .attr("cy", function(d,i){ 
                     if (i <= 4) { return 10 + i*24}
                     else { return i*25 - 115}
-
                 })
                 .attr("r", dotRadius)
                 .style("fill", d => color(d));
@@ -305,8 +269,6 @@
                 .attr("text-anchor", "left")
                 .attr("class", "legend-labels")
                 .style("alignment-baseline", "middle")
-
-            // console.log("legends added")
             }
         }
     }

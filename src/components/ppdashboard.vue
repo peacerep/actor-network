@@ -37,7 +37,7 @@
                 </div>
                 <!-- <el-affix :offset="0"> -->
                     <div class="legend-box">
-                    <legends />
+                    <legends :actorTypeLegendList="actorTypeLegendList" :colorRange="colorRange"/>
                     </div>
                 <!-- </el-affix> -->
         </div>
@@ -70,7 +70,11 @@
                     ref="network" 
                     :title="this.title" 
                     :actorList="this.actorList" 
-                    :agreementList="this.agreementList"/>
+                    :agreementList="this.agreementList"
+                    :actorTypeLegendListNetwork="actorTypeLegendListNetwork"
+                    :colorRangeNetwork="colorRangeNetwork"
+                    :actorTypeLegendList="actorTypeLegendList" :colorRange="colorRange"
+                    />
             </el-dialog>
         </div>
 
@@ -154,7 +158,7 @@ import list from '../components/list.vue'
 export default {
     components: {legends, network, jigsaw, list},
 
-    props: ["data"],
+    props: ["data", "actorTypeLegendList", "colorRange", "actorTypeLegendListNetwork", "colorRangeNetwork"],
 
     data() {
         return {

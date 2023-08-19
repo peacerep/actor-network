@@ -27,7 +27,7 @@
     export default {
         emits:["sendData"],
 
-        props:["ppArr"],
+        props:["ppArr", "actorTypeLegendList","actorTypeLegendListNetwork", "colorRange", "colorRangeNetwork"],
         
         data() {
             return {
@@ -64,51 +64,65 @@
             },
 
             async renderUpdateNew() {
-                        var select = this.selectedProcess
-                        //AUTO SIZING
-                        var jigsawWidth = this.jigsawW
-                        var jigsawHeight = this.jigsawH
-                        var networkWidth = this.networkW
-                        var networkHeight = this.networkH
-                        var listWidth = this.listW
-                        var listHeight = this.listH
-                        var timelineWidth = this.timelineW
-                        var timelineHeight = this.timelineH
-                        var timelinebar = this.barWidth
+                var select = this.selectedProcess
+                // AUTO SIZING
+                var jigsawWidth = this.jigsawW
+                var jigsawHeight = this.jigsawH
+                var networkWidth = this.networkW
+                var networkHeight = this.networkH
+                var listWidth = this.listW
+                var listHeight = this.listH
+                var timelineWidth = this.timelineW
+                var timelineHeight = this.timelineH
+                var timelinebar = this.barWidth
 
-                        view1 = await NetPanoramaTemplateViewer.render(`..${__webpack_public_path__}templates/network.json`, {
-                            fileUrl: `"..${__webpack_public_path__}data/uk.json"`,
-                            peaceProcess: `'${select}'`,
-                            autoWidth: `${networkWidth}`,
-                            autoHeight: `${networkHeight}`
-                            }, "network",
-                            {paramCallbacks: {selected_node: this.linkNodes}});
+                // legends for network and jigsaw
+                var actorTypeLegendListNetwork = JSON.stringify(this.actorTypeLegendListNetwork)
+                var colorRangeNetwork = JSON.stringify(this.colorRangeNetwork)
+                // legends for list
+                var actorTypeLegendList = JSON.stringify(this.actorTypeLegendList)
+                var colorRange = JSON.stringify(this.colorRange)
 
-                        view2 = await NetPanoramaTemplateViewer.render(`..${__webpack_public_path__}templates/jigsaw.json`, {
-                            fileUrl: `"..${__webpack_public_path__}data/uk.json"`,
-                            peaceProcess: `'${select}'`,
-                            autoWidth: `${jigsawWidth}`,
-                            autoHeight: `${jigsawHeight}`
-                            }, "jigsaw",
-                            {paramCallbacks: {selected_node: this.linkNodes}});
+                // see NetPan usage, read in data path, add template variables, and interaction listeners
+                view1 = await NetPanoramaTemplateViewer.render(`..${__webpack_public_path__}templates/network.json`, {
+                    fileUrl: `"..${__webpack_public_path__}data/uk.json"`,
+                    peaceProcess: `'${select}'`,
+                    autoWidth: `${networkWidth}`,
+                    autoHeight: `${networkHeight}`,
+                    actorTypeLegendList: `${actorTypeLegendListNetwork}`,
+                    colorRange: `${colorRangeNetwork}`
+                    }, "network",
+                    {paramCallbacks: {selected_node: this.linkNodes}});
 
-                        view3 = await NetPanoramaTemplateViewer.render(`..${__webpack_public_path__}templates/list.json`, {
-                            fileUrl: `"..${__webpack_public_path__}data/uk.json"`,
-                            peaceProcess: `'${select}'`,
-                            autoWidth: `${listWidth}`,
-                            autoHeight: `${listHeight}`
-                            }, "list");
+                view2 = await NetPanoramaTemplateViewer.render(`..${__webpack_public_path__}templates/jigsaw.json`, {
+                    fileUrl: `"..${__webpack_public_path__}data/uk.json"`,
+                    peaceProcess: `'${select}'`,
+                    autoWidth: `${jigsawWidth}`,
+                    autoHeight: `${jigsawHeight}`,
+                    actorTypeLegendList: `${actorTypeLegendListNetwork}`,
+                    colorRange: `${colorRangeNetwork}`
+                    }, "jigsaw",
+                    {paramCallbacks: {selected_node: this.linkNodes}});
 
-                        view4 = await NetPanoramaTemplateViewer.render(`..${__webpack_public_path__}templates/timeline.json`, {
-                            fileUrl: `"..${__webpack_public_path__}data/uk.json"`,
-                            peaceProcess: `'${select}'`,
-                            autoWidth: `${timelineWidth}`,
-                            autoHeight: `${timelineHeight}`,
-                            barWidth: `${timelinebar}`,
-                            }, "timeline",
-                            {paramCallbacks: {selected_node: this.linkNodes}});
+                view3 = await NetPanoramaTemplateViewer.render(`..${__webpack_public_path__}templates/list.json`, {
+                    fileUrl: `"..${__webpack_public_path__}data/uk.json"`,
+                    peaceProcess: `'${select}'`,
+                    autoWidth: `${listWidth}`,
+                    autoHeight: `${listHeight}`,
+                    actorTypeLegendList: `${actorTypeLegendList}`,
+                    colorRange: `${colorRange}`
+                    }, "list");
 
-                        console.log("RENDERED")
+                view4 = await NetPanoramaTemplateViewer.render(`..${__webpack_public_path__}templates/timeline.json`, {
+                    fileUrl: `"..${__webpack_public_path__}data/uk.json"`,
+                    peaceProcess: `'${select}'`,
+                    autoWidth: `${timelineWidth}`,
+                    autoHeight: `${timelineHeight}`,
+                    barWidth: `${timelinebar}`,
+                    }, "timeline",
+                    {paramCallbacks: {selected_node: this.linkNodes}});
+
+                console.log("RENDERED")
                 },
 
             queryElement(){
@@ -153,7 +167,6 @@
                     let listDivHeight = titleList.offsetHeight + listNewHeight + 50
                     if ( listDivHeight > this.listDefaultHeight) {
                         parent.style.height = `${listDivHeight*2}px`
-                        console.log(parent, parent.style.height)
                     }
                     else {
                         parent.style.height = "auto"
@@ -200,16 +213,17 @@
                 var actArr = []
                 var actorsInAgt = []
                 var actorSignedAgreements = []
-        
+
+                // loop over each row in entire data
                 for (let i=0; i<countryData.length; i++) {
-                    if (countryData[i].PP == select) {
-                        var agtName = countryData[i]["From Node (Short Name)"]
-                        var fullName = countryData[i]["From Node (Full Name)"]
-                        var actorName = countryData[i]["To Node Name"]
-                        var agtID = countryData[i]["AgtID"]
+                    // get only data from selected peace process
+                    if (countryData[i]["PPName"] == select) {
+                        var agtID = countryData[i]["AgtId"]
+                        var fullName = countryData[i]["Agt"]
+                        var actorName = countryData[i]["actor"]
 
                         if (agtArr.includes(agtID) == false) {
-                            agtArr.push(fullName)
+                            agtArr.push(agtID)
 
                             // new Date() parse string in "2000-01-01"
                             // agtYearArr.push(new Date(countryData[i].date))
@@ -219,23 +233,27 @@
                             let dateObj = new Date(parts[2], parts[1] - 1, parts[0]);
                             agtYearArr.push(dateObj)
 
-                            //for network full view, get agt: {attributes}
+                            //actorsInAgt: for network full view, get agt: {attributes}
                             actorsInAgt.push({
-                                agt: agtName, 
+                                id: agtID,
                                 name: fullName,  
                                 date:countryData[i].date,
                                 link: countryData[i].PAX_Hyperlink, 
-                                stage: countryData[i]["From Node Sub-Type"], 
-                                description: countryData[i].agt_description, 
+                                stage: countryData[i]["stage_label"], 
+                                description: countryData[i].description, 
                                 actorList: [actorName],
-                                actortypeList: [{actor: actorName, edge: countryData[i].Edge,type: countryData[i]["To Node Sub-Type"]}]})
+                                actortypeList: [{actor: actorName, edge: countryData[i]["signatory_type"],
+                                type: countryData[i]["old_actor_type"]}]})
                         }
                         else {
                             for (let item of actorsInAgt) {
-                                if (item.agt == agtName) {
+                                if (item.id == agtID) {
                                     if (item.actorList.includes(actorName) == false) {
                                         item.actorList.push(actorName)
-                                        item.actortypeList.push({actor: countryData[i]["To Node Name"], edge:countryData[i].Edge, type: countryData[i]["To Node Sub-Type"]})
+                                        item.actortypeList.push({
+                                            actor: countryData[i]["actor"], 
+                                            edge: countryData[i]["signatory_type"], 
+                                            type: countryData[i]["old_actor_type"]})
                                     }
                                 }
                             }
@@ -243,46 +261,55 @@
                         
                         if (actArr.includes(actorName) == false) {
                             actArr.push(actorName);
-                            //for network full view, get actor: {signed agreements}
+                            //actorSignedAgreements: for network full view, get actor: {signed agreements}
                             actorSignedAgreements.push({ 
                                 name: actorName,
-                                agtList: [{ name: fullName, edge: countryData[i].Edge, date: countryData[i].date}]  
+                                agtList: [{ name: fullName, edge: countryData[i]["signatory_type"], date: countryData[i].date}]  
                                 })
                         }
                         else {
                             for (let item of actorSignedAgreements) {
                                 if ( item.name == actorName) {
-                                    item.agtList.push({ name: fullName, edge: countryData[i].Edge, date: countryData[i].date})
+                                    item.agtList.push({ name: fullName, edge: countryData[i]["signatory_type"], date: countryData[i].date})
                                 }
                             }
                         }
                     }
                 }
 
+                console.log("Actors in Agt", actorsInAgt)
+
+                // for adjusting list height
                 this.maxNum = 0
                 var actorMax = 0
                 for (let agt of actorsInAgt) {
                     let actNum = agt.actorList.length
-                    // console.log("ACTORS", {agt: agt, actors: actorsInAgt})
                     if ( actNum >= actorMax) {
                         actorMax = actNum
                     }
                 }
-
                 this.maxNum = actorMax
+
+                // for peace process metrics data
                 this.agreementNum = agtArr.length
                 this.actorNum = actArr.length
-
                 var maxDate = new Date(Math.max.apply(null, agtYearArr));
                 var maxYear = maxDate.getFullYear();
                 var minDate = new Date(Math.min.apply(null, agtYearArr));
                 var minYear = minDate.getFullYear();
-
                 this.time = `${minYear} - ${maxYear}`;
-                console.log('time', agtYearArr)
 
                 //emit to parent
-                let emitArr = {"pp": this.selectedProcess, "agtNum": agtArr.length, "actorNum": actArr.length, "time": `${minYear} - ${maxYear}`, "actorList": actorsInAgt, "actors": actorSignedAgreements, "maxNum": actorMax }
+                let emitArr = {
+                    "pp": this.selectedProcess, 
+                    "agtNum": agtArr.length, 
+                    "actorNum": actArr.length, 
+                    "time": `${minYear} - ${maxYear}`, 
+                    // for network full view
+                    "actorList": actorsInAgt, 
+                    "actors": actorSignedAgreements, 
+                    "maxNum": actorMax 
+                }
                 this.$emit("sendData", emitArr)
 
             },
@@ -319,7 +346,9 @@
             propogateSelection(viewer, selectionName, newVal) {
                 const nodeIds = newVal.nodes.map(n => n.id)
                 const linkIds = newVal.links.map(l => l.id)
-                console.log({nodeIds: nodeIds, linkIds: linkIds})
+                // for testing out clicks
+                // console.log({nodeIds: nodeIds, linkIds: linkIds})
+                
                 // the name of the network in which the selection is made - set in specification       
                 const networkName = "network"
                 const nodes = viewer.state[networkName].nodes.filter(n => nodeIds.includes(n.id))
@@ -340,7 +369,6 @@
             this.listDefaultHeight = listGridHeight
 
             this.getMetrics()
-            // this.render()
 
             setTimeout(() => {
                 this.render()

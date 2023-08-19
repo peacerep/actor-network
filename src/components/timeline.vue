@@ -12,7 +12,7 @@
             <div id="timeline" style="width: 100%; " ></div>
         </div>
         <div class="title">
-        <!-- <el-button round>expand to full view</el-button> -->
+
         <el-button size="small" round @click="exportTimeline()" class="export-button">
             Download as PNG<el-icon><Download /></el-icon>
         </el-button>
