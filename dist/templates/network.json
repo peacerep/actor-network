@@ -43,68 +43,45 @@
         {
             "name": "network",
             "parts": [
-                {"data": "data",
-                    "yieldsLinks": [
-                        {"source_id": {"field": "From Node (Full Name)"},
-                         "source_node_type": "node",
-                         "source_id_field": "id",
-                         "target_id": {"field": "To Node Name"},
-                         "target_node_type": "node",
-                         "target_id_field": "id",
-                         "data": [ "*"]
-                        }
-                    ],
-                    "yieldsNodes": [
-                        {"id_field": "From Node (Full Name)",
-                        "type": "node",
-                        "data": [{"field": "From Node Type","as": "node_type"},
-                                {"field": "From Node Type", "as": "node_type_color"},
-                                {"field": "From Node (Short Name)","as": "name"},
-                                {"field": "From Node (Full Name)","as": "fullName"},
-                                {"field": "PP","as": "Peace"},
-                                {"field": "date", "as": "node_time"}]},
-                                
-                        {"id_field": "To Node Name",
-                        "type": "node",
-                        "data": [{"field": "To Node Type","as": "node_type"},
-                                {"field": "To Node Sub-Type", "as": "node_type_color"},
-                                {"field": "To Node Name","as": "name"}
-                                ]}
-                    ]
-                }
-            ],
+              {"data": "data",
+                  "yieldsLinks": [
+                      {"source_id": {"field": "Agt"},
+                       "source_node_type": "node",
+                       "source_id_field": "id",
+                       "target_id": {"field": "actor"},
+                       "target_node_type": "node",
+                       "target_id_field": "id",
+                       "data": [ "*"]
+                      }
+                  ],
+                  "yieldsNodes": [
+                      {"id_field": "Agt",
+                      "type": "node",
+                      "data": [{"field": "Type","as": "node_type"},
+                              {"field": "Type", "as": "node_type_color"},
+                              {"field": "short_agt_name","as": "name"},
+                              {"field": "Agt","as": "fullName"},
+                              {"field": "PPName","as": "Peace"},
+                              {"field": "date", "as": "node_time"},
+                              {"field": "year", "as": "year"}]},
+                              
+                      {"id_field": "actor",
+                      "type": "node",
+                      "data": [{"field": "target_type","as": "node_type"},
+                              {"field": "old_actor_type", "as": "node_type_color"},
+                              {"field": "actor","as": "name"}
+                              ]}
+                  ]
+              }
+          ],
             "transform": [
-                {"type": "filterEdges", "expression": "datum.data.PP == [peaceProcess]"},
+                {"type": "filterEdges", "expression": "datum.source.data.Peace == [peaceProcess]"},
                 {"type": "removeIsolated"}
             ]
         }
     ],
 
     "layouts": [
-        {
-            "name": "layout-discarded",
-            "network": "network",
-            "type": "d3-force",
-            "normalizeX": [
-                0,
-                500
-            ],
-            "normalizeY": [
-                0,
-                500
-            ],
-            "forces": [
-               {
-                "force": "link"
-               },
-                {
-                    "force": "nbody",
-                    "strength": -15,
-                    "theta": 1.2,
-                    "distanceMin": 1
-                }
-            ]
-        },
         {
             "name": "layout",
             "network": "network",
@@ -115,32 +92,8 @@
         {
             "name": "nodeColor",
             "type": "ordinal",
-            "range": [
-                "#60A18B",
-                "#EAC05B",
-                "#D97144",
-                "#E8A5D5",
-                "#7FAADC",
-                "#714FBA",
-                "#9EB449",
-                "#CEAC9D",
-                "#F6F5BF",
-                "#568AA4",
-                "#CDD2CC"
-            ],
-            "domain": [
-                "Peace Agreement",
-                "Country/State",
-                "Entity",
-                "IGO",
-                "NGO",
-                "Political Party",
-                "Armed Organization",
-                "Military",
-                "State Coalition",
-                "Umbrella",
-                "Other"
-            ]
+            "range": "[colorRange]",
+            "domain": "[actorTypeLegendList]"
         },
         {
             "name": "edgeColor",
@@ -157,7 +110,7 @@
         {
             "name": "shape",
             "type": "ordinal",
-            "domain": ["Peace Agreement","Entity","Peace Process"],
+            "domain": ["Peace Agreement","signatory","Peace Process"],
             "range": ["square","circle","triangle"]
         }
     ],
@@ -169,8 +122,8 @@
                 "type": "linkpath",
                 "start": "source",
                 "end": "target",
-                "strokeWidth": {"field":"data.Edge", "scale":"edgeWidth"},
-                "stroke": {"field":"data.Edge", "scale":"edgeColor"},
+                "strokeWidth": {"field":"data.signatory_type", "scale":"edgeWidth"},
+                "stroke": {"field":"data.signatory_type", "scale":"edgeColor"},
                 "opacity": {
                     "conditions": [
                         {"inSelection": "outlinks.links","value": 1},
@@ -189,7 +142,7 @@
                 "start": "source",
                 "end": "target",
                 "stroke": "#FF7F0E",
-                "strokeWidth": {"field":"data.Edge", "scale":"edgeWidth"}
+                "strokeWidth": {"field":"data.signatory_type", "scale":"edgeWidth"}
             }
         },
         {
@@ -213,7 +166,7 @@
                     "scale": "nodeColor"
                 },
                 "stroke": "black",
-                "strokeWidth": {"expression": "datum.data.name == 'Russia' ? 2 : 0"},
+                "strokeWidth": {"expression": "datum.data.name == 'United Kingdom' ? 2 : 0"},
                 "tooltip": {
                     "expression": "datum.data.node_type == 'Peace Agreement' ? {Name: datum.data.fullName, Date: datum.data.node_time} : {Name: datum.id}"
                 },
@@ -232,7 +185,7 @@
             "layout": "layout",
             "mark": {
                 "type": "text",
-                "text": {"expression": "datum.data.name == 'Russia' ? 'Russia' : ' '"},
+                "text": {"expression": "datum.data.name == 'United Kingdom' ? 'United Kingdom' : ' '"},
                 "fontSize": 14,
                 "fontWeight": 500,
                 "limit": 300,
