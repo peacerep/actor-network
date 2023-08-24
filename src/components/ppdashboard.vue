@@ -73,7 +73,8 @@
                     :agreementList="this.agreementList"
                     :actorTypeLegendListNetwork="actorTypeLegendListNetwork"
                     :colorRangeNetwork="colorRangeNetwork"
-                    :actorTypeLegendList="actorTypeLegendList" :colorRange="colorRange"
+                    :actorTypeLegendList="actorTypeLegendList" 
+                    :colorRange="colorRange"
                     />
             </el-dialog>
         </div>
@@ -106,7 +107,9 @@
                 ref="list" 
                 :title="this.title"
                 :agtNum="agtNum"
-                :maxNum="maxNum" />
+                :maxNum="maxNum"
+                :actorTypeLegendList="actorTypeLegendList" 
+                :colorRange="colorRange" />
             </el-dialog>
         </div>
 
@@ -137,7 +140,11 @@
             >
             <jigsaw
                 ref="jigsaw" 
-                :title="this.title" />
+                :title="this.title"
+                :actorTypeLegendListNetwork="actorTypeLegendListNetwork"
+                :colorRangeNetwork="colorRangeNetwork"
+                :actorTypeLegendList="actorTypeLegendList" 
+                :colorRange="colorRange" />
             </el-dialog>
 
         </div>

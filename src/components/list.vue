@@ -9,7 +9,7 @@
     <div class="dialogue-container">
         <div class="dialogue-legends" id="list-legend">
             <h3 class="dialogue-heading">Legends</h3>
-            <legends />
+            <legends :actorTypeLegendList="actorTypeLegendList" :colorRange="colorRange"/>
         </div>
 
         <el-divider v-if="this.w >= 1200" direction="vertical" content-position="center" />
@@ -27,7 +27,7 @@ import legends from '../components/legends.vue'
 
 export default {
     components: { legends },
-    props: ["title", "agtNum", "maxNum"],
+    props: ["title", "agtNum", "maxNum", "actorTypeLegendList", "colorRange"],
 
     data() {
         return {
@@ -66,12 +66,18 @@ export default {
             var listWidth = this.width
             var listHeight = this.height
 
+            // legends for list
+            var actorTypeLegendList = JSON.stringify(this.actorTypeLegendList)
+            var colorRange = JSON.stringify(this.colorRange)
+
             var view1 = await NetPanoramaTemplateViewer.render(`..${__webpack_public_path__}templates/list.json`, 
                     {
                         fileUrl: `"..${__webpack_public_path__}data/uk.json"`,
                         peaceProcess: `'${select}'`,
                         autoWidth: `${listWidth}`,
-                        autoHeight: `${listHeight}`
+                        autoHeight: `${listHeight}`,
+                        actorTypeLegendList: `${actorTypeLegendList}`,
+                        colorRange: `${colorRange}`
                     }, 
                     "listFull")
         },

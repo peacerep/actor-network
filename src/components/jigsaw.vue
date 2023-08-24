@@ -9,7 +9,7 @@
     <div class="dialogue-container">
         <div class="dialogue-legends">
             <h3 class="dialogue-heading">Legends</h3>
-            <legends />
+            <legends :actorTypeLegendList="actorTypeLegendList" :colorRange="colorRange" />
         </div>
         <el-divider v-if="this.w >= 1200" direction="vertical" content-position="center" />
         <el-divider v-else-if="this.w < 1200 && this.w >= 300" content-position="center" />
@@ -26,7 +26,7 @@ import legends from '../components/legends.vue'
 
 export default {
     components: { legends },
-    props: ["title"],
+    props: ["title", "actorTypeLegendListNetwork", "colorRangeNetwork", "actorTypeLegendList", "colorRange"],
 
     data() {
         return {
@@ -67,12 +67,18 @@ export default {
 
             console.log('Jigsaw FULL', {jigsawWidth: jigsawWidth, jigsawHeight: jigsawHeight})
 
+            // legends for network
+            var actorTypeLegendListNetwork = JSON.stringify(this.actorTypeLegendListNetwork)
+            var colorRangeNetwork = JSON.stringify(this.colorRangeNetwork)
+
             var view1 = await NetPanoramaTemplateViewer.render(`..${__webpack_public_path__}templates/jigsaw.json`, 
                     {
                         fileUrl: `"..${__webpack_public_path__}data/uk.json"`,
                         peaceProcess: `'${select}'`,
                         autoWidth: `${jigsawWidth}`,
-                        autoHeight: `${jigsawHeight}`
+                        autoHeight: `${jigsawHeight}`,
+                        actorTypeLegendList: `${actorTypeLegendListNetwork}`,
+                        colorRange: `${colorRangeNetwork}`
                     }, 
                     "jigsawFull");
         },

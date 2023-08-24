@@ -131,7 +131,7 @@
             const colorRange = this.colorRange
             const entityNum = this.actorTypeLegendList.length
 
-            const width = 220
+            const width = 250
             const height = entityNum * (2 * dotRadius + legendGap)
 
             const agt = ["Peace Agreement"]

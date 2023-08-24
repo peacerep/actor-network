@@ -18,37 +18,37 @@
         {
             "name": "network",
             "parts": [
-              {"data": "data",
-                  "yieldsLinks": [
-                      {"source_id": {"field": "Agt"},
-                       "source_node_type": "node",
-                       "source_id_field": "id",
-                       "target_id": {"field": "actor"},
-                       "target_node_type": "node",
-                       "target_id_field": "id",
-                       "data": [ "*"]
-                      }
-                  ],
-                  "yieldsNodes": [
-                      {"id_field": "Agt",
-                      "type": "node",
-                      "data": [{"field": "Type","as": "node_type"},
-                              {"field": "Type", "as": "node_type_color"},
-                              {"field": "short_agt_name","as": "name"},
-                              {"field": "Agt","as": "fullName"},
-                              {"field": "PPName","as": "Peace"},
-                              {"field": "date", "as": "node_time"},
-                              {"field": "year", "as": "year"}]},
-                              
-                      {"id_field": "actor",
-                      "type": "node",
-                      "data": [{"field": "target_type","as": "node_type"},
-                              {"field": "old_actor_type", "as": "node_type_color"},
-                              {"field": "actor","as": "name"}
-                              ]}
-                  ]
-              }
-          ],
+                {"data": "data",
+                    "yieldsLinks": [
+                        {"source_id": {"field": "Agt"},
+                         "source_node_type": "node",
+                         "source_id_field": "id",
+                         "target_id": {"field": "actor_name"},
+                         "target_node_type": "node",
+                         "target_id_field": "id",
+                         "data": [ "*"]
+                        }
+                    ],
+                    "yieldsNodes": [
+                        {"id_field": "Agt",
+                        "type": "node",
+                        "data": [{"field": "Type","as": "node_type"},
+                                {"field": "Type", "as": "node_type_color"},
+                                {"field": "short_agt_name","as": "name"},
+                                {"field": "Agt","as": "fullName"},
+                                {"field": "PPName","as": "Peace"},
+                                {"field": "date", "as": "node_time"},
+                                {"field": "year", "as": "year"}]},
+                                
+                        {"id_field": "actor_name",
+                        "type": "node",
+                        "data": [{"field": "target_type","as": "node_type"},
+                                {"field": "new_actor_type", "as": "node_type_color"},
+                                {"field": "actor_name","as": "name"}
+                                ]}
+                    ]
+                }
+            ],
             "transform": [
                 {"type": "filterEdges", "expression": "datum.source.data.Peace == [peaceProcess]"},
                 {"type": "removeIsolated"}
@@ -92,32 +92,8 @@
         {
             "name": "nodeColor",
             "type": "ordinal",
-            "range": [
-                "#60A18B",
-                "#EAC05B",
-                "#D97144",
-                "#E8A5D5",
-                "#7FAADC",
-                "#714FBA",
-                "#9EB449",
-                "#CEAC9D",
-                "#F6F5BF",
-                "#568AA4",
-                "#CDD2CC"
-            ],
-            "domain": [
-                "Peace Agreement",
-                "Country/State",
-                "Entity",
-                "IGO",
-                "NGO",
-                "Political Party",
-                "Armed Organization",
-                "Military",
-                "State Coalition",
-                "Umbrella",
-                "Other"
-            ]
+            "range": "[colorRange]",
+            "domain": "[actorTypeLegendList]"
         },
         {
             "name": "yScale",

@@ -88,7 +88,7 @@
 
       for (let i=0; i<countryData.length; i++) {
         var agt = countryData[i]["AgtId"]
-        var actorType = countryData[i]["old_actor_type"]
+        var actorType = countryData[i]["new_actor_type"]
 
         // The Russia agt date format is 1999/06/10, while the UK agt date is 10/06/1996
         // var agtYear = countryData[i].date
@@ -97,7 +97,7 @@
         var agtYear = dateParts[2];
 
         // count all actors
-        var actorName = countryData[i]["actor"]
+        var actorName = countryData[i]["actor_name"]
         if (actorArr.includes(actorName) == false) {
           actorArr.push(actorName);
         }

@@ -218,7 +218,7 @@
                     if (this.countryData[i]["PPName"] == select) {
                         var agtID = this.countryData[i]["AgtId"]
                         var fullName = this.countryData[i]["Agt"]
-                        var actorName = this.countryData[i]["actor"]
+                        var actorName = this.countryData[i]["actor_name"]
 
                         if (agtArr.includes(agtID) == false) {
                             agtArr.push(agtID)
@@ -241,7 +241,7 @@
                                 description: this.countryData[i].description, 
                                 actorList: [actorName],
                                 actortypeList: [{actor: actorName, edge: this.countryData[i]["signatory_type"],
-                                type: this.countryData[i]["old_actor_type"]}]})
+                                type: this.countryData[i]["new_actor_type"]}]})
                         }
                         else {
                             for (let item of actorsInAgt) {
@@ -249,9 +249,9 @@
                                     if (item.actorList.includes(actorName) == false) {
                                         item.actorList.push(actorName)
                                         item.actortypeList.push({
-                                            actor: this.countryData[i]["actor"], 
+                                            actor: this.countryData[i]["actor_name"], 
                                             edge: this.countryData[i]["signatory_type"], 
-                                            type: this.countryData[i]["old_actor_type"]})
+                                            type: this.countryData[i]["new_actor_type"]})
                                     }
                                 }
                             }
