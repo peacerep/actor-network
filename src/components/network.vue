@@ -66,7 +66,7 @@ import actorInfo from '../data/actors_all.json'
 
 export default {
     components: { legends },
-    props: ["country", "title", "actorList", "agreementList", "actorTypeLegendListNetwork", "colorRangeNetwork", "actorTypeLegendList", "colorRange", "sigColorRange", "agtColor"],
+    props: ["country", "dataPath", "title", "actorList", "agreementList", "actorTypeLegendListNetwork", "colorRangeNetwork", "actorTypeLegendList", "colorRange", "sigColorRange", "agtColor"],
 
     data() {
         return {
@@ -112,7 +112,7 @@ export default {
             var networkWidth = this.width
             var networkHeight = this.height
             var country = this.country
-            console.log("country", country)
+            var dataPath = this.dataPath
 
             // legends for network
             var actorTypeLegendListNetwork = JSON.stringify(this.actorTypeLegendListNetwork)
@@ -121,7 +121,7 @@ export default {
 
             var view1 = NetPanoramaTemplateViewer.render(`..${__webpack_public_path__}templates/network.json`, 
                     {
-                        fileUrl: `"..${__webpack_public_path__}data/uk.json"`,
+                        fileUrl: `"..${__webpack_public_path__}data/${dataPath}"`,
                         peaceProcess: `'${select}'`,
                         autoWidth: `${networkWidth}`,
                         autoHeight: `${networkHeight}`,

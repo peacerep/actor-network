@@ -25,7 +25,7 @@
     export default {
         emits:["sendData"],
 
-        props:["country", "countryData", "ppArr", "actorTypeLegendList","actorTypeLegendListNetwork", "colorRange", "colorRangeNetwork", "sigColorRange", "agtColor"],
+        props:["country","dataPath", "countryData", "ppArr", "actorTypeLegendList","actorTypeLegendListNetwork", "colorRange", "colorRangeNetwork", "sigColorRange", "agtColor"],
         
         data() {
             return {
@@ -75,6 +75,7 @@
                 var timelinebar = this.barWidth
 
                 var country = this.country
+                var dataPath = this.dataPath
 
                 // legends for network and jigsaw
                 var actorTypeLegendListNetwork = JSON.stringify(this.actorTypeLegendListNetwork)
@@ -88,7 +89,7 @@
 
                 // see NetPan usage, read in data path, add template variables, and interaction listeners
                 view1 = await NetPanoramaTemplateViewer.render(`..${__webpack_public_path__}templates/network.json`, {
-                    fileUrl: `"..${__webpack_public_path__}data/uk.json"`,
+                    fileUrl: `"..${__webpack_public_path__}data/${dataPath}"`,
                     peaceProcess: `'${select}'`,
                     autoWidth: `${networkWidth}`,
                     autoHeight: `${networkHeight}`,
@@ -100,7 +101,7 @@
                     {paramCallbacks: {selected_node: this.linkNodes}});
 
                 view2 = await NetPanoramaTemplateViewer.render(`..${__webpack_public_path__}templates/jigsaw.json`, {
-                    fileUrl: `"..${__webpack_public_path__}data/uk.json"`,
+                    fileUrl: `"..${__webpack_public_path__}data/${dataPath}"`,
                     peaceProcess: `'${select}'`,
                     autoWidth: `${jigsawWidth}`,
                     autoHeight: `${jigsawHeight}`,
@@ -112,7 +113,7 @@
                     {paramCallbacks: {selected_node: this.linkNodes}});
 
                 view3 = await NetPanoramaTemplateViewer.render(`..${__webpack_public_path__}templates/list.json`, {
-                    fileUrl: `"..${__webpack_public_path__}data/uk.json"`,
+                    fileUrl: `"..${__webpack_public_path__}data/${dataPath}"`,
                     peaceProcess: `'${select}'`,
                     autoWidth: `${listWidth}`,
                     autoHeight: `${listHeight}`,
@@ -122,7 +123,7 @@
                     }, "list");
 
                 view4 = await NetPanoramaTemplateViewer.render(`..${__webpack_public_path__}templates/timeline.json`, {
-                    fileUrl: `"..${__webpack_public_path__}data/uk.json"`,
+                    fileUrl: `"..${__webpack_public_path__}data/${dataPath}"`,
                     peaceProcess: `'${select}'`,
                     autoWidth: `${timelineWidth}`,
                     autoHeight: `${timelineHeight}`,

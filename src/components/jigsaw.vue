@@ -9,7 +9,11 @@
     <div class="dialogue-container">
         <div class="dialogue-legends">
             <h3 class="dialogue-heading">Legends</h3>
-            <legends :actorTypeLegendList="actorTypeLegendList" :colorRange="colorRange" />
+            <legends 
+                :actorTypeLegendList="actorTypeLegendList" 
+                :colorRange="colorRange"
+                :sigColorRange="sigColorRange"
+                :agtColor="agtColor"/>
         </div>
         <el-divider v-if="this.w >= 1200" direction="vertical" content-position="center" />
         <el-divider v-else-if="this.w < 1200 && this.w >= 300" content-position="center" />
@@ -26,7 +30,7 @@ import legends from '../components/legends.vue'
 
 export default {
     components: { legends },
-    props: ["country", "title", "actorTypeLegendListNetwork", "colorRangeNetwork", "actorTypeLegendList", "colorRange"],
+    props: ["country", "dataPath", "title", "actorTypeLegendListNetwork", "colorRangeNetwork", "actorTypeLegendList", "colorRange", "sigColorRange", "agtColor"],
 
     data() {
         return {
@@ -67,18 +71,24 @@ export default {
 
             console.log('Jigsaw FULL', {jigsawWidth: jigsawWidth, jigsawHeight: jigsawHeight})
 
+            var dataPath = this.dataPath
+            var country = this.country
+
             // legends for network
             var actorTypeLegendListNetwork = JSON.stringify(this.actorTypeLegendListNetwork)
             var colorRangeNetwork = JSON.stringify(this.colorRangeNetwork)
+            var sigColorRange = JSON.stringify(this.sigColorRange)
+
 
             var view1 = await NetPanoramaTemplateViewer.render(`..${__webpack_public_path__}templates/jigsaw.json`, 
                     {
-                        fileUrl: `"..${__webpack_public_path__}data/uk.json"`,
+                        fileUrl: `"..${__webpack_public_path__}data/${dataPath}"`,
                         peaceProcess: `'${select}'`,
                         autoWidth: `${jigsawWidth}`,
                         autoHeight: `${jigsawHeight}`,
                         actorTypeLegendList: `${actorTypeLegendListNetwork}`,
                         colorRange: `${colorRangeNetwork}`,
+                        sigColorRange: `${sigColorRange}`,
                         country:`'${country}'`
                     }, 
                     "jigsawFull");
@@ -94,7 +104,6 @@ export default {
                             element.style.width = "20px"
                             element.style.height = "20px"
                             console.log("SUB ELEMENT REMOVE", element)
-                            
                         }
 
                         //disable text selection on tooltip divs to improve hovering experience

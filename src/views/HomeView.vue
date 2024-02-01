@@ -5,6 +5,7 @@
         <countrytitle :country="country" />
         <peaceprocess
           :country="country"
+          :dataPath="dataPath"
           :countryData="countryData" 
           v-on:sendData="getData" 
           :ppArr="ppArr" 
@@ -27,6 +28,7 @@
   <div class="process-layout">
     <ppdashbord 
       :country="country"
+      :dataPath="dataPath"
       :data="data" 
       :actorTypeLegendList="actorTypeLegendList" 
       :colorRange="colorRange"
@@ -59,7 +61,8 @@
         agtTime: '',
         data: {},
         countryData,
-        country: "United Kingdom"
+        country: "United Kingdom",
+        dataPath: "uk.json"
       }
     },
 

@@ -9,7 +9,11 @@
     <div class="dialogue-container">
         <div class="dialogue-legends" id="list-legend">
             <h3 class="dialogue-heading">Legends</h3>
-            <legends :actorTypeLegendList="actorTypeLegendList" :colorRange="colorRange"/>
+            <legends 
+                :actorTypeLegendList="actorTypeLegendList" 
+                :colorRange="colorRange"
+                :sigColorRange="sigColorRange"
+                :agtColor="agtColor"/>
         </div>
 
         <el-divider v-if="this.w >= 1200" direction="vertical" content-position="center" />
@@ -27,7 +31,7 @@ import legends from '../components/legends.vue'
 
 export default {
     components: { legends },
-    props: ["country", "title", "agtNum", "maxNum", "actorTypeLegendList", "colorRange"],
+    props: ["country","dataPath", "title", "agtNum", "maxNum", "actorTypeLegendList", "colorRange", "sigColorRange", "agtColor"],
 
     data() {
         return {
@@ -66,13 +70,17 @@ export default {
             var listWidth = this.width
             var listHeight = this.height
 
+            var dataPath = this.dataPath
+            var country = this.country
+            
+
             // legends for list
             var actorTypeLegendList = JSON.stringify(this.actorTypeLegendList)
             var colorRange = JSON.stringify(this.colorRange)
 
             var view1 = await NetPanoramaTemplateViewer.render(`..${__webpack_public_path__}templates/list.json`, 
                     {
-                        fileUrl: `"..${__webpack_public_path__}data/uk.json"`,
+                        fileUrl: `"..${__webpack_public_path__}data/${dataPath}"`,
                         peaceProcess: `'${select}'`,
                         autoWidth: `${listWidth}`,
                         autoHeight: `${listHeight}`,
