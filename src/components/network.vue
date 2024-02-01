@@ -66,7 +66,7 @@ import actorInfo from '../data/actors_all.json'
 
 export default {
     components: { legends },
-    props: ["title", "actorList", "agreementList", "actorTypeLegendListNetwork", "colorRangeNetwork", "actorTypeLegendList", "colorRange", "sigColorRange", "agtColor"],
+    props: ["country", "title", "actorList", "agreementList", "actorTypeLegendListNetwork", "colorRangeNetwork", "actorTypeLegendList", "colorRange", "sigColorRange", "agtColor"],
 
     data() {
         return {
@@ -111,6 +111,8 @@ export default {
             var select = this.title
             var networkWidth = this.width
             var networkHeight = this.height
+            var country = this.country
+            console.log("country", country)
 
             // legends for network
             var actorTypeLegendListNetwork = JSON.stringify(this.actorTypeLegendListNetwork)
@@ -125,7 +127,8 @@ export default {
                         autoHeight: `${networkHeight}`,
                         actorTypeLegendList: `${actorTypeLegendListNetwork}`,
                         colorRange: `${colorRangeNetwork}`,
-                        sigColorRange: `${sigColorRange}`
+                        sigColorRange: `${sigColorRange}`,
+                        country:`'${country}'`
                     }, 
                     "networkFull",
                     {paramCallbacks: {selected_node: this.onChange}}

@@ -81,6 +81,7 @@
                     :colorRange="colorRange"
                     :sigColorRange="sigColorRange"
                     :agtColor="agtColor"
+                    :country="country"
                     />
             </el-dialog>
         </div>
@@ -115,7 +116,8 @@
                 :agtNum="agtNum"
                 :maxNum="maxNum"
                 :actorTypeLegendList="actorTypeLegendList" 
-                :colorRange="colorRange" />
+                :colorRange="colorRange"
+                :country="country" />
             </el-dialog>
         </div>
 
@@ -150,7 +152,8 @@
                 :actorTypeLegendListNetwork="actorTypeLegendListNetwork"
                 :colorRangeNetwork="colorRangeNetwork"
                 :actorTypeLegendList="actorTypeLegendList" 
-                :colorRange="colorRange" />
+                :colorRange="colorRange"
+                :country="country" />
             </el-dialog>
 
         </div>
@@ -171,7 +174,7 @@ import list from '../components/list.vue'
 export default {
     components: {legends, network, jigsaw, list},
 
-    props: ["data", "actorTypeLegendList", "colorRange", "actorTypeLegendListNetwork", "colorRangeNetwork", "sigColorRange", "agtColor"],
+    props: ["country", "data", "actorTypeLegendList", "colorRange", "actorTypeLegendListNetwork", "colorRangeNetwork", "sigColorRange", "agtColor"],
 
     data() {
         return {

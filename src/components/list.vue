@@ -27,7 +27,7 @@ import legends from '../components/legends.vue'
 
 export default {
     components: { legends },
-    props: ["title", "agtNum", "maxNum", "actorTypeLegendList", "colorRange"],
+    props: ["country", "title", "agtNum", "maxNum", "actorTypeLegendList", "colorRange"],
 
     data() {
         return {
@@ -77,7 +77,8 @@ export default {
                         autoWidth: `${listWidth}`,
                         autoHeight: `${listHeight}`,
                         actorTypeLegendList: `${actorTypeLegendList}`,
-                        colorRange: `${colorRange}`
+                        colorRange: `${colorRange}`,
+                        country:`'${country}'`
                     }, 
                     "listFull")
         },

@@ -225,7 +225,7 @@
                     "scale": "nodeColor"
                 },
                 "stroke": "black",
-                "strokeWidth": {"expression": "datum.data.name == 'United Kingdom' ? 2 : 0"},
+                "strokeWidth": {"expression": "datum.data.name == [country] ? 2 : 0"},
                 "tooltip": {
                     "expression": "datum.data.node_type == 'Peace Agreement' ? {Name: datum.data.fullName, Date: datum.data.node_time} : {Name: datum.id}"
                 },

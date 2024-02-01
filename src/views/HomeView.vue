@@ -2,8 +2,9 @@
   <div class="top-layout">
     <el-container>
       <el-aside class="top-side">
-        <countrytitle />
+        <countrytitle :country="country" />
         <peaceprocess
+          :country="country"
           :countryData="countryData" 
           v-on:sendData="getData" 
           :ppArr="ppArr" 
@@ -25,6 +26,7 @@
 
   <div class="process-layout">
     <ppdashbord 
+      :country="country"
       :data="data" 
       :actorTypeLegendList="actorTypeLegendList" 
       :colorRange="colorRange"
@@ -42,8 +44,8 @@
   import countrytitle from '../components/countrytitle.vue'
   import timeline from '../components/timeline.vue'
   import countrymetrics from '../components/countrymetrics.vue'
-
   import ppdashbord from '../components/ppdashboard.vue'
+
   import countryData from '../data/uk.json'
 
   export default {
@@ -56,7 +58,8 @@
         agtActorNum:0,
         agtTime: '',
         data: {},
-        countryData
+        countryData,
+        country: "United Kingdom"
       }
     },
 

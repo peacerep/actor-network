@@ -1,7 +1,7 @@
 
 <template>
     <div class='selector-wrapper'>
-        <p class="selector-title">To begin, select a Peace Process to show relevant agreements in which UK has been involved:</p>
+        <p class="selector-title">To begin, select a Peace Process to show relevant agreements in which {{ country }} has been involved:</p>
         <div class="selection">
             <el-select 
                 id="select1" 
@@ -25,7 +25,7 @@
     export default {
         emits:["sendData"],
 
-        props:["countryData", "ppArr", "actorTypeLegendList","actorTypeLegendListNetwork", "colorRange", "colorRangeNetwork", "sigColorRange", "agtColor"],
+        props:["country", "countryData", "ppArr", "actorTypeLegendList","actorTypeLegendListNetwork", "colorRange", "colorRangeNetwork", "sigColorRange", "agtColor"],
         
         data() {
             return {
@@ -74,6 +74,8 @@
                 var timelineHeight = this.timelineH
                 var timelinebar = this.barWidth
 
+                var country = this.country
+
                 // legends for network and jigsaw
                 var actorTypeLegendListNetwork = JSON.stringify(this.actorTypeLegendListNetwork)
                 var colorRangeNetwork = JSON.stringify(this.colorRangeNetwork)
@@ -92,7 +94,8 @@
                     autoHeight: `${networkHeight}`,
                     actorTypeLegendList: `${actorTypeLegendListNetwork}`,
                     colorRange: `${colorRangeNetwork}`,
-                    sigColorRange: `${sigColorRange}`
+                    sigColorRange: `${sigColorRange}`,
+                    country:`'${country}'`
                     }, "network",
                     {paramCallbacks: {selected_node: this.linkNodes}});
 
@@ -103,7 +106,8 @@
                     autoHeight: `${jigsawHeight}`,
                     actorTypeLegendList: `${actorTypeLegendListNetwork}`,
                     colorRange: `${colorRangeNetwork}`,
-                    sigColorRange: `${sigColorRange}`
+                    sigColorRange: `${sigColorRange}`,
+                    country:`'${country}'`
                     }, "jigsaw",
                     {paramCallbacks: {selected_node: this.linkNodes}});
 
@@ -113,7 +117,8 @@
                     autoWidth: `${listWidth}`,
                     autoHeight: `${listHeight}`,
                     actorTypeLegendList: `${actorTypeLegendList}`,
-                    colorRange: `${colorRange}`
+                    colorRange: `${colorRange}`,
+                    country:`'${country}'`
                     }, "list");
 
                 view4 = await NetPanoramaTemplateViewer.render(`..${__webpack_public_path__}templates/timeline.json`, {

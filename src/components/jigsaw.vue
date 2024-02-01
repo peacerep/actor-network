@@ -26,7 +26,7 @@ import legends from '../components/legends.vue'
 
 export default {
     components: { legends },
-    props: ["title", "actorTypeLegendListNetwork", "colorRangeNetwork", "actorTypeLegendList", "colorRange"],
+    props: ["country", "title", "actorTypeLegendListNetwork", "colorRangeNetwork", "actorTypeLegendList", "colorRange"],
 
     data() {
         return {
@@ -78,7 +78,8 @@ export default {
                         autoWidth: `${jigsawWidth}`,
                         autoHeight: `${jigsawHeight}`,
                         actorTypeLegendList: `${actorTypeLegendListNetwork}`,
-                        colorRange: `${colorRangeNetwork}`
+                        colorRange: `${colorRangeNetwork}`,
+                        country:`'${country}'`
                     }, 
                     "jigsawFull");
         },
