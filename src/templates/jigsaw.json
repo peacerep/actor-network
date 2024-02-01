@@ -43,35 +43,35 @@
         {
             "name": "network",
             "parts": [
-              {"data": "data",
-                  "yieldsLinks": [
-                      {"source_id": {"field": "Agt"},
-                       "source_node_type": "node",
-                       "source_id_field": "id",
-                       "target_id": {"field": "actor"},
-                       "target_node_type": "node",
-                       "target_id_field": "id",
-                       "data": [ "*"]
-                      }
-                  ],
-                  "yieldsNodes": [
-                      {"id_field": "Agt",
-                      "type": "node",
-                      "data": [{"field": "Type","as": "node_type"},
-                              {"field": "Type", "as": "node_type_color"},
-                              {"field": "short_agt_name","as": "name"},
-                              {"field": "Agt","as": "fullName"},
-                              {"field": "PPName","as": "Peace"},
-                              {"field": "date", "as": "node_time"},
-                              {"field": "year", "as": "year"}]},
-                              
-                      {"id_field": "actor",
-                      "type": "node",
-                      "data": [{"field": "target_type","as": "node_type"},
-                              {"field": "old_actor_type", "as": "node_type_color"},
-                              {"field": "actor","as": "name"}
-                              ]}
-                    ] 
+                {"data": "data",
+                    "yieldsLinks": [
+                        {"source_id": {"field": "Agt"},
+                         "source_node_type": "node",
+                         "source_id_field": "id",
+                         "target_id": {"field": "actor_name"},
+                         "target_node_type": "node",
+                         "target_id_field": "id",
+                         "data": [ "*"]
+                        }
+                    ],
+                    "yieldsNodes": [
+                        {"id_field": "Agt",
+                        "type": "node",
+                        "data": [{"field": "Type","as": "node_type"},
+                                {"field": "Type", "as": "node_type_color"},
+                                {"field": "short_agt_name","as": "name"},
+                                {"field": "Agt","as": "fullName"},
+                                {"field": "PPName","as": "Peace"},
+                                {"field": "date", "as": "node_time"},
+                                {"field": "year", "as": "year"}]},
+                                
+                        {"id_field": "actor_name",
+                        "type": "node",
+                        "data": [{"field": "target_type","as": "node_type"},
+                                {"field": "new_actor_type", "as": "node_type_color"},
+                                {"field": "actor_name","as": "name"}
+                                ]}
+                    ]
                 }
             ],
             "transform": [
@@ -148,13 +148,13 @@
         {
             "name": "edgeColor",
             "type": "ordinal",
-            "range": ["#C1C1C1","lightgrey"],
+            "range": "[sigColorRange]",
             "domain": ["party","third party"]
         },
         {
             "name": "edgeWidth",
             "type": "ordinal",
-            "range": [2,0.8],
+            "range": [0.7,0.7],
             "domain": ["party","third party"]
         },
         {
@@ -200,8 +200,8 @@
                 "type": "linkpath",
                 "start": "source",
                 "end": "target",
-                "stroke": "#FF7F0E",
-                "strokeWidth": {"field":"data.signatory_type", "scale":"edgeWidth"}
+                "stroke": {"field":"data.signatory_type", "scale":"edgeColor"},
+                "strokeWidth": 1.7
             }
         },
         {

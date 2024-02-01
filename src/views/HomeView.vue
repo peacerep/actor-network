@@ -11,12 +11,14 @@
           :colorRange="colorRange"
           :actorTypeLegendListNetwork="actorTypeLegendListNetwork"
           :colorRangeNetwork="colorRangeNetwork"
+          :sigColorRange="sigColorRange"
+          :agtColor="agtColor"
           />
       </el-aside>
 
       <el-main class="top-main">
         <countrymetrics :processNum="processNum" :agtNum="agtNum" :actorNum="actorNum" :timespan="timespan" />
-        <timeline :data="data"/>
+        <timeline :data="data" :agtColor="agtColor"/>
       </el-main>
     </el-container>
   </div>
@@ -28,6 +30,8 @@
       :colorRange="colorRange"
       :actorTypeLegendListNetwork="actorTypeLegendListNetwork"
       :colorRangeNetwork="colorRangeNetwork"
+      :sigColorRange="sigColorRange"
+      :agtColor="agtColor"
       />
   </div>
 
@@ -116,19 +120,32 @@
         }
       }
 
+      //Jinrui color
+      // var colorRange = [
+      //             "#EAC05B", "#D97144", "#E8A5D5",
+      //             "#7FAADC", "#714FBA", "#9EB449",
+      //             "#CEAC9D", "#F6F5BF", "#568AA4",
+      //             "#44E4DB", "#BA4B80", "#CDD2CC",
+      //             "#9793AA"
+      //             ]
+      // var sigColorRange = ["#C1C1C1","lightgrey"]
+      // var agtColor = "#60A18B"
+
+      // Unified colours
       var colorRange = [
-                  "#EAC05B", "#D97144", "#E8A5D5",
-                  "#7FAADC", "#714FBA", "#9EB449",
-                  "#CEAC9D", "#F6F5BF", "#568AA4",
-                  "#44E4DB", "#BA4B80", "#CDD2CC",
-                  "#9793AA"
+                  "#198038", "#2980B9", "#FF7F0E",
+                  "#03A9F4", "#D62728", "#9467BD",
+                  "#BCBD22", "#F1C40F", "#E377C2",
+                  "#44E4DB"
                   ]
+      var sigColorRange = ["#657585", "#F4A425"]
+      var agtColor = "#34495E"
       
       // for network, jigsaw rendering
       var actorTypeLegendListNetwork = actorTypeLegendList.slice()
       actorTypeLegendListNetwork.unshift("Peace Agreement");
       var colorRangeNetwork = colorRange.slice()
-      colorRangeNetwork.unshift("#60A18B");
+      colorRangeNetwork.unshift(agtColor);
 
       var maxDate = new Date(Math.max.apply(null, agtTimeArr))
       var maxYear = maxDate.getFullYear()
@@ -137,7 +154,7 @@
       let timespan = `${minYear} - ${maxYear}`
 
       return {
-        ppArr, processNum, agtNum, actorNum, timespan, actorTypeLegendList, colorRange, actorTypeLegendListNetwork, colorRangeNetwork
+        ppArr, processNum, agtNum, actorNum, timespan, actorTypeLegendList, colorRange, actorTypeLegendListNetwork, colorRangeNetwork, sigColorRange, agtColor
       }
 
     }

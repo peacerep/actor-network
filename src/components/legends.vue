@@ -36,13 +36,14 @@
     import actors from "@/data/actor_definitions.json"
 
     export default {
-    props: ["actorTypeLegendList", "colorRange"],
+    props: ["actorTypeLegendList", "colorRange", "agtColor", "sigColorRange"],
 
     data() {
         return {
             actors: [],
             timelienLegends:["other agreements"],
-            width: 0
+            width: 0,
+            // agtColor: "#34495E"
         };
     },
     
@@ -136,11 +137,11 @@
 
             const agt = ["Peace Agreement"]
             const signatory = ["Party", "Third Party"]
-            const sigColor = ["#C1C1C1","#D3D3D3"]
+            // const sigColor = ["#C1C1C1","#D3D3D3"]
 
             var sigColorScale = d3.scaleOrdinal()
                                 .domain(signatory)
-                                .range(sigColor)
+                                .range(this.sigColorRange)
 
             var svg = d3.selectAll("#entity_legend")
                         .attr('width', width)
@@ -230,7 +231,7 @@
                         .attr("y", function(d,i){ return 0 + i*25})
                         .attr("width", rectWidth)
                         .attr("height", rectWidth)
-                        .style("fill", "#60A18B")
+                        .style("fill", this.agtColor)
 
             svgAgt.selectAll("labels")
                 .data(agt)

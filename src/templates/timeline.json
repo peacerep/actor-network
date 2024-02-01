@@ -71,7 +71,7 @@
                     {"source_id": {"field": "Agt"},
                      "source_node_type": "node",
                      "source_id_field": "id",
-                     "target_id": {"field": "actor"},
+                     "target_id": {"field": "actor_name"},
                      "target_node_type": "node",
                      "target_id_field": "id",
                      "data": [ "*"]
@@ -88,11 +88,11 @@
                             {"field": "date", "as": "node_time"},
                             {"field": "year", "as": "year"}]},
                             
-                    {"id_field": "actor",
+                    {"id_field": "actor_name",
                     "type": "node",
                     "data": [{"field": "target_type","as": "node_type"},
-                            {"field": "old_actor_type", "as": "node_type_color"},
-                            {"field": "actor","as": "name"}
+                            {"field": "new_actor_type", "as": "node_type_color"},
+                            {"field": "actor_name","as": "name"}
                             ]}
                 ]
             }
@@ -197,7 +197,7 @@
         "mark": {
             "type": "square",
             "area": 150,
-            "fill": { "expression": "datum.data.Peace == [peaceProcess] ? '#60A18B' : '#D9D9D9'"},
+            "fill": { "expression": "datum.data.Peace == [peaceProcess] ? '[agtColor]' : '#D9D9D9'"},
             "tooltip": {"expression": "{ Name: datum.data.fullName, Date: datum.data.node_time}"  }
         }
     },

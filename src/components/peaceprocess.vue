@@ -25,7 +25,7 @@
     export default {
         emits:["sendData"],
 
-        props:["countryData", "ppArr", "actorTypeLegendList","actorTypeLegendListNetwork", "colorRange", "colorRangeNetwork"],
+        props:["countryData", "ppArr", "actorTypeLegendList","actorTypeLegendListNetwork", "colorRange", "colorRangeNetwork", "sigColorRange", "agtColor"],
         
         data() {
             return {
@@ -80,6 +80,9 @@
                 // legends for list
                 var actorTypeLegendList = JSON.stringify(this.actorTypeLegendList)
                 var colorRange = JSON.stringify(this.colorRange)
+                // legends for links
+                var sigColorRange = JSON.stringify(this.sigColorRange)
+                var agtColor = JSON.stringify(this.agtColor)
 
                 // see NetPan usage, read in data path, add template variables, and interaction listeners
                 view1 = await NetPanoramaTemplateViewer.render(`..${__webpack_public_path__}templates/network.json`, {
@@ -88,7 +91,8 @@
                     autoWidth: `${networkWidth}`,
                     autoHeight: `${networkHeight}`,
                     actorTypeLegendList: `${actorTypeLegendListNetwork}`,
-                    colorRange: `${colorRangeNetwork}`
+                    colorRange: `${colorRangeNetwork}`,
+                    sigColorRange: `${sigColorRange}`
                     }, "network",
                     {paramCallbacks: {selected_node: this.linkNodes}});
 
@@ -98,7 +102,8 @@
                     autoWidth: `${jigsawWidth}`,
                     autoHeight: `${jigsawHeight}`,
                     actorTypeLegendList: `${actorTypeLegendListNetwork}`,
-                    colorRange: `${colorRangeNetwork}`
+                    colorRange: `${colorRangeNetwork}`,
+                    sigColorRange: `${sigColorRange}`
                     }, "jigsaw",
                     {paramCallbacks: {selected_node: this.linkNodes}});
 
@@ -117,6 +122,7 @@
                     autoWidth: `${timelineWidth}`,
                     autoHeight: `${timelineHeight}`,
                     barWidth: `${timelinebar}`,
+                    agtColor: `${agtColor}`
                     }, "timeline",
                     {paramCallbacks: {selected_node: this.linkNodes}});
 

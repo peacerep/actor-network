@@ -197,7 +197,7 @@
         "mark": {
             "type": "square",
             "area": 150,
-            "fill": { "expression": "datum.data.Peace == [peaceProcess] ? '#60A18B' : '#D9D9D9'"},
+            "fill": { "expression": "datum.data.Peace == [peaceProcess] ? '[agtColor]' : '#D9D9D9'"},
             "tooltip": {"expression": "{ Name: datum.data.fullName, Date: datum.data.node_time}"  }
         }
     },
@@ -208,7 +208,7 @@
         "mark": {
             "type": "square",
             "area": 220,
-            "fill": "orange"
+            "fill": "#7FB0E0"
         }
     },
     {

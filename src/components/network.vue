@@ -9,7 +9,11 @@
     <div class="dialogue-container" id="network-dialog-container">
         <div class="dialogue-legends">
             <h3 class="dialogue-heading">Legend</h3>
-            <legends :actorTypeLegendList="actorTypeLegendList" :colorRange="colorRange"/>
+            <legends 
+                        :actorTypeLegendList="actorTypeLegendList" 
+                        :colorRange="colorRange"
+                        :sigColorRange="sigColorRange"
+                        :agtColor="agtColor"/>
         </div>
         <el-divider v-if="this.w >= 1200" direction="vertical" content-position="center" />
         <el-divider v-else-if="this.w < 1200 && this.w >= 300" content-position="center" />
@@ -62,7 +66,7 @@ import actorInfo from '../data/actors_all.json'
 
 export default {
     components: { legends },
-    props: ["title", "actorList", "agreementList", "actorTypeLegendListNetwork", "colorRangeNetwork", "actorTypeLegendList", "colorRange" ],
+    props: ["title", "actorList", "agreementList", "actorTypeLegendListNetwork", "colorRangeNetwork", "actorTypeLegendList", "colorRange", "sigColorRange", "agtColor"],
 
     data() {
         return {
@@ -111,6 +115,7 @@ export default {
             // legends for network
             var actorTypeLegendListNetwork = JSON.stringify(this.actorTypeLegendListNetwork)
             var colorRangeNetwork = JSON.stringify(this.colorRangeNetwork)
+            var sigColorRange = JSON.stringify(this.sigColorRange)
 
             var view1 = NetPanoramaTemplateViewer.render(`..${__webpack_public_path__}templates/network.json`, 
                     {
@@ -119,7 +124,8 @@ export default {
                         autoWidth: `${networkWidth}`,
                         autoHeight: `${networkHeight}`,
                         actorTypeLegendList: `${actorTypeLegendListNetwork}`,
-                        colorRange: `${colorRangeNetwork}`
+                        colorRange: `${colorRangeNetwork}`,
+                        sigColorRange: `${sigColorRange}`
                     }, 
                     "networkFull",
                     {paramCallbacks: {selected_node: this.onChange}}

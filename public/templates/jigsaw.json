@@ -148,13 +148,13 @@
         {
             "name": "edgeColor",
             "type": "ordinal",
-            "range": ["#C1C1C1","lightgrey"],
+            "range": "[sigColorRange]",
             "domain": ["party","third party"]
         },
         {
             "name": "edgeWidth",
             "type": "ordinal",
-            "range": [2,0.8],
+            "range": [0.7,0.7],
             "domain": ["party","third party"]
         },
         {
@@ -200,8 +200,8 @@
                 "type": "linkpath",
                 "start": "source",
                 "end": "target",
-                "stroke": "#FF7F0E",
-                "strokeWidth": {"field":"data.signatory_type", "scale":"edgeWidth"}
+                "stroke": {"field":"data.signatory_type", "scale":"edgeColor"},
+                "strokeWidth": 1.7
             }
         },
         {

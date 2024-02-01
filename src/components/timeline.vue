@@ -27,7 +27,7 @@ import * as svg from 'save-svg-as-png';
 import * as d3 from "d3";
 
 export default ({
-    props: ["data"],
+    props: ["data", "agtColor"],
 
     data() {
         return {
@@ -43,8 +43,10 @@ export default ({
         },
 
         renderTimelineLegend() {
+            // var agtColor = JSON.stringify(this.agtColor)
+
             let timelineList = [`Agreement in ${this.processName}`, "All other agreements"];
-            let timelineColors = ["#60A18B", "#D9D9D9"];
+            let timelineColors = [this.agtColor, "#D9D9D9"];
             var timelineColorScale = d3.scaleOrdinal()
                                         .domain(timelineList)
                                         .range(timelineColors)
