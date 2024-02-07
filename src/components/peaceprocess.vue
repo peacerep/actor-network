@@ -25,7 +25,7 @@
     export default {
         emits:["sendData"],
 
-        props:["country","dataPath", "countryData", "ppArr", "actorTypeLegendList","actorTypeLegendListNetwork", "colorRange", "colorRangeNetwork", "sigColorRange", "agtColor"],
+        props:["country","dataPath", "countryData", "ppArr", "actorTypeLegendList","actorTypeLegendListNetwork", "colorRange", "colorRangeNetwork", "sigColorRange", "agtColor", "timespanArr"],
         
         data() {
             return {
@@ -76,6 +76,9 @@
 
                 var country = this.country
                 var dataPath = this.dataPath
+
+                console.log("fetch timespanArr", this.timespanArr)
+                var timespanArr = JSON.stringify(this.timespanArr)
 
                 // legends for network and jigsaw
                 var actorTypeLegendListNetwork = JSON.stringify(this.actorTypeLegendListNetwork)
@@ -128,7 +131,8 @@
                     autoWidth: `${timelineWidth}`,
                     autoHeight: `${timelineHeight}`,
                     barWidth: `${timelinebar}`,
-                    agtColor: `${agtColor}`
+                    agtColor: `${agtColor}`,
+                    timespanArr: `${timespanArr}`
                     }, "timeline",
                     {paramCallbacks: {selected_node: this.linkNodes}});
 

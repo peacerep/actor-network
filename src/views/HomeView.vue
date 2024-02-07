@@ -9,6 +9,7 @@
           :countryData="countryData" 
           v-on:sendData="getData" 
           :ppArr="ppArr" 
+          :timespanArr="timespanArr"
           :actorTypeLegendList="actorTypeLegendList" 
           :colorRange="colorRange"
           :actorTypeLegendListNetwork="actorTypeLegendListNetwork"
@@ -20,7 +21,7 @@
 
       <el-main class="top-main">
         <countrymetrics :processNum="processNum" :agtNum="agtNum" :actorNum="actorNum" :timespan="timespan" />
-        <timeline :data="data" :agtColor="agtColor"/>
+        <timeline :data="data" :agtColor="agtColor" :timespan="timespan"/>
       </el-main>
     </el-container>
   </div>
@@ -159,8 +160,16 @@
       var minYear = minDate.getFullYear()
       let timespan = `${minYear} - ${maxYear}`
 
+      let timespanArr = [];
+
+      for (let year = minYear; year <= maxYear; year++) {
+          timespanArr.push({"year": year});
+      }
+
+      console.log(timespanArr);
+
       return {
-        ppArr, processNum, agtNum, actorNum, timespan, actorTypeLegendList, colorRange, actorTypeLegendListNetwork, colorRangeNetwork, sigColorRange, agtColor
+        ppArr, processNum, agtNum, actorNum, timespan, actorTypeLegendList, colorRange, actorTypeLegendListNetwork, colorRangeNetwork, sigColorRange, agtColor, timespanArr
       }
 
     }

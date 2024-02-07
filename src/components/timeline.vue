@@ -2,7 +2,7 @@
     <div class="component-container">
         <div class="title">
             <h3 class="top-sub">Timeline</h3>
-            <h3>All Agreements Signed 1990 - 2021</h3>
+            <h3>All Agreements Signed {{timespan}}</h3>
             <p class="chart-description">
                 Hover to see agreement name.
             </p>
@@ -27,7 +27,7 @@ import * as svg from 'save-svg-as-png';
 import * as d3 from "d3";
 
 export default ({
-    props: ["data", "agtColor"],
+    props: ["data", "agtColor", "timespan"],
 
     data() {
         return {
