@@ -1,38 +1,32 @@
 # Documentation for Extending Templates
 
+## Update instructions
+1. Update `src/data/source/country_files.csv`;
+2. Inlcude agreement and actor csv for the updated country in `src/data/source/` folder;
+3. Run the notebook `prep4dashboard.ipynb`;
+4. Update country name and file name in `src/views/Homeview.vue` and `src/components/network.vue`
+
+
+## Explanation
 This dashboard uses:
-- country data file in `json` format, i.e. `uk.json` or `russia.json`.
-- `actor_info.json` used in `src/components/network.vue`; 
+- country data file in `json` format, named as `{abbr}_agt.json`.
+- `{abbr}_actor.json` used in `src/components/network.vue`; 
 - `actor_definitions.json` used in `src/components/legends.vue`.
 
-## Source Files
-Stored in: `src/data/source/`
 
-There's a jupyter notebook `Network schema.ipynb`. Run the scripts it will output a csv file, and a json file.
+Original data files are stored in: `src/data/source/`
+In this folder, we store original data for countries' agreement links and actor information, recorded in `country_files.csv`.
+
+There's a jupyter notebook `prep4dashboard.ipynb`. Run the scripts it will output all country files to the upper folder.
 
 Please note: The output file contains only information used to construct networks (NetPanoraoma sepcs), support peace process selection, provide additional information in the dashboard.
 
-Copy and move the output json file to the parent folder `src/data/`.
-
-
-## Importing data
-
 ### Read in countryData
 Country data is imported in `src/views/Homeview.vue` as `countryData`. It is parsed and passed to child component `src/component/peaceprocess.vue`, where we make the selection for peace process and render all the visualizations.
+Actor data is imported in `src/components/network.vue`. 
 
-### Replace file path
-For now, the country files are named as countryName.json. Therefore every time we replace it with a new country, we need to update all the visualization templates rendering methods, for NetPan reads in data path every time.
 
-Files in need of care:
-- `peaceprocess.vue` - `renderUpdateNew()`
-- `network.vue` - `renderNetwork()`
-- `list.vue` - `renderList()`
-- `jigsaw.vue` - `renderJigsaw()`
-
-### Replace country name text
-We need to update all text containing country name, `countrytitle.vue` and `peaceprocess.vue` This is silly right now.
 
 ## Pending Fixes
-- Automate country names and paths
 - Timeline beeswarm graph lacks full responsiveness
 - ...
