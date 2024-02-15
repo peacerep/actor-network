@@ -257,7 +257,7 @@
                                 description: this.countryData[i].description, 
                                 actorList: [actorName],
                                 actortypeList: [{actor: actorName, edge: this.countryData[i]["signatory_type"],
-                                type: this.countryData[i]["new_actor_type"]}]})
+                                type: this.countryData[i]["actor_type"]}]})
                         }
                         else {
                             for (let item of actorsInAgt) {
@@ -267,7 +267,7 @@
                                         item.actortypeList.push({
                                             actor: this.countryData[i]["actor_name"], 
                                             edge: this.countryData[i]["signatory_type"], 
-                                            type: this.countryData[i]["new_actor_type"]})
+                                            type: this.countryData[i]["actor_type"]})
                                     }
                                 }
                             }

@@ -58,7 +58,7 @@
                     {"id_field": "actor_name",
                     "type": "node",
                     "data": [{"field": "target_type","as": "node_type"},
-                            {"field": "new_actor_type", "as": "node_type_color"},
+                            {"field": "actor_type", "as": "node_type_color"},
                             {"field": "actor_name","as": "name"}
                             ]}
                 ]
@@ -118,8 +118,8 @@
           "x": [{"field": "date", "scale": "time"}],
           "y": [{"value": 0}],
           "transform": [
-              {"type": "set", "field": "width", "value": 10},
-              {"type": "set", "field": "height", "value": 27},
+              {"type": "set", "field": "width", "value": 25},
+              {"type": "set", "field": "height", "value": 16},
               {"type": "beeswarm", "gravityY": 0} 
           ]
       }

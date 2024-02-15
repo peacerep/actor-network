@@ -43,7 +43,7 @@
                         {"id_field": "actor_name",
                         "type": "node",
                         "data": [{"field": "target_type","as": "node_type"},
-                                {"field": "new_actor_type", "as": "node_type_color"},
+                                {"field": "actor_type", "as": "node_type_color"},
                                 {"field": "actor_name","as": "name"}
                                 ]}
                     ]

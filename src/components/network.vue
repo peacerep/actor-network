@@ -60,9 +60,8 @@
 </template>
 
 <script>
-// import russia from "@/data/russia.json"
 import legends from '../components/legends.vue'
-import actorInfo from '../data/actors_all.json'
+import actorInfo from '../data/UKG_actor.json'
 
 export default {
     components: { legends },

@@ -30,7 +30,7 @@
     <ppdashbord 
       :country="country"
       :dataPath="dataPath"
-      :data="data" 
+      :data="data"
       :actorTypeLegendList="actorTypeLegendList" 
       :colorRange="colorRange"
       :actorTypeLegendListNetwork="actorTypeLegendListNetwork"
@@ -49,7 +49,7 @@
   import countrymetrics from '../components/countrymetrics.vue'
   import ppdashbord from '../components/ppdashboard.vue'
 
-  import countryData from '../data/uk.json'
+  import countryData from '../data/UKG_agt.json'
 
   export default {
     components: {peaceprocess, countrytitle, timeline, countrymetrics, ppdashbord},
@@ -63,7 +63,7 @@
         data: {},
         countryData,
         country: "United Kingdom",
-        dataPath: "uk.json"
+        dataPath: "UKG_agt.json"
       }
     },
 
@@ -99,7 +99,7 @@
 
       for (let i=0; i<countryData.length; i++) {
         var agt = countryData[i]["AgtId"]
-        var actorType = countryData[i]["new_actor_type"]
+        var actorType = countryData[i]["actor_type"]
 
         // The Russia agt date format is 1999/06/10, while the UK agt date is 10/06/1996
         // var agtYear = countryData[i].date
