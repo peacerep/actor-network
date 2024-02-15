@@ -61,7 +61,7 @@
 
 <script>
 import legends from '../components/legends.vue'
-import actorInfo from '../data/UKG_actor.json'
+import actorInfo from '../data/RUS_actor.json'
 
 export default {
     components: { legends },

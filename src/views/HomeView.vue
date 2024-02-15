@@ -49,7 +49,7 @@
   import countrymetrics from '../components/countrymetrics.vue'
   import ppdashbord from '../components/ppdashboard.vue'
 
-  import countryData from '../data/UKG_agt.json'
+  import countryData from '../data/RUS_agt.json'
 
   export default {
     components: {peaceprocess, countrytitle, timeline, countrymetrics, ppdashbord},
@@ -62,8 +62,8 @@
         agtTime: '',
         data: {},
         countryData,
-        country: "United Kingdom",
-        dataPath: "UKG_agt.json"
+        country: "Russia",
+        dataPath: "RUS_agt.json"
       }
     },
 

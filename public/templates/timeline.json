@@ -118,7 +118,7 @@
           "x": [{"field": "date", "scale": "time"}],
           "y": [{"value": 0}],
           "transform": [
-              {"type": "set", "field": "width", "value": 25},
+              {"type": "set", "field": "width", "value": 16},
               {"type": "set", "field": "height", "value": 16},
               {"type": "beeswarm", "gravityY": 0} 
           ]
