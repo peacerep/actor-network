@@ -38,6 +38,7 @@
                 maxNum: 0,
                 time: "",
                 selectedProcess: this.ppArr[0],
+                // selectedProcess: '',
 
                 //for resizing the dashboards
                 jigsawW: 0,
@@ -384,12 +385,18 @@
 
             this.getMetrics()
 
+
             setTimeout(() => {
+                // console.log("mounted", this.selectedProcess)
+                // console.log("test", this.ppArr[0])
+                this.selectedProcess = this.ppArr[0]
+                this.getMetrics()
                 this.render()
             }, 200);
             
             //in async await
             window.addEventListener('resize', this.debounce(this.render, 150))
+
         }
     }
 

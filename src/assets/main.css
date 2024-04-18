@@ -277,7 +277,7 @@ text.legend-labels { font-size: 0.7rem; }
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
 /* TEXTS */
-h1 { font-size: 2.5rem; }
+h1 { font-size: 2.2rem; }
 h1.sub-heading { font-size: 1.2rem; }
 h3 { font-size: 1.5rem; }
 h3.top-sub { font-size: 1rem; }

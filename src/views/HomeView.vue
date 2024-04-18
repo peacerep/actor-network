@@ -43,13 +43,15 @@
 </template>
 
 <script>
+  import * as d3 from "d3";
+
   import peaceprocess from '../components/peaceprocess.vue'
   import countrytitle from '../components/countrytitle.vue'
   import timeline from '../components/timeline.vue'
   import countrymetrics from '../components/countrymetrics.vue'
   import ppdashbord from '../components/ppdashboard.vue'
 
-  import countryData from '../data/UKG_agt.json'
+  // import countryData from '../data/UKG_agt.json'
 
   export default {
     components: {peaceprocess, countrytitle, timeline, countrymetrics, ppdashbord},
@@ -58,121 +60,210 @@
       return {
         ppTitle: '',
         agtNum: 0,
-        agtActorNum:0,
+        actorNum: 0,
         agtTime: '',
         data: {},
-        countryData,
-        country: "United Kingdom",
-        dataPath: "UKG_agt.json"
+        countryData: {},
+        country: '',
+        dataPath: '',
+        ppArr: [],
+        processNum: 0,
+        actorTypeLegendList: [],
+        actorTypeLegendListNetwork: [],
+        colorRange: ["#198038", "#2980B9", "#FF7F0E", "#03A9F4", "#D62728", "#9467BD", "#BCBD22", "#F1C40F", "#E377C2", "#44E4DB"],
+        sigColorRange: ["#657585", "#F4A425"],
+        colorRangeNetwork: [],
+        agtColor: "#34495E",
+        timespan: '',
+        timespanArr: []
       }
     },
+    
 
     methods: {
       getData(data) {
         this.data = data
-      }
+      },
+
+      async fetchData(countryCode) {
+        console.log("run fetch data")
+        this.country = countryCode;
+        const csvData = await d3.csv('../data/source/country_files.csv');
+        const countryMapping = csvData.reduce((map, row) => {
+          map[row.abbr] = row.country;
+          return map;
+        }, {});
+        this.country = countryMapping[countryCode];
+        this.dataPath = `${countryCode}_agt.json`; 
+        console.log(`../data/${this.dataPath}`)
+        try {
+          const module = await import(`../data/${this.dataPath}`);
+          this.countryData = module.default;
+          this.processData(this.countryData);
+        } catch (error) {
+          console.error('Failed to load country data:', error);
+          this.countryData = {};
+        }
+      },
+
+      processData(countryData) {
+        for (let i=0; i<countryData.length; i++) {
+            var peaceProcess = countryData[i]["PPName"];
+            if (this.ppArr.includes(peaceProcess) == false) {
+                this.ppArr.push(peaceProcess);
+                i++
+            } else {
+                i++
+            }
+        }
+        console.log(this.ppArr)
+        this.processNum = this.ppArr.length
+        var agtArr = []
+        var agtTimeArr = []
+        var actorArr = []
+
+        for (let i=0; i<countryData.length; i++) {
+          var agt = countryData[i]["AgtId"]
+          var actorType = countryData[i]["actor_type"]
+
+          var date = countryData[i].date;
+          
+          var dateParts = date.split("/");
+          var agtYear = dateParts[2];
+
+          // count all actors
+          var actorName = countryData[i]["actor_name"]
+          if (actorArr.includes(actorName) == false) {
+            actorArr.push(actorName);
+          }
+          this.actorNum = actorArr.length
+
+          // count all agreements and time range
+          if (agtArr.includes(agt) == false) {
+              agtArr.push(agt);
+              agtTimeArr.push(new Date(agtYear))
+              this.agtNum++;
+          }
+
+          // get all actor types, pass it to "peaceprocess", "ppdashboard", "legends"
+          if (this.actorTypeLegendList.includes(actorType) == false) {
+            this.actorTypeLegendList.push(actorType)
+          }
+        }
+        
+        // for network, jigsaw rendering
+        this.actorTypeLegendListNetwork = this.actorTypeLegendList.slice()
+        this.actorTypeLegendListNetwork.unshift("Peace Agreement");
+        this.colorRangeNetwork = this.colorRange.slice()
+        this.colorRangeNetwork.unshift(this.agtColor);
+
+        var maxDate = new Date(Math.max.apply(null, agtTimeArr))
+        var maxYear = maxDate.getFullYear()
+        var minDate = new Date(Math.min.apply(null, agtTimeArr))
+        var minYear = minDate.getFullYear()
+        this.timespan = `${minYear} - ${maxYear}`
+
+        // let timespanArr = [];
+
+        for (let year = minYear; year <= maxYear; year++) {
+            this.timespanArr.push({"year": year});
+        }
+
+        console.log(this.timespanArr);
+        }
     },
 
-    setup() {
-      // 1. Calculate country metrics
-      // countryData is directly imported
-
-      // count peace processes
-      var ppArr = [];
-      for (let i=0; i<countryData.length; i++) {
-          var peaceProcess = countryData[i]["PPName"];
-          if (ppArr.includes(peaceProcess) == false) {
-              ppArr.push(peaceProcess);
-              i++
-          } else {
-              i++
-          }
-      }
-      let processNum = ppArr.length
-
-      var agtArr = []
-      var agtTimeArr = []
-      var agtNum = 0
-      var actorArr = []
-      // for legends
-      var actorTypeLegendList = []
-
-      for (let i=0; i<countryData.length; i++) {
-        var agt = countryData[i]["AgtId"]
-        var actorType = countryData[i]["actor_type"]
-
-        // The Russia agt date format is 1999/06/10, while the UK agt date is 10/06/1996
-        // var agtYear = countryData[i].date
-        var date = countryData[i].date;
-        var dateParts = date.split("/");
-        var agtYear = dateParts[2];
-
-        // count all actors
-        var actorName = countryData[i]["actor_name"]
-        if (actorArr.includes(actorName) == false) {
-          actorArr.push(actorName);
-        }
-        var actorNum = actorArr.length
-
-        // count all agreements and time range
-        if (agtArr.includes(agt) == false) {
-            agtArr.push(agt);
-            agtTimeArr.push(new Date(agtYear))
-            agtNum++;
-        }
-
-        // get all actor types, pass it to "peaceprocess", "ppdashboard", "legends"
-        if (actorTypeLegendList.includes(actorType) == false) {
-          actorTypeLegendList.push(actorType)
-        }
-      }
-
-      //Jinrui color
-      // var colorRange = [
-      //             "#EAC05B", "#D97144", "#E8A5D5",
-      //             "#7FAADC", "#714FBA", "#9EB449",
-      //             "#CEAC9D", "#F6F5BF", "#568AA4",
-      //             "#44E4DB", "#BA4B80", "#CDD2CC",
-      //             "#9793AA"
-      //             ]
-      // var sigColorRange = ["#C1C1C1","lightgrey"]
-      // var agtColor = "#60A18B"
-
-      // Unified colours
-      var colorRange = [
-                  "#198038", "#2980B9", "#FF7F0E",
-                  "#03A9F4", "#D62728", "#9467BD",
-                  "#BCBD22", "#F1C40F", "#E377C2",
-                  "#44E4DB"
-                  ]
-      var sigColorRange = ["#657585", "#F4A425"]
-      var agtColor = "#34495E"
-      
-      // for network, jigsaw rendering
-      var actorTypeLegendListNetwork = actorTypeLegendList.slice()
-      actorTypeLegendListNetwork.unshift("Peace Agreement");
-      var colorRangeNetwork = colorRange.slice()
-      colorRangeNetwork.unshift(agtColor);
-
-      var maxDate = new Date(Math.max.apply(null, agtTimeArr))
-      var maxYear = maxDate.getFullYear()
-      var minDate = new Date(Math.min.apply(null, agtTimeArr))
-      var minYear = minDate.getFullYear()
-      let timespan = `${minYear} - ${maxYear}`
-
-      let timespanArr = [];
-
-      for (let year = minYear; year <= maxYear; year++) {
-          timespanArr.push({"year": year});
-      }
-
-      console.log(timespanArr);
-
-      return {
-        ppArr, processNum, agtNum, actorNum, timespan, actorTypeLegendList, colorRange, actorTypeLegendListNetwork, colorRangeNetwork, sigColorRange, agtColor, timespanArr
-      }
-
+    created() {
+      this.fetchData(this.$route.params.country);
     }
+
+
+
+    
+
+
+    // setup() {
+
+    //   var ppArr = [];
+    //   for (let i=0; i<countryData.length; i++) {
+    //       var peaceProcess = countryData[i]["PPName"];
+    //       if (ppArr.includes(peaceProcess) == false) {
+    //           ppArr.push(peaceProcess);
+    //           i++
+    //       } else {
+    //           i++
+    //       }
+    //   }
+    //   let processNum = ppArr.length
+
+    //   var agtArr = []
+    //   var agtTimeArr = []
+    //   var agtNum = 0
+    //   var actorArr = []
+    //   var actorTypeLegendList = []
+
+    //   for (let i=0; i<countryData.length; i++) {
+    //     var agt = countryData[i]["AgtId"]
+    //     var actorType = countryData[i]["actor_type"]
+
+    //     var date = countryData[i].date;
+    //     var dateParts = date.split("/");
+    //     var agtYear = dateParts[2];
+
+    //     // count all actors
+    //     var actorName = countryData[i]["actor_name"]
+    //     if (actorArr.includes(actorName) == false) {
+    //       actorArr.push(actorName);
+    //     }
+    //     var actorNum = actorArr.length
+
+    //     // count all agreements and time range
+    //     if (agtArr.includes(agt) == false) {
+    //         agtArr.push(agt);
+    //         agtTimeArr.push(new Date(agtYear))
+    //         agtNum++;
+    //     }
+
+    //     // get all actor types, pass it to "peaceprocess", "ppdashboard", "legends"
+    //     if (actorTypeLegendList.includes(actorType) == false) {
+    //       actorTypeLegendList.push(actorType)
+    //     }
+    //   }
+
+    //   var colorRange = [
+    //               "#198038", "#2980B9", "#FF7F0E",
+    //               "#03A9F4", "#D62728", "#9467BD",
+    //               "#BCBD22", "#F1C40F", "#E377C2",
+    //               "#44E4DB"
+    //               ]
+    //   var sigColorRange = ["#657585", "#F4A425"]
+    //   var agtColor = "#34495E"
+      
+    //   // for network, jigsaw rendering
+    //   var actorTypeLegendListNetwork = actorTypeLegendList.slice()
+    //   actorTypeLegendListNetwork.unshift("Peace Agreement");
+    //   var colorRangeNetwork = colorRange.slice()
+    //   colorRangeNetwork.unshift(agtColor);
+
+    //   var maxDate = new Date(Math.max.apply(null, agtTimeArr))
+    //   var maxYear = maxDate.getFullYear()
+    //   var minDate = new Date(Math.min.apply(null, agtTimeArr))
+    //   var minYear = minDate.getFullYear()
+    //   timespan = `${minYear} - ${maxYear}`
+
+    //   let timespanArr = [];
+
+    //   for (let year = minYear; year <= maxYear; year++) {
+    //       timespanArr.push({"year": year});
+    //   }
+
+    //   console.log(timespanArr);
+
+    //   return {
+    //     ppArr, processNum, agtNum, actorNum, timespan, actorTypeLegendList, colorRange, actorTypeLegendListNetwork, colorRangeNetwork, sigColorRange, agtColor, timespanArr
+    //   }
+
+    // }
   }
 
 </script>

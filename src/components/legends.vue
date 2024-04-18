@@ -49,7 +49,13 @@
     
     mounted() {
         this.actors = actors
-        this.load()
+        // this.load()
+
+        setTimeout(() => {
+                this.load()
+            }, 200);
+
+
         window.addEventListener('resize', this.debounce(this.render, 100))
     },
 
