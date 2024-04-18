@@ -11,7 +11,7 @@ const routes = [
   },
   {
     // path: '/',
-    path: '/:country',
+    path: '/country/:country',
     name: 'home',
     component: HomeView
   },
