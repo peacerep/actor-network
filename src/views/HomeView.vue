@@ -52,6 +52,7 @@
   import ppdashbord from '../components/ppdashboard.vue'
 
   // import countryData from '../data/UKG_agt.json'
+  import countryCodeData from '../data/country_code.json';
 
   export default {
     components: {peaceprocess, countrytitle, timeline, countrymetrics, ppdashbord},
@@ -88,12 +89,19 @@
       async fetchData(countryCode) {
         console.log("run fetch data")
         this.country = countryCode;
-        const csvData = await d3.csv('../data/source/country_files.csv');
-        const countryMapping = csvData.reduce((map, row) => {
-          map[row.abbr] = row.country;
-          return map;
+        // const csvData = await d3.csv('../data/source/country_files.csv');
+        // const countryMapping = csvData.reduce((map, row) => {
+        //   map[row.abbr] = row.country;
+        //   return map;
+        // }, {});
+        // this.country = countryMapping[countryCode];
+        const countryMapping = countryCodeData.reduce((map, item) => {
+            map[item.abbr] = item.country;
+            return map;
         }, {});
+
         this.country = countryMapping[countryCode];
+
         this.dataPath = `${countryCode}_agt.json`; 
         console.log(`../data/${this.dataPath}`)
         try {
