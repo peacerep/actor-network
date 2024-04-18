@@ -1,6 +1,6 @@
 <template>
     <div class="title-wrapper">
-      <h1>{{ country }} as a Global Peace Actor</h1>
+      <h1>{{ country }} as a Peace Agreement Signatory</h1>
       <h1 class="sub-heading">Actor Networks of {{ country }}'s involvement in Peace and Transition Processes</h1>
     </div>
 
