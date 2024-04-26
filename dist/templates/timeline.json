@@ -89,10 +89,26 @@
           "name": "year",
           "type": "linear",
           "range": [0, 1500],
-          "domain": [1990, 2021]
+          "domain": [1990, 2022]
+      },
+      {
+        "name": "fixed",
+        "type": "linear",
+        "range": [150, 150],
+        "domain": [1990, 2022]
       }
       
   ],
+
+
+  "orderings": [
+    {
+      "name": "order",
+      "data": "network.nodes",
+      "orderBy": { "field": "date", "direction": "ascending" }
+    }
+    ],
+
 
   "groupings": [
       {
@@ -111,18 +127,17 @@
             {"scale": "year", "field": "year"}
         ]
     },
-      {
-          "name": "l",
-          "network": "network",
-          "pattern": "cartesian",
-          "x": [{"field": "date", "scale": "time"}],
-          "y": [{"value": 0}],
-          "transform": [
-              {"type": "set", "field": "width", "value": 25},
-              {"type": "set", "field": "height", "value": 16},
-              {"type": "beeswarm", "gravityY": 0} 
-          ]
-      }
+    {
+        "name": "l",
+        "network": "network",
+        "pattern": "cartesian",
+        "x": [{"field": "date", "scale": "time"}],
+        "transform": [
+            {"type": "set", "field": "width", "value": 2},
+            {"type": "set", "field": "height", "value": "[countryTimeline]"},
+            {"type": "beeswarm", "gravityY": 0}
+        ]
+    }
   ],
 
   "vis": [
