@@ -25,7 +25,7 @@
     export default {
         emits:["sendData"],
 
-        props:["country","dataPath", "countryData", "ppArr", "actorTypeLegendList","actorTypeLegendListNetwork", "colorRange", "colorRangeNetwork", "sigColorRange", "agtColor", "timespanArr"],
+        props:["country","dataPath", "countryData", "ppArr", "actorTypeLegendList","actorTypeLegendListNetwork", "colorRange", "colorRangeNetwork", "sigColorRange", "agtColor", "timespanArr", "countryTimeline"],
         
         data() {
             return {
@@ -77,6 +77,7 @@
 
                 var country = this.country
                 var dataPath = this.dataPath
+                var countryTimeline = this.countryTimeline
 
                 console.log("fetch timespanArr", this.timespanArr)
                 var timespanArr = JSON.stringify(this.timespanArr)
@@ -179,10 +180,12 @@
                     autoHeight: `${timelineHeight}`,
                     barWidth: `${timelinebar}`,
                     agtColor: `${agtColor}`,
-                    timespanArr: `${timespanArr}`
+                    timespanArr: `${timespanArr}`,
+                    countryTimeline: `${countryTimeline}`
                     }, "timeline",
                     {paramCallbacks: {selected_node: this.linkNodes}});
 
+                console.log("timeline spec", countryTimeline)
                 console.log("RENDERED")
                 },
 

@@ -16,6 +16,7 @@
           :colorRangeNetwork="colorRangeNetwork"
           :sigColorRange="sigColorRange"
           :agtColor="agtColor"
+          :countryTimeline="countryTimeline"
           />
       </el-aside>
 
@@ -43,7 +44,6 @@
 </template>
 
 <script>
-  import * as d3 from "d3";
 
   import peaceprocess from '../components/peaceprocess.vue'
   import countrytitle from '../components/countrytitle.vue'
@@ -72,11 +72,12 @@
         actorTypeLegendList: [],
         actorTypeLegendListNetwork: [],
         colorRange: ["#198038", "#2980B9", "#FF7F0E", "#03A9F4", "#D62728", "#9467BD", "#BCBD22", "#F1C40F", "#E377C2", "#44E4DB"],
-        sigColorRange: ["#657585", "#F4A425"],
+        sigColorRange: ["#657585", "#657585"],
         colorRangeNetwork: [],
         agtColor: "#34495E",
         timespan: '',
-        timespanArr: []
+        timespanArr: [],
+        countryTimeline: 0
       }
     },
     
@@ -96,11 +97,15 @@
         // }, {});
         // this.country = countryMapping[countryCode];
         const countryMapping = countryCodeData.reduce((map, item) => {
-            map[item.abbr] = item.country;
-            return map;
+          map[item.abbr] = item;
+          return map;
         }, {});
 
-        this.country = countryMapping[countryCode];
+        const countryItem = countryMapping[countryCode];
+        this.country = countryItem.country;
+        this.countryTimeline = countryItem.timeline;
+
+        console.log("homeview data", countryItem)
 
         this.dataPath = `${countryCode}_agt.json`; 
         console.log(`../data/${this.dataPath}`)
