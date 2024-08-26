@@ -202,8 +202,7 @@
       navigateToCountry(countryAbbr) {
         console.log(`/country/${countryAbbr}`)
         if (countryAbbr) {
-          // this.$router.push(`/country/${countryAbbr}`);
-          window.location = `/country/${countryAbbr}`;
+          window.location = `${publicPath}country/${countryAbbr}`;
         }
       }
     },
