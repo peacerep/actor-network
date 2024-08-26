@@ -1,5 +1,5 @@
 <template>
-    <div style="display: flex; align-items: right; margin: 10px 10px 0 0">
+    <div class="dropdown-container">
       <el-dropdown @command="navigateToCountry">
         <el-button>Change Signatory</el-button>
         <template #dropdown>
@@ -9,8 +9,8 @@
             <el-dropdown-item command="RUS">Russia</el-dropdown-item>
             <el-dropdown-item command="UKG">United Kingdom</el-dropdown-item>
           </el-dropdown-menu>
-    </template>
-  </el-dropdown>
+        </template>
+      </el-dropdown>
     </div>
   
     <div class="top-layout">
