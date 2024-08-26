@@ -65,7 +65,6 @@
   import countrymetrics from '../components/countrymetrics.vue'
   import ppdashbord from '../components/ppdashboard.vue'
 
-  // import countryData from '../data/UKG_agt.json'
   import countryCodeData from '../data/country_code.json';
 
   export default {
@@ -200,9 +199,9 @@
         },
 
       navigateToCountry(countryAbbr) {
-        console.log(`/country/${countryAbbr}`)
         if (countryAbbr) {
-          window.location = `${publicPath}country/${countryAbbr}`;
+          window.location = `../country/${countryAbbr}`;
+          // console.log(`..${__webpack_public_path__}country/${countryAbbr}`)
         }
       }
     },
