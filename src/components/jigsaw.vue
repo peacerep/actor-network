@@ -80,18 +80,31 @@ export default {
             var sigColorRange = JSON.stringify(this.sigColorRange)
 
 
-            var view1 = await NetPanoramaTemplateViewer.render(`..${__webpack_public_path__}templates/jigsaw.json`, 
-                    {
-                        fileUrl: `"..${__webpack_public_path__}data/${dataPath}"`,
-                        peaceProcess: `'${select}'`,
-                        autoWidth: `${jigsawWidth}`,
-                        autoHeight: `${jigsawHeight}`,
-                        actorTypeLegendList: `${actorTypeLegendListNetwork}`,
-                        colorRange: `${colorRangeNetwork}`,
-                        sigColorRange: `${sigColorRange}`,
-                        country:`'${country}'`
-                    }, 
-                    "jigsawFull");
+            // var view1 = await NetPanoramaTemplateViewer.render(`..${__webpack_public_path__}templates/jigsaw.json`, 
+            //         {
+            //             fileUrl: `"..${__webpack_public_path__}data/${dataPath}"`,
+            //             peaceProcess: `'${select}'`,
+            //             autoWidth: `${jigsawWidth}`,
+            //             autoHeight: `${jigsawHeight}`,
+            //             actorTypeLegendList: `${actorTypeLegendListNetwork}`,
+            //             colorRange: `${colorRangeNetwork}`,
+            //             sigColorRange: `${sigColorRange}`,
+            //             country:`'${country}'`
+            //         }, 
+            //         "jigsawFull");
+
+            var view1 = await NetPanoramaTemplateViewer.render(`../templates/jigsaw.json`, 
+            {
+                fileUrl: `"../data/${dataPath}"`,
+                peaceProcess: `'${select}'`,
+                autoWidth: `${jigsawWidth}`,
+                autoHeight: `${jigsawHeight}`,
+                actorTypeLegendList: `${actorTypeLegendListNetwork}`,
+                colorRange: `${colorRangeNetwork}`,
+                sigColorRange: `${sigColorRange}`,
+                country:`'${country}'`
+            }, 
+            "jigsawFull");
         },
 
         queryElement(){

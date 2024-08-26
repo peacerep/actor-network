@@ -43,7 +43,7 @@
                         {"id_field": "actor_name",
                         "type": "node",
                         "data": [{"field": "target_type","as": "node_type"},
-                                {"field": "new_actor_type", "as": "node_type_color"},
+                                {"field": "actor_type", "as": "node_type_color"},
                                 {"field": "actor_name","as": "name"}
                                 ]}
                     ]
@@ -151,7 +151,7 @@
                             "field": "target.data.node_type_color",
                             "scale": "nodeColor"
                         },
-                        "stroke": {"expression": "datum.target.id == 'United Kingdom' ? 'black' : 'white'"},
+                        "stroke": {"expression": "datum.target.id == [country] ? 'black' : 'white'"},
                         "strokeWidth": 2.5,
                         "area": 320,
                         "tooltip": {"expression": "datum.target.data.name"} 

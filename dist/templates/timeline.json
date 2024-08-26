@@ -12,40 +12,7 @@
     },
     {
         "name": "yearArr",
-        "values": [
-            {"year": 1990},
-            {"year": 1991},
-            {"year": 1992},
-            {"year": 1993},
-            {"year": 1994},
-            {"year": 1995},
-            {"year": 1996},
-            {"year": 1997},
-            {"year": 1998},
-            {"year": 1999},
-            {"year": 2000},
-            {"year": 2001},
-            {"year": 2002},
-            {"year": 2003},
-            {"year": 2004},
-            {"year": 2005},
-            {"year": 2006},
-            {"year": 2007},
-            {"year": 2008},
-            {"year": 2009},
-            {"year": 2010},
-            {"year": 2011},
-            {"year": 2012},
-            {"year": 2013},
-            {"year": 2014},
-            {"year": 2015},
-            {"year": 2016},
-            {"year": 2017},
-            {"year": 2018},
-            {"year": 2019},
-            {"year": 2020},
-            {"year": 2021}
-        ],
+        "values": "[timespanArr]",
         "transform": [
                 {"type": "addIndex","as": "id"}
             ]
@@ -91,7 +58,7 @@
                     {"id_field": "actor_name",
                     "type": "node",
                     "data": [{"field": "target_type","as": "node_type"},
-                            {"field": "new_actor_type", "as": "node_type_color"},
+                            {"field": "actor_type", "as": "node_type_color"},
                             {"field": "actor_name","as": "name"}
                             ]}
                 ]
@@ -122,10 +89,26 @@
           "name": "year",
           "type": "linear",
           "range": [0, 1500],
-          "domain": [1990, 2021]
+          "domain": [1990, 2022]
+      },
+      {
+        "name": "fixed",
+        "type": "linear",
+        "range": [150, 150],
+        "domain": [1990, 2022]
       }
       
   ],
+
+
+  "orderings": [
+    {
+      "name": "order",
+      "data": "network.nodes",
+      "orderBy": { "field": "date", "direction": "ascending" }
+    }
+    ],
+
 
   "groupings": [
       {
@@ -144,18 +127,17 @@
             {"scale": "year", "field": "year"}
         ]
     },
-      {
-          "name": "l",
-          "network": "network",
-          "pattern": "cartesian",
-          "x": [{"field": "date", "scale": "time"}],
-          "y": [{"value": 0}],
-          "transform": [
-              {"type": "set", "field": "width", "value": 10},
-              {"type": "set", "field": "height", "value": 27},
-              {"type": "beeswarm", "gravityY": 0} 
-          ]
-      }
+    {
+        "name": "l",
+        "network": "network",
+        "pattern": "cartesian",
+        "x": [{"field": "date", "scale": "time"}],
+        "transform": [
+            {"type": "set", "field": "width", "value": 2},
+            {"type": "set", "field": "height", "value": "[countryTimeline]"},
+            {"type": "beeswarm", "gravityY": 0}
+        ]
+    }
   ],
 
   "vis": [
@@ -197,7 +179,7 @@
         "mark": {
             "type": "square",
             "area": 150,
-            "fill": { "expression": "datum.data.Peace == [peaceProcess] ? '#60A18B' : '#D9D9D9'"},
+            "fill": { "expression": "datum.data.Peace == [peaceProcess] ? '[agtColor]' : '#D9D9D9'"},
             "tooltip": {"expression": "{ Name: datum.data.fullName, Date: datum.data.node_time}"  }
         }
     },
@@ -208,7 +190,7 @@
         "mark": {
             "type": "square",
             "area": 220,
-            "fill": "orange"
+            "fill": "#7FB0E0"
         }
     },
     {

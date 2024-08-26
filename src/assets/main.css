@@ -32,7 +32,8 @@ p.network-legends { margin-left: 1.5vw; margin-bottom: 1vh; }
 }
 
 /* CONTAINERS */  
-.el-container { display: flex; }
+.dropdown-container { display: flex; justify-content: flex-end; margin-right: 1.5vw; margin-top: 1vw;}
+.el-container { display: flex;}
 .top-side { padding: 7vh 2vw 0vh 2vw; }
 .top-main { padding: 1.5vw; overflow: hidden; }
 
@@ -277,7 +278,7 @@ text.legend-labels { font-size: 0.7rem; }
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
 /* TEXTS */
-h1 { font-size: 2.5rem; }
+h1 { font-size: 2.2rem; }
 h1.sub-heading { font-size: 1.2rem; }
 h3 { font-size: 1.5rem; }
 h3.top-sub { font-size: 1rem; }

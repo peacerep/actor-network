@@ -1,0 +1,22 @@
+[
+  {
+    "country": "Russia",
+    "abbr": "RUS",
+    "timeline": 15
+  },
+  {
+    "country": "United Kingdom",
+    "abbr": "UKG",
+    "timeline": 20
+  },
+  {
+    "country": "China",
+    "abbr": "CHN",
+    "timeline": 20
+  },
+  {
+    "country": "United Nations",
+    "abbr": "UN",
+    "timeline": 15
+  }
+]

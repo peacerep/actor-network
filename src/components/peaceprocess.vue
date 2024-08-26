@@ -25,7 +25,7 @@
     export default {
         emits:["sendData"],
 
-        props:["country","dataPath", "countryData", "ppArr", "actorTypeLegendList","actorTypeLegendListNetwork", "colorRange", "colorRangeNetwork", "sigColorRange", "agtColor", "timespanArr"],
+        props:["country","dataPath", "countryData", "ppArr", "actorTypeLegendList","actorTypeLegendListNetwork", "colorRange", "colorRangeNetwork", "sigColorRange", "agtColor", "timespanArr", "countryTimeline"],
         
         data() {
             return {
@@ -38,6 +38,7 @@
                 maxNum: 0,
                 time: "",
                 selectedProcess: this.ppArr[0],
+                // selectedProcess: '',
 
                 //for resizing the dashboards
                 jigsawW: 0,
@@ -76,6 +77,7 @@
 
                 var country = this.country
                 var dataPath = this.dataPath
+                var countryTimeline = this.countryTimeline
 
                 console.log("fetch timespanArr", this.timespanArr)
                 var timespanArr = JSON.stringify(this.timespanArr)
@@ -91,8 +93,54 @@
                 var agtColor = JSON.stringify(this.agtColor)
 
                 // see NetPan usage, read in data path, add template variables, and interaction listeners
-                view1 = await NetPanoramaTemplateViewer.render(`..${__webpack_public_path__}templates/network.json`, {
-                    fileUrl: `"..${__webpack_public_path__}data/${dataPath}"`,
+                // view1 = await NetPanoramaTemplateViewer.render(`..${__webpack_public_path__}templates/network.json`, {
+                //     fileUrl: `"..${__webpack_public_path__}data/${dataPath}"`,
+                //     peaceProcess: `'${select}'`,
+                //     autoWidth: `${networkWidth}`,
+                //     autoHeight: `${networkHeight}`,
+                //     actorTypeLegendList: `${actorTypeLegendListNetwork}`,
+                //     colorRange: `${colorRangeNetwork}`,
+                //     sigColorRange: `${sigColorRange}`,
+                //     country:`'${country}'`
+                //     }, "network",
+                //     {paramCallbacks: {selected_node: this.linkNodes}});
+
+                // view2 = await NetPanoramaTemplateViewer.render(`..${__webpack_public_path__}templates/jigsaw.json`, {
+                //     fileUrl: `"..${__webpack_public_path__}data/${dataPath}"`,
+                //     peaceProcess: `'${select}'`,
+                //     autoWidth: `${jigsawWidth}`,
+                //     autoHeight: `${jigsawHeight}`,
+                //     actorTypeLegendList: `${actorTypeLegendListNetwork}`,
+                //     colorRange: `${colorRangeNetwork}`,
+                //     sigColorRange: `${sigColorRange}`,
+                //     country:`'${country}'`
+                //     }, "jigsaw",
+                //     {paramCallbacks: {selected_node: this.linkNodes}});
+
+                // view3 = await NetPanoramaTemplateViewer.render(`..${__webpack_public_path__}templates/list.json`, {
+                //     fileUrl: `"..${__webpack_public_path__}data/${dataPath}"`,
+                //     peaceProcess: `'${select}'`,
+                //     autoWidth: `${listWidth}`,
+                //     autoHeight: `${listHeight}`,
+                //     actorTypeLegendList: `${actorTypeLegendList}`,
+                //     colorRange: `${colorRange}`,
+                //     country:`'${country}'`
+                //     }, "list");
+
+                // view4 = await NetPanoramaTemplateViewer.render(`..${__webpack_public_path__}templates/timeline.json`, {
+                //     fileUrl: `"..${__webpack_public_path__}data/${dataPath}"`,
+                //     peaceProcess: `'${select}'`,
+                //     autoWidth: `${timelineWidth}`,
+                //     autoHeight: `${timelineHeight}`,
+                //     barWidth: `${timelinebar}`,
+                //     agtColor: `${agtColor}`,
+                //     timespanArr: `${timespanArr}`
+                //     }, "timeline",
+                //     {paramCallbacks: {selected_node: this.linkNodes}});
+
+
+                view1 = await NetPanoramaTemplateViewer.render(`../templates/network.json`, {
+                    fileUrl: `"../data/${dataPath}"`,
                     peaceProcess: `'${select}'`,
                     autoWidth: `${networkWidth}`,
                     autoHeight: `${networkHeight}`,
@@ -103,8 +151,8 @@
                     }, "network",
                     {paramCallbacks: {selected_node: this.linkNodes}});
 
-                view2 = await NetPanoramaTemplateViewer.render(`..${__webpack_public_path__}templates/jigsaw.json`, {
-                    fileUrl: `"..${__webpack_public_path__}data/${dataPath}"`,
+                view2 = await NetPanoramaTemplateViewer.render(`../templates/jigsaw.json`, {
+                    fileUrl: `"../data/${dataPath}"`,
                     peaceProcess: `'${select}'`,
                     autoWidth: `${jigsawWidth}`,
                     autoHeight: `${jigsawHeight}`,
@@ -115,8 +163,8 @@
                     }, "jigsaw",
                     {paramCallbacks: {selected_node: this.linkNodes}});
 
-                view3 = await NetPanoramaTemplateViewer.render(`..${__webpack_public_path__}templates/list.json`, {
-                    fileUrl: `"..${__webpack_public_path__}data/${dataPath}"`,
+                view3 = await NetPanoramaTemplateViewer.render(`../templates/list.json`, {
+                    fileUrl: `"../data/${dataPath}"`,
                     peaceProcess: `'${select}'`,
                     autoWidth: `${listWidth}`,
                     autoHeight: `${listHeight}`,
@@ -125,17 +173,19 @@
                     country:`'${country}'`
                     }, "list");
 
-                view4 = await NetPanoramaTemplateViewer.render(`..${__webpack_public_path__}templates/timeline.json`, {
-                    fileUrl: `"..${__webpack_public_path__}data/${dataPath}"`,
+                view4 = await NetPanoramaTemplateViewer.render(`../templates/timeline.json`, {
+                    fileUrl: `"../data/${dataPath}"`,
                     peaceProcess: `'${select}'`,
                     autoWidth: `${timelineWidth}`,
                     autoHeight: `${timelineHeight}`,
                     barWidth: `${timelinebar}`,
                     agtColor: `${agtColor}`,
-                    timespanArr: `${timespanArr}`
+                    timespanArr: `${timespanArr}`,
+                    countryTimeline: `${countryTimeline}`
                     }, "timeline",
                     {paramCallbacks: {selected_node: this.linkNodes}});
 
+                console.log("timeline spec", countryTimeline)
                 console.log("RENDERED")
                 },
 
@@ -384,12 +434,18 @@
 
             this.getMetrics()
 
+
             setTimeout(() => {
+                // console.log("mounted", this.selectedProcess)
+                // console.log("test", this.ppArr[0])
+                this.selectedProcess = this.ppArr[0]
+                this.getMetrics()
                 this.render()
             }, 200);
             
             //in async await
             window.addEventListener('resize', this.debounce(this.render, 150))
+
         }
     }
 
