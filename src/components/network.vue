@@ -10,10 +10,10 @@
         <div class="dialogue-legends">
             <h3 class="dialogue-heading">Legend</h3>
             <legends 
-                        :actorTypeLegendList="actorTypeLegendList" 
-                        :colorRange="colorRange"
-                        :sigColorRange="sigColorRange"
-                        :agtColor="agtColor"/>
+                :actorTypeLegendList="actorTypeLegendList" 
+                :colorRange="colorRange"
+                :sigColorRange="sigColorRange"
+                :agtColor="agtColor"/>
         </div>
         <el-divider v-if="this.w >= 1200" direction="vertical" content-position="center" />
         <el-divider v-else-if="this.w < 1200 && this.w >= 300" content-position="center" />
@@ -118,21 +118,37 @@ export default {
             var colorRangeNetwork = JSON.stringify(this.colorRangeNetwork)
             var sigColorRange = JSON.stringify(this.sigColorRange)
 
-            var view1 = NetPanoramaTemplateViewer.render(`..${__webpack_public_path__}templates/network.json`, 
-                    {
-                        fileUrl: `"..${__webpack_public_path__}data/${dataPath}"`,
-                        peaceProcess: `'${select}'`,
-                        autoWidth: `${networkWidth}`,
-                        autoHeight: `${networkHeight}`,
-                        actorTypeLegendList: `${actorTypeLegendListNetwork}`,
-                        colorRange: `${colorRangeNetwork}`,
-                        sigColorRange: `${sigColorRange}`,
-                        country:`'${country}'`
-                    }, 
-                    "networkFull",
-                    {paramCallbacks: {selected_node: this.onChange}}
-                    );
-                },
+            // var view1 = NetPanoramaTemplateViewer.render(`..${__webpack_public_path__}templates/network.json`, 
+            //         {
+            //             fileUrl: `"..${__webpack_public_path__}data/${dataPath}"`,
+            //             peaceProcess: `'${select}'`,
+            //             autoWidth: `${networkWidth}`,
+            //             autoHeight: `${networkHeight}`,
+            //             actorTypeLegendList: `${actorTypeLegendListNetwork}`,
+            //             colorRange: `${colorRangeNetwork}`,
+            //             sigColorRange: `${sigColorRange}`,
+            //             country:`'${country}'`
+            //         }, 
+            //         "networkFull",
+            //         {paramCallbacks: {selected_node: this.onChange}}
+            //         );
+            //     },
+
+            var view1 = NetPanoramaTemplateViewer.render(`../templates/network.json`, 
+                {
+                    fileUrl: `"../data/${dataPath}"`,
+                    peaceProcess: `'${select}'`,
+                    autoWidth: `${networkWidth}`,
+                    autoHeight: `${networkHeight}`,
+                    actorTypeLegendList: `${actorTypeLegendListNetwork}`,
+                    colorRange: `${colorRangeNetwork}`,
+                    sigColorRange: `${sigColorRange}`,
+                    country:`'${country}'`
+                }, 
+                "networkFull",
+                {paramCallbacks: {selected_node: this.onChange}}
+                );
+            },
 
         queryElement(){
                 return new Promise (resolve => {

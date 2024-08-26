@@ -1,5 +1,19 @@
 <template>
-  <div class="top-layout">
+    <div style="display: flex; align-items: right; margin: 10px 10px 0 0">
+      <el-dropdown @command="navigateToCountry">
+        <el-button>Change Signatory</el-button>
+        <template #dropdown>
+          <el-dropdown-menu>
+            <el-dropdown-item command="UN">United Nations</el-dropdown-item>
+            <el-dropdown-item command="CHN">China</el-dropdown-item>
+            <el-dropdown-item command="RUS">Russia</el-dropdown-item>
+            <el-dropdown-item command="UKG">United Kingdom</el-dropdown-item>
+          </el-dropdown-menu>
+    </template>
+  </el-dropdown>
+    </div>
+  
+    <div class="top-layout">
     <el-container>
       <el-aside class="top-side">
         <countrytitle :country="country" />
@@ -183,17 +197,28 @@
         }
 
         console.log(this.timespanArr);
+        },
+
+      navigateToCountry(countryAbbr) {
+        console.log(`/country/${countryAbbr}`)
+        if (countryAbbr) {
+          // this.$router.push(`/country/${countryAbbr}`);
+          window.location = `/country/${countryAbbr}`;
         }
+      }
     },
+
+  //   watch: {
+  //   '$route'(to, from) {
+  //     this.fetchData(to.params.country);
+  //   }
+  // },
 
     created() {
       this.fetchData(this.$route.params.country);
-    }
-
-
+    },
 
     
-
 
     // setup() {
 

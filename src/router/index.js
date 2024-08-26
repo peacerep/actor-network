@@ -4,13 +4,11 @@ import Start from '../views/Start.vue'
 
 const routes = [
   {
-    // path: '/',
     path: '/',
     name: 'start',
     component: Start
   },
   {
-    // path: '/',
     path: '/country/:country',
     name: 'home',
     component: HomeView

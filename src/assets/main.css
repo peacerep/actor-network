@@ -32,7 +32,8 @@ p.network-legends { margin-left: 1.5vw; margin-bottom: 1vh; }
 }
 
 /* CONTAINERS */  
-.el-container { display: flex; }
+.country-dropdown { position: relative; float: right;}
+.el-container { display: flex;}
 .top-side { padding: 7vh 2vw 0vh 2vw; }
 .top-main { padding: 1.5vw; overflow: hidden; }
 
