@@ -1,6 +1,6 @@
 
 <template>
-    <div class='selector-wrapper'>
+    <div class='process-selector'>
         <p class="selector-title">To begin, select a Peace Process to show relevant agreements in which {{ country }} has been involved:</p>
         <div class="selection">
             <el-select 

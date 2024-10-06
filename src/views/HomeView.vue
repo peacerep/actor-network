@@ -1,7 +1,8 @@
 <template>
     <div class="dropdown-container">
+      <scrollystory :country="country" class="left-align"/>
       <el-dropdown @command="navigateToCountry">
-        <el-button>Change Signatory</el-button>
+        <el-button style="margin-right: 1vw;">Change Signatory</el-button>
         <template #dropdown>
           <el-dropdown-menu>
             <el-dropdown-item command="UN">United Nations</el-dropdown-item>
@@ -32,6 +33,7 @@
           :agtColor="agtColor"
           :countryTimeline="countryTimeline"
           />
+        <!-- <scrollystory :country="country" /> -->
       </el-aside>
 
       <el-main class="top-main">
@@ -64,11 +66,12 @@
   import timeline from '../components/timeline.vue'
   import countrymetrics from '../components/countrymetrics.vue'
   import ppdashbord from '../components/ppdashboard.vue'
+  import scrollystory from '../components/scrollystory.vue'
 
   import countryCodeData from '../data/country_code.json';
 
   export default {
-    components: {peaceprocess, countrytitle, timeline, countrymetrics, ppdashbord},
+    components: {peaceprocess, countrytitle,scrollystory, timeline, countrymetrics, ppdashbord},
 
     data() {
       return {
