@@ -9,6 +9,7 @@
             <el-dropdown-item command="CHN">China</el-dropdown-item>
             <el-dropdown-item command="RUS">Russia</el-dropdown-item>
             <el-dropdown-item command="UKG">United Kingdom</el-dropdown-item>
+            <el-dropdown-item command="QAT">Qatar</el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
