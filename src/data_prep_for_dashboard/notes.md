@@ -1,0 +1,3 @@
+Columns in the CSV file: ['signatory_id', 'AgtId', 'agt_name', 'signatory_type', 'practical_third', 'condition', 'actor_id', 'id_paax', 'actor_name', 'actor_type', 'sub_type', 'cs_type', 'actor_iso3c', 'actor_country', 'actor_gwno', 'actor_region', 'abbreviation', 'un_type', 'international', 'regional', 'domestic', 'women', 'ucdp_id', 'ucdp_name', 'acled_name', 'acled_other', 'Con', 'PPName', 'Reg', 'Dat', 'year', 'agt_type', 'stage_process', 'Part', 'ThrdPart', 'agt_description', 'Loc1ISO', 'Loc2ISO', 'Loc1GWNO', 'Loc2GWNO', 'UcdpCon', 'UcdpAgr', 'PamAgr', 'CowWar', 'PAX_Hyperlink', 'PDF_Hyperlink', 'PA-X Page html', 'Agreement PDF html', 'global_actor']
+
+short_agt_name 去掉了

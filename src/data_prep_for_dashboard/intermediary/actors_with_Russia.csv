@@ -1,0 +1,227 @@
+actor_id,id_paax,actor_name,actor_type,actor_iso3c,sub_type,cs_type,abbreviation,actor_country,actor_gwno,actor_region,un_type,international,regional,domestic,women,ucdp_id,ucdp_name,acled_name,acled_other
+0,CON_0,Bosnia and Herzegovina,Country/State,BIH,,,,Bosnia and Herzegovina,346.0,Europe,,,,,,50.0,Government of Bosnia-Herzegovina,Government of Bosnia and Herzegovina (2018-),
+1,CON_1,Croatia,Country/State,HRV,,,,Croatia,344.0,Europe,,,,,,48.0,Government of Croatia,Government of Croatia (2016-),
+2,CON_2,Germany,Country/State,DEU,,,,Germany,255.0,Europe,,,,,,37.0,Government of Germany,Government of Germany (2021-),Government of Germany (2005-2021) | Government of Germany (2021-)
+3,CON_3,United States,Country/State,USA,,,,United States,2.0,Americas,P5,,,,,3.0,Government of United States of America,Government of the United States (2021-),Government of the United States (2017-2021) | Government of the United States (2021-)
+4,CON_4,Spain,Country/State,ESP,,,,Spain,230.0,Europe,,,,,,35.0,Government of Spain,Government of Spain (2020-),
+5,IGO_5,European Union,Intergovernmental Organization,,Regional,,EU,,,Europe,,,1.0,,,,,,
+7,CON_7,France,Country/State,FRA,,,,France,220.0,Europe,P5,,,,,33.0,Government of France,Government of France (2017-),Government of France (2017-) | Government of France (2017-) French Guiana | Government of France (2017-) Guadeloupe | Government of France (2017-) Martinique | Government of France (2017-) Saint-Barthelemy | Government of France (2017-) Saint-Martin
+8,IGO_8,UN Security Council,Intergovernmental Organization,,,,UNSC,,,,United Nations,1.0,,,,,,,
+9,CON_9,Argentina,Country/State,ARG,,,,Argentina,160.0,Americas,,,,,,26.0,Government of Argentina,Government of Argentina (2019-),Government of Argentina (2015-2019) | Government of Argentina (2019-)
+10,CON_10,Netherlands,Country/State,NLD,,,,Netherlands,210.0,Europe,,,,,,30.0,Government of Netherlands,Government of the Netherlands (2010-),
+11,CON_11,Canada,Country/State,CAN,,,,Canada,20.0,Americas,,,,,,4.0,Government of Canada,Government of Canada (2015-),
+12,CON_12,Malaysia,Country/State,MYS,,,,Malaysia,820.0,Asia,,,,,,152.0,Government of Malaysia,Government of Malaysia (2021-),Government of Malaysia (2020-2021) | Government of Malaysia (2021-)
+13,CON_13,Namibia,Country/State,NAM,,,,Namibia,565.0,Africa,,,,,,103.0,Government of Namibia,,
+14,CON_14,Slovenia,Country/State,SVN,,,,Slovenia,317.0,Europe,,,,,,51.0,Government of Slovenia,Government of Slovenia (2018-),
+15,CON_15,Brazil,Country/State,BRA,,,,Brazil,140.0,Americas,,,,,,22.0,Government of Brazil,Government of Brazil (2019-),Government of Brazil (2016-2018) | Government of Brazil (2019-)
+16,CON_16,Gambia,Country/State,GMB,,,,Gambia,420.0,Africa,,,,,,71.0,Government of Gambia,Government of Gambia (2017-),Government of Gambia (1996-2017) | Government of Gambia (2017-)
+17,CON_17,Gabon,Country/State,GAB,,,,Gabon,481.0,Africa,,,,,,85.0,Government of Gabon,Government of Gabon (2009-),
+18,CON_18,Bahrain,Country/State,BHR,,,,Bahrain,692.0,Asia,,,,,,126.0,Government of Bahrain,Government of Bahrain (1999-),
+19,CON_19,United Kingdom,Country/State,GBR,,,,United Kingdom,200.0,Europe,P5,,,,,28.0,Government of United Kingdom,Government of the United Kingdom (2010-),
+20,CON_20,China,Country/State,CHN,,,,China,710.0,Asia,P5,,,,,135.0,Government of China,Government of China (2012-),Government of China (2012-) | Government of China (2017-) Hong Kong Special Administrative Region | Government of China (2019-) Macau Special Administrative Region
+21,CON_21,Russia,Country/State,RUS,,,,Russia,365.0,Europe,P5,,,,,57.0,Government of Russia (Soviet Union),Government of Russia (2000-),Government of Russia (2000-) | Government of Russia (2000-) Republic of Chechnya | Government of Russia (2000-) Republic of Ingushetia
+22,CON_22,Yugoslavia,Country/State, ,,,,Yugoslavia,345.0,Europe,,,,,,,,,
+41,CON_41,Benin,Country/State,BEN,,,,Benin,434.0,Africa,,,,,,1209.0,Government of Benin,Government of Benin (2016-),Government of Benin (2006-2016) | Government of Benin (2016-)
+42,CON_42,Congo,Country/State,COG,,,,"Congo, Republic of the",484.0,Africa,,,,,,88.0,Government of Congo,Government of the Republic of Congo (1997-),
+43,IGO_43,Organization of African Unity,Intergovernmental Organization,,Regional,,OAU,,,Africa,,,1.0,,,,,,
+45,CON_45,Georgia,Country/State,GEO,,,,Georgia,372.0,Asia,,,,,,63.0,Government of Georgia,Government of Georgia (2012-),
+46,ENT_46,Abkhazia,Entity,GEO,,,,Georgia,372.0,Asia,,,,,,,,,
+47,ENT_47,North Caucasian,Entity,RUS,,,,Russia,365.0,Europe,,,,,,,,,
+48,IGO_48,Conference on Security and Cooperation in Europe,Intergovernmental Organization,,Regional,,CSCE,,,Europe,,,1.0,,,,,,
+49,IGO_49,United Nations (General),Intergovernmental Organization,,,,UN,,,,United Nations,1.0,,,,,,UN: United Nations,
+50,IGO_50,Organization for Security and Cooperation in Europe,Intergovernmental Organization,,Regional,,OSCE,,,Europe,,1.0,1.0,,,,,,
+51,COA_51,Group of Friends UNSG,State Coalition,,,,,,,,,1.0,,,,,,,
+52,CON_52,Ukraine,Country/State,UKR,,,,Ukraine,369.0,Europe,,,,,,61.0,Government of Ukraine,Government of Ukraine (2019-),Government of Ukraine (2014-2019) | Government of Ukraine (2019-)
+53,IGO_53,Commonwealth of Independent States,Intergovernmental Organization,,Regional,,CIS,,,Europe,,1.0,1.0,,,,,,
+54,CON_54,Uzbekistan,Country/State,UZB,,,,Uzbekistan,704.0,Asia,,,,,,133.0,Government of Uzbekistan,Government of Uzbekistan (2016-),
+55,CON_55,Kyrgyzstan,Country/State,KGZ,,,,Kyrgyzstan,703.0,Asia,,,,,,132.0,Government of Kyrgyzstan,Government of Kyrgyzstan (2017-2020),
+56,CON_56,Kazakhstan,Country/State,KAZ,,,,Kazakhstan,705.0,Asia,,,,,,134.0,Government of Kazakhstan,Government of Kazakhstan (2019-),Government of Kazakhstan (1990-2019) | Government of Kazakhstan (2019-)
+57,CON_57,Turkmenistan,Country/State,TKM,,,,Turkmenistan,701.0,Asia,,,,,,,,Government of Turkmenistan (2006-),
+58,CON_58,Belarus,Country/State,BLR,,,,Belarus,370.0,Europe,,,,,,,,Government of Belarus (1994-),
+59,CON_59,Azerbaijan,Country/State,AZE,,,,Azerbaijan,373.0,Asia,,,,,,64.0,Government of Azerbaijan,Government of Azerbaijan (2003-),
+60,CON_60,Moldova,Country/State,MDA,,,,Moldova,359.0,Europe,,,,,,55.0,Government of Moldova,Government of Moldova (2021-),Government of Moldova (2016-2019) | Government of Moldova (2019-2020) | Government of Moldova (2021-) | Government of Moldova (2016-2019) Gagauzia Regional Government | Government of Moldova (2019-) Gagauzia Regional Government | Government of Moldova (2020-2021)
+61,CON_61,Armenia,Country/State,ARM,,,,Armenia,371.0,Asia,,,,,,62.0,Government of Armenia,Government of Armenia (2018-),Government of Armenia (2008-2018) | Government of Armenia (2018-)
+62,CON_62,Tajikistan,Country/State,TJK,,,,Tajikistan,702.0,Asia,,,,,,131.0,Government of Tajikistan,Government of Tajikistan (1994-),
+63,IGO_63,CIS Peacekeeping Force,Intergovernmental Organization,,Regional,,CIS-PKF,,,Europe,,,1.0,,,,,,
+64,IGO_64,United Nations Development Programme,Intergovernmental Organization,,,,UNDP,,,,United Nations,1.0,,,,,,,
+65,IGO_65,High Commission for Refugees,Intergovernmental Organization,,,,UNHCR,,,,United Nations,1.0,,,,,,,
+70,CON_70,India,Country/State,IND,,,,India,750.0,Asia,,,,,,141.0,Government of India,Government of India (2014-),
+75,CON_75,Iraq,Country/State,IRQ,,,,Iraq,645.0,Asia,,,,,,116.0,Government of Iraq,Government of Iraq (2020-),Government of Iraq (2014-2018) | Government of Iraq (2018-2020) | Government of Iraq (2020-)
+76,CON_76,Israel,Country/State,ISR,,,,Israel,666.0,Asia,,,,,,121.0,Government of Israel,Government of Israel (2009-2021),
+77,CON_77,Syrian Arab Republic,Country/State,SYR,,,,Syria,652.0,Asia,,,,,,118.0,Government of Syria,Government of Syria (2000-),
+78,CON_78,Jordan,Country/State,JOR,,,,Jordan,663.0,Asia,,,,,,120.0,Government of Jordan,Government of Jordan (1999-),
+79,CON_79,Lebanon,Country/State,LBN,,,,Lebanon,660.0,Asia,,,,,,119.0,Government of Lebanon,Government of Lebanon (2020-2021),Government of Lebanon (2016-2019) | Government of Lebanon (2019-2020) | Government of Lebanon (2020-2021)
+80,ARM_80,Palestine Liberation Organization ,Armed Organization,PSE,,,PLO,Palestine,667.0,Asia,,,,,,204.0,PLO,PLO: Palestinian Liberation Organisation,
+81,CON_81,Norway,Country/State,NOR,,,,Norway,385.0,Europe,,,,,,67.0,Government of Norway,Government of Norway (2013-),
+82,CON_82,Egypt,Country/State,EGY,,,,Egypt,651.0,Africa,,,,,,117.0,Government of Egypt,Government of Egypt (2014-),Government of Egypt (2012-2013) | Government of Egypt (2013-2014) | Government of Egypt (2014-) | Government of Egypt (1981-2011) | Government of Egypt (2011-2012)
+86,CON_86,Burkina Faso,Country/State,BFA,,,,Burkina Faso,439.0,Africa,,,,,,78.0,Government of Burkina Faso,Government of Burkina Faso (2015-),Government of Burkina Faso (1987-2014) | Government of Burkina Faso (2014-2015) | Government of Burkina Faso (2015-)
+87,IGO_87,African Union,Intergovernmental Organization,,Regional,,AU,,,Africa,,,1.0,,,,,,
+90,CON_90,Nigeria,Country/State,NGA,,,,Nigeria,475.0,Africa,,,,,,84.0,Government of Nigeria,Government of Nigeria (2015-),Government of Nigeria (1999-2015) | Government of Nigeria (2015-)
+91,CON_91,Guinea-Bissau,Country/State,GNB,,,,Guinea-Bissau,404.0,Africa,,,,,,70.0,Government of Guinea-Bissau,Government of Guinea-Bissau (2014-2020),
+97,CON_97,Mozambique,Country/State,MOZ,,,,Mozambique,541.0,Africa,,,,,,100.0,Government of Mozambique,Government of Mozambique (1990-),
+139,CON_139,Italy,Country/State,ITA,,,,Italy,325.0,Europe,,,,,,44.0,Government of Italy,Government of Italy (2018-),
+142,CON_142,Niger,Country/State,NER,,,,Niger,436.0,Africa,,,,,,75.0,Government of Niger,Government of Niger (2021-),Government of Niger (2011-2021) | Government of Niger (2021-)
+146,CON_146,Nepal,Country/State,NPL,,,,Nepal,790.0,Asia,,,,,,146.0,Government of Nepal,Government of Nepal (2015-),Government of Nepal (2008-2015) | Government of Nepal (2015-)
+157,CON_157,Chad,Country/State,TCD,,,,Chad,483.0,Africa,,,,,,87.0,Government of Chad,Government of Chad (2021-),Government of Chad (1990-2021) | Government of Chad (2021-)
+158,CON_158,Sudan,Country/State,SDN,,,,Sudan,625.0,Africa,,,,,,112.0,Government of Sudan,Government of Sudan (2019-),Government of Sudan (1989-2019) | Government of Sudan (2019-)
+159,CON_159,Ethiopia,Country/State,ETH,,,,Ethiopia,530.0,Africa,,,,,,97.0,Government of Ethiopia,Government of Ethiopia (2018-),Government of Ethiopia (1991-2018) | Government of Ethiopia (2018-)
+160,CON_160,Philippines,Country/State,PHL,,,,Philippines,840.0,Asia,,,,,,154.0,Government of Philippines,Government of the Philippines (2016-),Government of the Philippines (2010-2016) | Government of the Philippines (2016-)
+162,CON_162,Indonesia,Country/State,IDN,,,,Indonesia,850.0,Asia,,,,,,155.0,Government of Indonesia,Government of Indonesia (2014-),
+169,CON_169,Ireland,Country/State,IRL,,,,Ireland,205.0,Europe,,,,,,29.0,Government of Ireland,Government of Ireland (2017-2020),
+171,CON_171,Finland,Country/State,FIN,,,,Finland,375.0,Europe,,,,,,65.0,Government of Finland,Government of Finland (2019-),
+172,CON_172,Kenya,Country/State,KEN,,,,Kenya,501.0,Africa,,,,,,91.0,Government of Kenya,Government of Kenya (2013-),Government of Kenya (2002-2013) | Government of Kenya (2013-)
+174,CON_174,Tanzania,Country/State,TZA,,,,Tanzania,510.0,Africa,,,,,,92.0,Government of Tanzania,Government of Tanzania (1964-),
+177,CON_177,Chile,Country/State,CHL,,,,Chile,155.0,Americas,,,,,,25.0,Government of Chile,Government of Chile (2022-),Government of Chile (2018-2022) | Government of Chile (2022-)
+181,CON_181,Colombia,Country/State,COL,,,,Colombia,100.0,Americas,,,,,,17.0,Government of Colombia,Government of Colombia (2018-),
+201,NGO_201,International Committee of the Red Cross,Civil Society,,Non-governmental Organization,Other,ICRC,,,,,1.0,,,,,,,
+202,CON_202,Switzerland,Country/State,CHE,,,,Switzerland,225.0,Europe,,,,,,34.0,Government of Switzerland,,
+221,CON_221,South Africa,Country/State,ZAF,,,,South Africa,560.0,Africa,,,,,,102.0,Government of South Africa,Government of South Africa (1994-),
+226,IGO_226,Organisation of Islamic Cooperation,Intergovernmental Organization,,,,OIC,,,,,1.0,,,,,,,
+228,CON_228,Morocco,Country/State,MAR,,,,Morocco,600.0,Africa,,,,,,108.0,Government of Morocco,Government of Morocco (1999-),
+246,POL_246,FUNCINPEC,Political Party,KHM,,,,Cambodia,811.0,Asia,,,,,,,,,
+247,CON_247,Cambodia,Country/State,KHM,,,,Cambodia,811.0,Asia,,,,,,148.0,Government of Cambodia (Kampuchea),Government of Cambodia (1993-),
+255,CON_255,Algeria,Country/State,DZA,,,,Algeria,615.0,Africa,,,,,,109.0,Government of Algeria,Government of Algeria (2019-),Government of Algeria (1999-2019) | Government of Algeria (2019-)
+258,ARM_258,National Union for the Total Independence of Angola,Armed Organization,AGO,,,UNITA,Angola,540.0,Africa,,,,,,567.0,UNITA,UNITA: National Union for the Total Independence of Angola,
+259,CON_259,Portugal,Country/State,PRT,,,,Portugal,235.0,Europe,,,,,,36.0,Government of Portugal,Government of Portugal (2015-),
+260,CON_260,Angola,Country/State,AGO,,,,Angola,540.0,Africa,,,,,,99.0,Government of Angola,Government of Angola (1975-),
+263,UMB_263,United Tajik Opposition,Umbrella,TJK,,,,Tajikistan,702.0,Asia,,,,,,345.0,UTO,,
+264,CON_264,"Congo, Democratic Republic of the",Country/State,COD,,,,"Congo, Democratic Republic of the",490.0,Africa,,,,,,89.0,Government of DR Congo (Zaire),Government of the Democratic Republic of Congo (2019-),Government of the Democratic Republic of Congo (1997-2001) | Government of the Democratic Republic of Congo (2001-2019) | Government of the Democratic Republic of Congo (2019-)
+267,CON_267,Botswana,Country/State,BWA,,,,Botswana,571.0,Africa,,,,,,105.0,Government of Botswana,,
+268,CON_268,Mexico,Country/State,MEX,,,,Mexico,70.0,Americas,,,,,,10.0,Government of Mexico,Government of Mexico (2018-),
+273,CON_273,North Korea,Country/State,PRK,,,,"Korea, North",731.0,Asia,,,,,,138.0,Government of North Korea,Government of North Korea (2011-),
+275,ENT_275,Chechen Republic,Entity,RUS,,,,Russia,365.0,Europe,,,,,,,,,
+276,CON_276,New Zealand,Country/State,NZL,,,,New Zealand,920.0,Oceania,,,,,,158.0,Government of New Zealand,Government of New Zealand (2017-),
+277,CON_277,Australia,Country/State,AUS,,,,Australia,900.0,Oceania,,,,,,156.0,Government of Australia,Government of Australia (2013-),
+283,ARM_283,Sudan People's Liberation Movement/Army ,Armed Organization,SDN,,,SPLM/A,Sudan,625.0,Africa,,,,,,466.0,SPLM/A,SPLM/A: Sudan People's Liberation Movement/Army,
+285,CON_285,Libya,Country/State,LBY,,,,Libya,620.0,Africa,,,,,,111.0,Government of Libya,Government of Libya (2012-2014),Government of Libya (1969-2011) | Government of Libya (2011-2012) | Government of Libya (2012-2014) | Government of Libya (2014-) General National Congress | Government of Libya (2014-) House of Representatives | Government of Libya (2016-2021) Government of National Accord | Government of Libya (2021-) Government of National Unity | Government of Libya (2022-) Parliament-Appointed Government
+287,CON_287,Bangladesh,Country/State,BGD,,,,Bangladesh,771.0,Asia,,,,,,143.0,Government of Bangladesh,Government of Bangladesh (2009-),
+288,CON_288,Afghanistan,Country/State,AFG,,,,Afghanistan,700.0,Asia,,,,,,130.0,Government of Afghanistan,Government of Afghanistan (2021-),Government of Afghanistan (2014-2021) | Government of Afghanistan (2021-)
+289,CON_289,Iran (Islamic Republic of),Country/State,IRN,,,,Iran,630.0,Asia,,,,,,114.0,Government of Iran,Government of Iran (1989-),
+290,CON_290,Cameroon,Country/State,CMR,,,,Cameroon,471.0,Africa,,,,,,83.0,Government of Cameroon,Government of Cameroon (1982-),
+292,CON_292,Brunei,Country/State,BRN,,,,Brunei,835.0,Asia,,,,,,,,Government of Brunei (1984-),
+293,ARM_293,Khmer People’s National Liberation Front,Armed Organization,KHM,,,KPNLF,Cambodia,811.0,Asia,,,,,,272.0,KPNLF,Former KPNLF: Khmer People's National Liberation Front (Cambodia),
+294,CON_294,Japan,Country/State,JPN,,,,Japan,740.0,Asia,,,,,,140.0,Government of Japan,Government of Japan (2012-),
+295,CON_295,Thailand,Country/State,THA,,,,Thailand,800.0,Asia,,,,,,147.0,Government of Thailand,Government of Thailand (2019-),Government of Thailand (2008-2011) | Government of Thailand (2014-2019) | Government of Thailand (2019-)
+296,CON_296,Singapore,Country/State,SGP,,,,Singapore,830.0,Asia,,,,,,153.0,Government of Singapore,Government of Singapore (1965-),
+297,CON_297,Vietnam,Country/State,VNM,,,,Vietnam,816.0,Asia,,,,,,150.0,Government of Vietnam (North Vietnam),Government of Vietnam (1976-),
+298,CON_298,Laos,Country/State,LAO,,,,Laos,812.0,Asia,,,,,,149.0,Government of Laos,Government of Laos (1991-),
+300,CON_300,El Salvador,Country/State,SLV,,,,El Salvador,92.0,Americas,,,,,,13.0,Government of El Salvador,Government of El Salvador (2019-),
+301,CON_301,Sri Lanka,Country/State,LKA,,,,Sri Lanka,780.0,Asia,,,,,,145.0,Government of Sri Lanka,Government of Sri Lanka (2015-2019),
+303,OTH_303,Presidential Council,Other,YEM,,,,Yemen,678.0,Asia,,,,1.0,,,,,
+304,CON_304,Yemen,Country/State,YEM,,,,Yemen,678.0,Asia,,,,,,123.0,Government of Yemen (North Yemen),Government of Yemen (2012-),Government of Yemen (2012-) | Government of Yemen (2015-2016) Supreme Revolutionary Committee | Government of Yemen (2016-) Supreme Political Council
+305,POL_305,Democratic Kampuchea,Political Party,KHM,,,,Cambodia,811.0,Asia,,,,,,,,,
+311,POL_311,General People's Congress,Political Party,YEM,,,GPC,Yemen,678.0,Asia,,,,,,,,,
+312,IGO_312,Intergovernmental Authority on Development,Intergovernmental Organization,,Regional,,IGAD,,,Africa,,,1.0,,,,,,
+313,ARM_313,Republika Srpska,Armed Organization,BIH,,,,Bosnia and Herzegovina,346.0,Europe,,,,,,339.0,Serbian Republic of Bosnia-Herzegovina,,
+339,CON_339,Rwanda,Country/State,RWA,,,,Rwanda,517.0,Africa,,,,,,94.0,Government of Rwanda,Government of Rwanda (1994-),
+346,IGO_346,League of Arab States,Intergovernmental Organization,,Regional,,LOAS,,,Africa,,,1.0,,,,,,
+350,CON_350,Zimbabwe,Country/State,ZWE,,,,Zimbabwe,552.0,Africa,,,,,,101.0,Government of Zimbabwe (Rhodesia),Government of Zimbabwe (2017-),
+355,IGO_355,United Nations Protection Force (UNPROFOR),Intergovernmental Organization,,,,UNPROFOR,,,,UN Mission,1.0,,,,,,,
+386,IGO_386,UN Secretary General,Intergovernmental Organization,,,,UNSG,,,,United Nations,1.0,,,,,,,
+391,IGO_391,United Nations Secretariat,Intergovernmental Organization,,,,UN Secretariat,,,,United Nations,1.0,,,,,,,
+394,CON_394,Romania,Country/State,ROU,,,,Romania,360.0,Europe,,,,,,56.0,Government of Romania,Government of Romania (2021-),Government of Romania (2019-2020) | Government of Romania (2020-2021) | Government of Romania (2021-) | Government of Romania (2016-2019)
+395,CON_395,Pakistan,Country/State,PAK,,,,Pakistan,770.0,Asia,,,,,,142.0,Government of Pakistan,Government of Pakistan (2018-2022),Government of Pakistan (2008-2013) | Government of Pakistan (2013-2018) | Government of Pakistan (2018-2022)
+406,IGO_406,North Atlantic Treaty Organization,Intergovernmental Organization,,,,NATO,,,,,1.0,,,,,,,
+419,CON_419,Saudi Arabia,Country/State,SAU,,,,Saudi Arabia,670.0,Asia,,,,,,122.0,Government of Saudi Arabia,Government of Saudi Arabia (2015-),
+436,IGO_436,European Commission,Intergovernmental Organization,,Regional,,EU Commission,,,Europe,,,1.0,,,,,,
+437,IGO_437,World Bank,Intergovernmental Organization,,,,WB,,,,,1.0,,,,,,,
+438,IGO_438,International Monetary Fund,Intergovernmental Organization,,,,IMF,,,,,1.0,,,,,,,
+441,CON_441,Belgium,Country/State,BEL,,,,Belgium,211.0,Europe,,,,,,31.0,Government of Belgium,Government of Belgium (2019-2020),
+452,ARM_452,Armed Forces of the Chechen Republic of Ichkeria,Armed Organization,RUS,,,,Russia,365.0,Europe,,,,,,,,,
+453,NGO_453,Aga Khan Foundation,Civil Society,,Non-governmental Organization,Other,,,,,,1.0,,,,,,,
+458,CON_458,South Korea,Country/State,KOR,,,,"Korea, South",732.0,Asia,,,,,,139.0,Government of South Korea,Government of South Korea (2017-2022),
+459,IGO_459,United Nations Children's Fund,Intergovernmental Organization,,,,UNICEF,,,,United Nations,1.0,,,,,,,
+480,IGO_480,United Nations Observer Mission in Georgia (UNOMIG),Intergovernmental Organization,,,,UNOMIG,,,,UN Mission,1.0,,,,,,,
+481,CON_481,Madagascar,Country/State,MDG,,,,Madagascar,580.0,Africa,,,,,,106.0,Government of Madagascar,Government of Madagascar (2014-2019),
+482,CON_482,Mauritius,Country/State,MUS,,,,Mauritius,590.0,Africa,,,,,,,,,
+484,ENT_484,Anjouan,Entity,COM,,,,Comoros,581.0,Africa,,,,,,544.0,,,
+485,CON_485,Comoros,Country/State,COM,,,,Comoros,581.0,Africa,,,,,,107.0,Government of Comoros,,
+486,CON_486,Qatar,Country/State,QAT,,,,Qatar,694.0,Asia,,,,,,127.0,Government of Qatar,Government of Qatar (2013-),
+539,OTH_539,National Council,Other,YEM,,,,Yemen,678.0,Asia,,,,1.0,,,,,
+540,IGO_540,Gulf Cooperation Council,Intergovernmental Organization,,Regional,,GCC,,,Asia,,,1.0,,,,,,
+562,CON_562,Turkey,Country/State,TUR,,,,Turkey,640.0,Asia,,,,,,115.0,Government of Turkey,Government of Turkey (2016-),Government of Turkey (2002-2016) | Government of Turkey (2016-)
+563,CON_563,Kuwait,Country/State,KWT,,,,Kuwait,692.0,Asia,,,,,,125.0,Government of Kuwait,Government of Kuwait (2020-),Government of Kuwait (2006-2020) | Government of Kuwait (2020-)
+567,ARM_567,Southern Movement,Armed Organization,YEM,,,,Yemen,678.0,Asia,,,,,,,,Southern Movement,
+568,ARM_568,Ansar Allah,Armed Organization,YEM,,,,Yemen,678.0,Asia,,,,,,1091.0,Ansarallah,Houthi Movement - Ansar Allah,
+572,ARM_572,anti-Balaka,Armed Organization,CAF,,,,Central African Republic,482.0,Africa,,,,,,4201.0,anti-Balaka,Anti-Balaka,
+577,ARM_577,Popular Front for the Renaissance of Central Africa,Armed Organization,CAF,,,FPRC,Central African Republic,482.0,Africa,,,,,,4007.0,FPRC,FPRC: Popular Front for the Renaissance of Central Africa,FPRC: Popular Front for the Renaissance of Central Africa (Hissene Faction)
+586,IGO_586,Shanghai Cooperation Organization,Intergovernmental Organization,,Regional,,SCO,,,Asia,,,1.0,,,,,,
+587,CON_587,Albania,Country/State,ALB,,,,Albania,339.0,Europe,,,,,,45.0,Government of Albania,Government of Albania (2013-),
+588,CON_588,Austria,Country/State,AUT,,,,Austria,305.0,Europe,,,,,,39.0,Government of Austria,Government of Austria (2019-),
+589,CON_589,Bulgaria,Country/State,BGR,,,,Bulgaria,355.0,Europe,,,,,,54.0,Government of Bulgaria,Government of Bulgaria (2017-),
+590,CON_590,Tunisia,Country/State,TUN,,,,Tunisia,616.0,Africa,,,,,,110.0,Government of Tunisia,Government of Tunisia (2019-),Government of Tunisia (2011-2014) | Government of Tunisia (2014-2019) | Government of Tunisia (2019-)
+591,CON_591,United Arab Emirates,Country/State,ARE,,,,United Arab Emirates,696.0,Asia,,,,,,128.0,Government of United Arab Emirates,Government of the United Arab Emirates (2004-),
+592,CON_592,Slovakia,Country/State,SVK,,,,Slovakia,317.0,Europe,,,,,,43.0,Government of Slovakia,Government of Slovakia (2020-),Government of Slovakia (2012-2020) | Government of Slovakia (2020-)
+593,CON_593,Sweden,Country/State,SWE,,,,Sweden,380.0,Europe,,,,,,66.0,Government of Sweden,Government of Sweden (2019-),
+594,CON_594,Uruguay,Country/State,URY,,,,Uruguay,165.0,Americas,,,,,,27.0,Government of Uruguay,Government of Uruguay (2020-),
+595,NGO_595,Aga Khan Development Network,Civil Society,,Non-governmental Organization,Other,,,,,,1.0,,,,,,,
+596,IGO_596,Islamic Development Bank,Intergovernmental Organization,,,,ISDB,,,,,1.0,,,,,,,
+597,IGO_597,Economic Cooperation Organization,Intergovernmental Organization,,Regional,,ECO,,,,,,1.0,,,,,,
+598,IGO_598,Collective Security Treaty Organization,Intergovernmental Organization,,Regional,,CSTO,,,Europe,,,1.0,,,,,,
+599,IGO_599,Conference on Interaction and Confidence-Building Measures in Asia (CICA),Intergovernmental Organization,,Regional,,CICA,,,Asia,,,1.0,,,,,,
+600,IGO_600,Asian Development Bank,Intergovernmental Organization,,Regional,,ADB,,,Asia,,,1.0,,,,,,
+601,CON_601,Iceland,Country/State,ISL,,,,Iceland,385.0,Europe,,,,,,69.0,Government of Iceland,Government of Iceland (2017-),
+602,CON_602,Hungary,Country/State,HUN,,,,Hungary,310.0,Europe,,,,,,40.0,Government of Hungary,Government of Hungary (2010-),
+603,CON_603,Poland,Country/State,POL,,,,Poland,290.0,Europe,,,,,,38.0,Government of Poland,Government of Poland (2015-),
+604,CON_604,Denmark,Country/State,DNK,,,,Denmark,390.0,Europe,,,,,,68.0,Government of Denmark,Government of Denmark (2019-),
+605,CON_605,Estonia,Country/State,EST,,,,Estonia,366.0,Europe,,,,,,58.0,Government of Estonia,Government of Estonia (2021-),
+606,CON_606,Oman,Country/State,OMN,,,,Oman,698.0,Asia,,,,,,129.0,Government of Oman,Government of Oman (2020-),Government of Oman (1970-2020) | Government of Oman (2020-)
+607,CON_607,Montenegro,Country/State,MNE,,,,Montenegro,341.0,Europe,,,,,,46.0,Government of Montenegro,Government of Montenegro (2022-),
+608,CON_608,Mongolia,Country/State,MNG,,,,Mongolia,712.0,Asia,,,,,,136.0,Government of Mongolia,Government of Mongolia (2016-),
+609,CON_609,Cyprus,Country/State,CYP,,,,Cyprus,352.0,Asia,,,,,,53.0,Government of Cyprus,Government of Cyprus (2013-),
+610,CON_610,North Macedonia,Country/State,MKD,,,,North Macedonia,343.0,Europe,,,,,,47.0,Government of North Macedonia,Government of North Macedonia (2017-),
+611,CON_611,Luxembourg,Country/State,LUX,,,,Luxembourg,215.0,Europe,,,,,,32.0,Government of Luxembourg,Government of Luxembourg (2013-),
+612,CON_612,Lithuania,Country/State,LTU,,,,Lithuania,368.0,Europe,,,,,,60.0,Government of Lithuania,Government of Lithuania (2020-),
+613,CON_613,Liechtenstein,Country/State,LIE,,,,Liechtenstein,223.0,Europe,,,,,,,,,
+614,CON_614,Malta,Country/State,MLT,,,,Malta,338.0,Europe,,,,,,,,Government of Malta (2013-),
+615,CON_615,Latvia,Country/State,LVA,,,,Latvia,367.0,Europe,,,,,,59.0,Government of Latvia,Government of Latvia (2019-),
+621,CON_621,Honduras,Country/State,HND,,,,Honduras,91.0,Americas,,,,,,12.0,Government of Honduras,Government of Honduras (2022-),Government of Honduras (2010-2022) | Government of Honduras (2022-)
+632,MIL_632,Armed Forces of Angola,Military,AGO,,,,Angola,540.0,Africa,,,,,,,,Military Forces of Angola (1975-),
+634,ENT_634,North Ossetia,Entity,RUS,,,,Russia,365.0,Europe,,,,,,,,,
+635,ENT_635,South Ossetia,Entity,RUS,,,,Russia,365.0,Europe,,,,,,,,,
+636,CON_636,Greece,Country/State,GRC,,,,Greece,350.0,Europe,,,,,,52.0,Government of Greece,Government of Greece (2019-),Government of Greece (2015-2019) | Government of Greece (2019-)
+637,CON_637,Czechia,Country/State,CZE,,,,Czech Republic,316.0,Europe,,,,,,42.0,Government of Czech Republic,Government of the Czech Republic (2021-),Government of the Czech Republic (2018-2021) | Government of the Czech Republic (2021-)
+638,IGO_638,European Bank for Reconstruction and Development,Intergovernmental Organization,,Regional,,EBRD,,,Europe,,,1.0,,,,,,
+639,IGO_639,Council of Europe,Intergovernmental Organization,,Regional,,COE,,,Europe,,,1.0,,,,,,
+640,IGO_640,Office of the United Nations High Commissioner for Human Rights,Intergovernmental Organization,,,,UNHCHR,,,,United Nations,1.0,,,,,,,
+641,CON_641,Seychelles,Country/State,SYC,,,,Seychelles,591.0,Africa,,,,,,,,Government of Seychelles (2020-),Government of Seychelles (2016-2020) | Government of Seychelles (2020-)
+669,CON_669,Vatican City,Country/State, ,,,,Holy See,,Europe,,,,,,,,Government of Vatican City (2013-),
+671,OTH_671,Central Bank of Sri Lanka,Other,LKA,,,,Sri Lanka,780.0,Asia,,,,1.0,,,,,
+672,IGO_672,UN Office on Drugs and Crimes,Intergovernmental Organization,,,,UNODC,,,,United Nations,1.0,,,,,,,
+673,IGO_673,World Food Program,Intergovernmental Organization,,,,WFP,,,,United Nations,1.0,,,,,,,
+674,IGO_674,United Nations Population Fund,Intergovernmental Organization,,,,UNFPA,,,,United Nations,1.0,,,,,,,
+675,IGO_675,International Organization for Migration,Intergovernmental Organization,,,,IOM,,,,United Nations,1.0,,,,,,,
+676,IGO_676,Food and Agriculture Organization,Intergovernmental Organization,,,,FAO,,,,United Nations,1.0,,,,,,,
+677,IGO_677,World Health Organization,Intergovernmental Organization,,,,WHO,,,,United Nations,1.0,,,,,,,
+678,IGO_678,"United Nations Educational, Scientific and Cultural Organization",Intergovernmental Organization,,,,UNESCO,,,,United Nations,1.0,,,,,,,
+679,IGO_679,International Fund for Agricultural Development (IFAD),Intergovernmental Organization,,,,IFAD,,,,,1.0,,,,,,,
+680,IGO_680,Asian Productivity Organization,Intergovernmental Organization,,Regional,,APO,,,Asia,,,1.0,,,,,,
+681,IGO_681,Multilateral Investment Guarantee Agency (MIGA),Intergovernmental Organization,,,,MIGA,,,,,1.0,,,,,,,
+682,ENT_682,Czechoslovakia,Entity, ,,,,Czechoslovakia,315.0,Europe,,,,,,,,,
+687,ARM_687,Republic of Serb Krajina,Armed Organization,BIH,,,,Bosnia and Herzegovina,346.0,Europe,,,,,,340.0,Serbian Republic of Krajina,,
+688,COA_688,Group of Eight,State Coalition,,,,G8,,,,,1.0,,,,,,,
+720,ENT_720,Luhansk People Republic,Entity,UKR,,,,Ukraine,369.0,Europe,,,,,,,,,
+721,ENT_721,Donetsk People Republic,Entity,UKR,,,,Ukraine,369.0,Europe,,,,,,,,,
+727,OTH_727,House of Representatives,Other,LBY,,,,Libya,620.0,Africa,,,,1.0,,,,,
+732,UMB_732,Joint Meeting Parties,Umbrella,YEM,,,JMP,Yemen,678.0,Asia,,,,,,,,,
+733,COA_733,Friends of Yemen,State Coalition,,,,,,,,,1.0,,,,,,,
+750,IGO_750,United Nations Support Mission in Libya (UNSMIL),Intergovernmental Organization,,,,UNSMIL,,,,UN Mission,1.0,,,,,,,
+778,ARM_778,Islam Army (Jaysh Al-Islam),Armed Organization,SYR,,,,Syria,652.0,Asia,,,,,,6377.0,Jaysh al-Islam,Jaysh al Islam,
+855,ARM_855,Army of Nagorno Karabakh,Armed Organization,AZE,,,,Azerbaijan,373.0,Asia,,,,,,338.0,Republic of Artsakh,Military Forces of Artsakh (2007-),Government of Artsakh (2007-)
+862,ENT_862,Moheli,Entity,COM,,,,Comoros,581.0,Africa,,,,,,,,,
+889,ARM_889,Union for Peace in the Central African Republic,Armed Organization,CAF,,,UPC,Central African Republic,482.0,Africa,,,,,,5999.0,UPC,UPC: Union for Peace in the Central African Republic,
+891,ARM_891,Patriotic Movement for the Central African Republic ,Armed Organization,CAF,,,MPC,Central African Republic,482.0,Africa,,,,,,6354.0,MPC,MPC: Patriotic Movement for Central African Republic,
+900,ENT_900,Transdniestria,Entity,MDA,,,,Moldova,359.0,Europe,,,,,,,,,
+909,ARM_909,Syrian Armed Opposition,Armed Organization,SYR,,,,Syria,652.0,Asia,,,,,,,,,
+910,ARM_910,Jaysh al-Ababil,Armed Organization,SYR,,,,Syria,652.0,Asia,,,,,,,,,
+911,ARM_911,Aknaf Bayt al-Muqadis,Armed Organization,SYR,,,,Syria,652.0,Asia,,,,,,,,,
+912,ARM_912,Libyan National Army,Armed Organization,LBY,,,LNA,Libya,620.0,Africa,,,,,,7072.0,LNA,,
+925,OTH_925,Congress of Syrian National Dialogue,Other,SYR,,,,Syria,652.0,Asia,,,,1.0,,,,,
+926,UMB_926,CADLR,Umbrella,UKR,,,CADLR,Ukraine,369.0,Europe,,,,,,,,,
+929,OTH_929,High Council of State,Other,LBY,,,,Libya,620.0,Africa,,,,1.0,,,,,
+988,COA_988,Group of Five for the Sahel,State Coalition,,,,G5 Sahel,,,Africa,,,1.0,,,,,,
+1139,IGO_1139,South Asian Association for Regional Cooperation,Intergovernmental Organization,,Regional,,SAARC,,,Asia,,,1.0,,,,,,
+1160,ENT_1160,Ngazidja,Entity,COM,,,,Comoros,581.0,Africa,,,,,,,,,
+1173,ENT_1173,Nagorno-Karabakh,Entity,AZE,,,,Azerbaijan,373.0,Asia,,,,,,,,,
+1179,POL_1179,National Front for Justice ,Political Party,COM,,,FNJ,Comoros,581.0,Africa,,,,,,,,,
+1365,IGO_1365,International Syria Support Group,Intergovernmental Organization,,,,ISSG,,,,,1.0,,,,,,,
